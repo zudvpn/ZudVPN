@@ -5267,10 +5267,9 @@ react-native-ssh-sftp@^1.0.3:
   resolved "https://registry.yarnpkg.com/react-native-ssh-sftp/-/react-native-ssh-sftp-1.0.3.tgz#42c4a0e5c12d3c64cec605ded62dabd83253794d"
   integrity sha1-QsSg5cEtPGTOxgXe1i2r2DJTeU0=
 
-react-native-static-server@^0.4.2:
+react-native-static-server@futurepress/react-native-static-server#master:
   version "0.4.2"
-  resolved "https://registry.yarnpkg.com/react-native-static-server/-/react-native-static-server-0.4.2.tgz#dea8415e27d723fc5607a155a03a7e92bee21840"
-  integrity sha512-EDcWQDhHbrO6r8flpg8OJCvpndo4H6j9CPfOeO3VPPeEAhr2hz4I9ryA/CcdJgrr+ri/HntGtnlK6GLVGVbQpw==
+  resolved "https://codeload.github.com/futurepress/react-native-static-server/tar.gz/390303423ef1d2185d64eff246532bdc8b57fb33"
 
 react-native@0.60.5:
   version "0.60.5"

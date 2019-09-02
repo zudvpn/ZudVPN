@@ -20,7 +20,7 @@
     "react-native-rsa-native": "^1.1.2",
     "react-native-safari-view": "^2.1.0",
     "react-native-ssh-sftp": "^1.0.3",
-    "react-native-static-server": "^0.4.2",
+    "react-native-static-server": "futurepress/react-native-static-server#master",
     "uuid": "^3.3.3"
   },
   "devDependencies": {
