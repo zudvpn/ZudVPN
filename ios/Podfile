@@ -27,6 +27,12 @@ target 'ZudVPN' do
   pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
 
+  pod 'react-native-safari-view', :podspec => '../node_modules/react-native-safari-view/react-native-safari-view.podspec'
+
+  pod 'NMSSH', '2.2.8'
+
+  pod 'ReactNativeNavigation', :podspec => '../node_modules/react-native-navigation/ReactNativeNavigation.podspec'
+
   target 'ZudVPNTests' do
     inherit! :search_paths
     # Pods for testing

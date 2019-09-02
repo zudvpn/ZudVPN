@@ -18,6 +18,8 @@
 		2DCD954D1E0B4F2C00145EB5 /* ZudVPNTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* ZudVPNTests.m */; };
 		6959BD2577273B59D00F3BCF /* libPods-ZudVPN-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 515AC21F64FEEB8E9FCB7747 /* libPods-ZudVPN-tvOSTests.a */; };
 		7617F431984284DA136DA073 /* libPods-ZudVPN-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D22DC7CE54687847EB481833 /* libPods-ZudVPN-tvOS.a */; };
+		BC9415F6231C9151002908C9 /* libRNSSHClient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BC9415F5231C913B002908C9 /* libRNSSHClient.a */; };
+		BC9415FB231C9437002908C9 /* AppCenter-Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = BC9415F9231C9437002908C9 /* AppCenter-Config.plist */; };
 		CDA6967C30453181A7004651 /* libPods-ZudVPN.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 091080A238B989222CE4AEA6 /* libPods-ZudVPN.a */; };
 		D4CC9BCAF544298A68932139 /* libPods-ZudVPNTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DFF3E2C0A29E30E0B1DA2C6 /* libPods-ZudVPNTests.a */; };
 /* End PBXBuildFile section */
@@ -36,6 +38,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 2D02E47A1E0B4A5D006451C7;
 			remoteInfo = "ZudVPN-tvOS";
+		};
+		BC9415F4231C913B002908C9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BC9415F0231C913B002908C9 /* RNSSHClient.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = RNSSHClient;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -62,6 +71,8 @@
 		75A94B763CFA2FD1F4D827C8 /* Pods-ZudVPN-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZudVPN-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-ZudVPN-tvOSTests/Pods-ZudVPN-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 		78F1E0A9EB6C6B58A7B0C9C7 /* Pods-ZudVPN-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZudVPN-tvOS.release.xcconfig"; path = "Target Support Files/Pods-ZudVPN-tvOS/Pods-ZudVPN-tvOS.release.xcconfig"; sourceTree = "<group>"; };
 		94A46C35F0EB3DE82264DC9F /* Pods-ZudVPN-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZudVPN-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-ZudVPN-tvOS/Pods-ZudVPN-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
+		BC9415F0231C913B002908C9 /* RNSSHClient.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNSSHClient.xcodeproj; path = "../node_modules/react-native-ssh-sftp/ios/RNSSHClient.xcodeproj"; sourceTree = "<group>"; };
+		BC9415F9231C9437002908C9 /* AppCenter-Config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "AppCenter-Config.plist"; sourceTree = "<group>"; };
 		D22DC7CE54687847EB481833 /* libPods-ZudVPN-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ZudVPN-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ECB724549693817DB14949E9 /* Pods-ZudVPNTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZudVPNTests.release.xcconfig"; path = "Target Support Files/Pods-ZudVPNTests/Pods-ZudVPNTests.release.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
@@ -82,6 +93,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BC9415F6231C9151002908C9 /* libRNSSHClient.a in Frameworks */,
 				CDA6967C30453181A7004651 /* libPods-ZudVPN.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -125,6 +137,7 @@
 		13B07FAE1A68108700A75B9A /* ZudVPN */ = {
 			isa = PBXGroup;
 			children = (
+				BC9415F9231C9437002908C9 /* AppCenter-Config.plist */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -161,13 +174,13 @@
 				61314CEBB1DC28C7107C0178 /* Pods-ZudVPNTests.debug.xcconfig */,
 				ECB724549693817DB14949E9 /* Pods-ZudVPNTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				BC9415F0231C913B002908C9 /* RNSSHClient.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -194,6 +207,14 @@
 				00E356EE1AD99517003FC87E /* ZudVPNTests.xctest */,
 				2D02E47B1E0B4A5D006451C7 /* ZudVPN-tvOS.app */,
 				2D02E4901E0B4A5D006451C7 /* ZudVPN-tvOSTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		BC9415F1231C913B002908C9 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				BC9415F5231C913B002908C9 /* libRNSSHClient.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -308,12 +329,19 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
 			mainGroup = 83CBB9F61A601CBA00E9B192;
 			productRefGroup = 83CBBA001A601CBA00E9B192 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = BC9415F1231C913B002908C9 /* Products */;
+					ProjectRef = BC9415F0231C913B002908C9 /* RNSSHClient.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				13B07F861A680F5B00A75B9A /* ZudVPN */,
@@ -323,6 +351,16 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		BC9415F5231C913B002908C9 /* libRNSSHClient.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNSSHClient.a;
+			remoteRef = BC9415F4231C913B002908C9 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		00E356EC1AD99517003FC87E /* Resources */ = {
@@ -338,6 +376,7 @@
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
+				BC9415FB231C9437002908C9 /* AppCenter-Config.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
