@@ -64,7 +64,7 @@ class Deploy {
             droplet = await this.doClient.createDroplet(sshKeys, this.name, this.region, DropletSize, userData, DropletImage, [DropletBaseName])
             
             console.log('Creating firewall for the instance.')
-            this.addFirewallToDroplet(DropletBaseName, droplet.id)
+            await this.addFirewallToDroplet(DropletBaseName, droplet.id)
         }
 
         console.log('Waiting for the instance IP address.')
@@ -74,11 +74,12 @@ class Deploy {
         console.log('Starting SSH connection to the instance.')
         let sshClient = new SSHClient(sshKeyPair, 'core', ipAddress, 22)
 
-        waitForSSHConnection(sshClient)
+        await this.waitForSSHConnection(sshClient)
 
         console.log('Waiting for VPN service to become active.')
         let countWaitingForVPN = 3;
         do {
+            console.log('Cheking VPN service, attemt: ', 4 - countWaitingForVPN)
             countWaitingForVPN--
             try {
                 await sshClient.run('until docker logs dosxvpn &>/dev/null; do sleep 2; done; sleep 5;')
@@ -89,7 +90,7 @@ class Deploy {
                     throw e
                 }
             }
-        } while (countWaitingForVPN > 0)        
+        } while (countWaitingForVPN > 0)
 
         console.log('Reading authentication data from VPN service.')
         let [privateKeyPassword, privateKeyCertificate, caCertificate, serverCertificate] = await Promise.all([
@@ -136,6 +137,7 @@ class Deploy {
     async waitForSSHConnection(sshClient) {
         let trialLeft = 5
         do {
+            console.log('Waiting for SSH, attempt:', 6 - trialLeft)
             trialLeft--
             try {
                 let isConnected = await sshClient.openSession()

@@ -10,7 +10,7 @@ class Client {
         this.port = port
     }
 
-    openSession() {
+    async openSession() {
         if (!this.nativeSshClient) {
             return new Promise((resolve, reject) => {
                 this.nativeSshClient = new NativeSSHClient(

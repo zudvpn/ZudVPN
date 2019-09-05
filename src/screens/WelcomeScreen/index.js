@@ -7,8 +7,8 @@ import Deploy from './../../providers/DigitalOcean/deploy'
 import StaticServer from 'react-native-static-server'
 import RNFS from 'react-native-fs'
 import VPNMobileConfig from './../../vpn.mobileconfig'
-import DOCallbackHtml from './../../do-api-callback.html.js'
 import uuidv4 from 'uuid/v4'
+import { ProviderSelectScreenModal } from './../../screens/screens';
 
 class Welcome extends Component {
     constructor(props) {
@@ -81,25 +81,6 @@ class Welcome extends Component {
         this.handleCallback(event.url)
     }
 
-    registerWithDO = async () => {
-        await RNFS.mkdir(RNFS.DocumentDirectoryPath + '/config', {NSURLIsExcludedFromBackupKey: true})
-        const path = RNFS.DocumentDirectoryPath + '/config/do-api-callback.html'
-
-        const html = DOCallbackHtml()
-
-        await RNFS.writeFile(path, html, 'utf8')
-
-        let url = await this.staticServer.isRunning() ? this.staticServer.origin : await this.staticServer.start()
-
-        SafariView.show({
-            url: `https://cloud.digitalocean.com/v1/oauth/authorize?response_type=token` +
-            `&client_id=49149d0e511068c840aed69d1eb3e84b3e8055d0ffb1df140d49307920018095` +
-            `&redirect_uri=${url}/do-api-callback.html` +
-            `&scope=read%20write`,
-            fromBottom: true
-        })
-    }
-
     installConfig = async (vpnData) => {
         await RNFS.mkdir(RNFS.DocumentDirectoryPath + '/config', {NSURLIsExcludedFromBackupKey: true})
         let path = RNFS.DocumentDirectoryPath + '/config/vpn.mobileconfig';
@@ -131,6 +112,7 @@ class Welcome extends Component {
             url: url + '/vpn.mobileconfig',
             fromBottom: true
         }).then(() => {
+            SafariView.dismiss()
             // RNNetworkExtension.connect({
             //     IPAddress: vpnData.ipAddress,
             //     clientCert: vpnData.privateKeyCertificate,
@@ -164,6 +146,10 @@ class Welcome extends Component {
         }
     }
 
+    triggerProviderSelectScreenModal = () => {
+        ProviderSelectScreenModal(this.staticServer)
+    }
+
     render() {
         const { tokenData } = this.state
 
@@ -188,7 +174,7 @@ class Welcome extends Component {
                     }}></View>
                     <Text style={{position: 'absolute', top: 50, color: 'black'}}>Zud VPN</Text>
                     <TouchableOpacity
-                        onPress={this.registerWithDO}
+                        onPress={this.triggerProviderSelectScreenModal}
                         style={{
                             justifyContent: 'center',
                             alignItems: 'center',
@@ -207,15 +193,52 @@ class Welcome extends Component {
                             fontSize: 18
                             }}>Connect</Text>
                     </TouchableOpacity>
-                </View>        
+                    <Text>
+                        Get Started!
+                    </Text>
+                </View>
             )
         }
         
         let disabled = this.state.status == 'Connecting' || this.state.status == 'Disconnecting';
 
         return (
-            <View style={{flex:1, alignItems: 'center', justifyContent: 'center'}}>
-                <Button disabled={disabled} title={this.state.status == 'Connected' ? 'Disconnect' : 'Connect'} onPress={this.triggerVPN}/>
+            <View style={{                    
+                flex:1, 
+                alignItems: 'center',
+                position: 'relative',
+                paddingTop: '70%'
+                }}>
+                <View style={{
+                    flex: 1,
+                    height: Dimensions.get('window').width,
+                    width: Dimensions.get('window').width * 2,
+                    position: 'absolute',
+                    backgroundColor: '#C4DBF6',
+                    borderBottomStartRadius: Dimensions.get('window').height,
+                    borderBottomEndRadius: Dimensions.get('window').height,
+                }}></View>
+                <Text style={{position: 'absolute', top: 50, color: 'black'}}>Zud VPN</Text>
+                <TouchableOpacity
+                    onPress={this.triggerVPN}
+                    style={{
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        backgroundColor: '#3B8BEB',
+                        borderColor: '#E7E3D4',
+                        borderColor: 'white',
+                        borderWidth: 5,
+                        padding: 5,
+                        height: 200,
+                        width: 200,
+                        borderRadius: 400
+                    }}
+                >
+                    <Text style={{
+                        color: 'white', 
+                        fontSize: 18
+                        }}>{this.state.status == 'Connected' ? 'Disconnect' : 'Connect'}</Text>
+                </TouchableOpacity>
             </View>
         )
     }
