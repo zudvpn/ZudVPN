@@ -44,8 +44,6 @@ class ProviderSelectScreen extends Component {
 
         let url = await this.props.staticServer.isRunning() ? this.props.staticServer.origin : await this.props.staticServer.start()
 
-        console.log('The DO redirect uri', url)
-
         SafariView.show({
             url: `https://cloud.digitalocean.com/v1/oauth/authorize?response_type=token` +
             `&client_id=8d60106cd9109861ce841d4d8cfcc3477a10757f2919601a36873d25be226904` +

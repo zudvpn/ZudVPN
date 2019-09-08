@@ -1,5 +1,13 @@
-export default (name, ip, privateKeyPassword, privateKey, caCert, serverCert, uuid1, uuid2, uuid3, uuid4, uuid5, uuid6) => {
- return `<?xml version="1.0" encoding="UTF-8"?>
+import uuidv4 from 'uuid/v4'
+
+export default (name, vpn) => {
+   const uuid1 = uuidv4()
+   const uuid2 = uuidv4()
+   const uuid4 = uuidv4()
+   const uuid5 = uuidv4()
+   const uuid6 = uuidv4()
+
+   return `<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
@@ -8,7 +16,7 @@ export default (name, ip, privateKeyPassword, privateKey, caCert, serverCert, uu
  <key>PayloadDisplayName</key>
  <string>${name}</string>
  <key>PayloadIdentifier</key>
- <string>com.anyvpn.${name}</string>
+ <string>com.zudvpn.${name}</string>
  <key>PayloadRemovalDisallowed</key>
  <false/>
  <key>PayloadType</key>
@@ -24,7 +32,7 @@ export default (name, ip, privateKeyPassword, privateKey, caCert, serverCert, uu
    <string>ca.pem</string>
    <key>PayloadContent</key>
    <data>
-${caCert}
+${vpn.caCertificate}
    </data>
    <key>PayloadDescription</key>
    <string>Root Certificate Authority</string>
@@ -44,12 +52,12 @@ ${caCert}
    <string>server.pem</string>
    <key>PayloadContent</key>
    <data>
-${serverCert}
+${vpn.serverCertificate}
    </data>
    <key>PayloadDescription</key>
    <string>PKCS#1</string>
    <key>PayloadDisplayName</key>
-   <string>${ip}</string>
+   <string>${vpn.ipAddress}</string>
    <key>PayloadIdentifier</key>
    <string>com.apple.security.pem.${uuid5}</string>
    <key>PayloadType</key>
@@ -61,12 +69,12 @@ ${serverCert}
   </dict>
   <dict>
    <key>Password</key>
-   <string>${privateKeyPassword}</string>
+   <string>${vpn.privateKeyPassword}</string>
    <key>PayloadCertificateFileName</key>
    <string>client.cert.p12</string>
    <key>PayloadContent</key>
    <data>
-${privateKey}
+${vpn.privateKeyCertificate}
    </data>
    <key>PayloadDescription</key>
    <string>PKCS#12</string>
@@ -84,15 +92,6 @@ ${privateKey}
   <dict>
    <key>IKEv2</key>
    <dict>
-    <key>OnDemandEnabled</key>
-    <integer>1</integer>
-    <key>OnDemandRules</key>
-    <array>
-     <dict>
-      <key>Action</key>
-      <string>Connect</string>
-     </dict>
-    </array>
     <key>AuthenticationMethod</key>
     <string>Certificate</string>
     <key>ChildSecurityAssociationParameters</key>
@@ -128,17 +127,17 @@ ${privateKey}
      <integer>20</integer>
     </dict>
     <key>LocalIdentifier</key>
-    <string>${ip}</string>
+    <string>${vpn.ipAddress}</string>
     <key>PayloadCertificateUUID</key>
     <string>${uuid1}</string>
     <key>CertificateType</key>
     <string>ECDSA256</string>
     <key>ServerCertificateIssuerCommonName</key>
-    <string>${ip}</string>
+    <string>${vpn.ipAddress}</string>
     <key>RemoteAddress</key>
-    <string>${ip}</string>
+    <string>${vpn.ipAddress}</string>
     <key>RemoteIdentifier</key>
-    <string>${ip}</string>
+    <string>${vpn.ipAddress}</string>
     <key>UseConfigurationAttributeInternalIPSubnet</key>
     <integer>0</integer>
    </dict>

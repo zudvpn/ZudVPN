@@ -24,6 +24,7 @@ class Client {
                     error => {
                         if (error) {
                             console.log('An error occurred while establishing SSH connection:', error)
+                            this.nativeSshClient = null
                             reject(error)
                         } else {
                             resolve(true)

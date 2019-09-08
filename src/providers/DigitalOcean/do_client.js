@@ -15,7 +15,13 @@ class Client {
             body
         })
 
-        return await response.json()
+        const contentType = response.headers.get("content-type");
+
+        if (contentType && contentType.indexOf("application/json") !== -1) {
+            return await response.json()
+        }
+
+        return await response.text()
     }
 
     async getAccountSSHKeys() {

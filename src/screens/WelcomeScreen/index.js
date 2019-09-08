@@ -7,8 +7,10 @@ import Deploy from './../../providers/DigitalOcean/deploy'
 import StaticServer from 'react-native-static-server'
 import RNFS from 'react-native-fs'
 import VPNMobileConfig from './../../vpn.mobileconfig'
-import uuidv4 from 'uuid/v4'
-import { ProviderSelectScreenModal } from './../../screens/screens';
+import DownloadViaXhr from '../../download-via-xhr';
+import notification from '../../notification_core'
+
+const ACCESS_TOKEN_DATA = 'ACCESS_RESPONSE';
 
 class Welcome extends Component {
     constructor(props) {
@@ -16,8 +18,9 @@ class Welcome extends Component {
 
         this.state = {
             tokenData: null,
-            status: 'Disconnected'
-        }        
+            status: 'Disconnected',
+            logs: []
+        }
 
         this.staticServer = new StaticServer(8080, RNFS.DocumentDirectoryPath + '/config', {localOnly: true})
     }
@@ -35,10 +38,10 @@ class Welcome extends Component {
 
         //this.vpnFailListener = RNNetworkExtension.addEventListener('fail', this.networkFailCallback)
 
-        AsyncStorage.getItem('ACCESS_RESPONSE').then(value => {
+        AsyncStorage.getItem(ACCESS_TOKEN_DATA).then(value => {
             if (value !== null) {
-                const parsed = JSON.parse(value)
-                this.setState({ tokenData: parsed })
+                const tokenData = JSON.parse(value)
+                this.setState({ tokenData })
             }
         })
     }
@@ -63,14 +66,15 @@ class Welcome extends Component {
     }
 
     handleCallback = (url) => {
+        console.log('The callback url received', url)
         let result = url.split('?')[1].split('&').reduce(function (result, item) {
             var parts = item.split('=');
             result[parts[0]] = parts[1];
             return result;
         }, {});
 
-        if (Object.keys(result).length > 0) {
-            AsyncStorage.setItem('ACCESS_RESPONSE', JSON.stringify(result))
+        if (Object.keys(result).length > 0 && result.hasOwnProperty('access_token')) {
+            AsyncStorage.setItem(ACCESS_TOKEN_DATA, JSON.stringify(result))
             this.setState({ tokenData: result })
         }
 
@@ -82,37 +86,23 @@ class Welcome extends Component {
     }
 
     installConfig = async (vpnData) => {
+        let config = VPNMobileConfig('ZudVPN', vpnData)
+        
         await RNFS.mkdir(RNFS.DocumentDirectoryPath + '/config', {NSURLIsExcludedFromBackupKey: true})
-        let path = RNFS.DocumentDirectoryPath + '/config/vpn.mobileconfig';
+            
+        let html = DownloadViaXhr(config)
 
-        let config = VPNMobileConfig(
-            'AnyVPN', 
-            vpnData.ipAddress, 
-            vpnData.privateKeyPassword, 
-            vpnData.privateKeyCertificate, 
-            vpnData.caCertificate, 
-            vpnData.serverCertificate, 
-            uuidv4(), 
-            uuidv4(), 
-            uuidv4(), 
-            uuidv4(), 
-            uuidv4(), 
-            uuidv4()
-        )
+        let html_path = RNFS.DocumentDirectoryPath + '/config/download-via-xhr.html'
 
-        await RNFS.writeFile(path, config, 'utf8')
-
-        console.log('written config file', config)
+        await RNFS.writeFile(html_path, html, 'utf8')
 
         let url = await this.staticServer.isRunning() ? this.staticServer.origin : await this.staticServer.start()
-        
-        console.log('Serving url:', url)
 
         SafariView.show({
-            url: url + '/vpn.mobileconfig',
+            url: url + '/download-via-xhr.html',
             fromBottom: true
         }).then(() => {
-            SafariView.dismiss()
+            this.setState({status: 'Connect'})
             // RNNetworkExtension.connect({
             //     IPAddress: vpnData.ipAddress,
             //     clientCert: vpnData.privateKeyCertificate,
@@ -131,29 +121,37 @@ class Welcome extends Component {
             
             // @TODO SELECT REGION IF NOT SELECTED
 
-            deploy = new Deploy(this.state.tokenData.access_token, 'fra1')
-            let vpnData = await deploy.run()
-
-            console.log('VPN DATA:', vpnData)
-
-            this.installConfig(vpnData)
-
-            // RNNetworkExtension.connect({
-            //     IPAddress: vpnData.ipAddress,
-            //     clientCert: vpnData.privateKeyCertificate,
-            //     clientCertKey: vpnData.privateKeyPassword
-            // })
+            try {
+                deploy = new Deploy(this.state.tokenData.access_token, 'fra1', this.setLog)
+                let vpnData = await deploy.run()
+    
+                this.installConfig(vpnData)
+    
+                // RNNetworkExtension.connect({
+                //     IPAddress: vpnData.ipAddress,
+                //     clientCert: vpnData.privateKeyCertificate,
+                //     clientCertKey: vpnData.privateKeyPassword
+                // })
+            } catch (e) {
+                this.setState({status:'Disconnected'})
+                console.warn(e)
+                this.setLog('ERROR:', e)
+            }
         }
     }
 
     triggerProviderSelectScreenModal = () => {
-        ProviderSelectScreenModal(this.staticServer)
+        this.props.ProviderSelectScreenModal(this.staticServer)
+    }
+
+    setLog = (...message) => {
+        notification.log(message)
+        const logs = [...notification.logs()]
+        this.setState({ logs: logs.reverse() })
     }
 
     render() {
-        const { tokenData } = this.state
-
-        console.log(tokenData)
+        const { tokenData, logs } = this.state
 
         if (tokenData === null) {
             return (
@@ -202,9 +200,20 @@ class Welcome extends Component {
         
         let disabled = this.state.status == 'Connecting' || this.state.status == 'Disconnecting';
 
+
+        let label = this.state.status
+        switch (this.state.status) {
+            case 'Connected':
+                label = 'Disconnect'
+                break;
+            case 'Disconnected':
+                label = 'Connect'
+                break;
+        }
+
         return (
-            <View style={{                    
-                flex:1, 
+            <View style={{
+                flex:1,
                 alignItems: 'center',
                 position: 'relative',
                 paddingTop: '70%'
@@ -220,6 +229,7 @@ class Welcome extends Component {
                 }}></View>
                 <Text style={{position: 'absolute', top: 50, color: 'black'}}>Zud VPN</Text>
                 <TouchableOpacity
+                    disabled={disabled}
                     onPress={this.triggerVPN}
                     style={{
                         justifyContent: 'center',
@@ -237,8 +247,13 @@ class Welcome extends Component {
                     <Text style={{
                         color: 'white', 
                         fontSize: 18
-                        }}>{this.state.status == 'Connected' ? 'Disconnect' : 'Connect'}</Text>
+                        }}>{label}</Text>
                 </TouchableOpacity>
+                <View>
+                    <TouchableOpacity onPress={this.props.LogFileViewerScreenModal}>
+                        {logs.map((log, index) => <Text key={index}>{log}</Text>)}
+                    </TouchableOpacity>
+                </View>
             </View>
         )
     }
