@@ -40,7 +40,7 @@ class LogFileViewerScreen extends Component {
         //     this.setState({
         //         contents
         //     })
-        // })        
+        // })
     }
 
     render() {

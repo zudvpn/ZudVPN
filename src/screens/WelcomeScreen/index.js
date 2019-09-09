@@ -7,7 +7,7 @@ import Deploy from './../../providers/DigitalOcean/deploy'
 import StaticServer from 'react-native-static-server'
 import RNFS from 'react-native-fs'
 import VPNMobileConfig from './../../vpn.mobileconfig'
-import DownloadViaXhr from '../../download-via-xhr';
+import InstallVPNConfiguration from '../../install-vpn-configuration';
 import notification from '../../notification_core'
 
 const ACCESS_TOKEN_DATA = 'ACCESS_RESPONSE';
@@ -17,6 +17,7 @@ class Welcome extends Component {
         super(props)
 
         this.state = {
+            selectedServer: null,
             tokenData: null,
             status: 'Disconnected',
             logs: []
@@ -90,16 +91,16 @@ class Welcome extends Component {
         
         await RNFS.mkdir(RNFS.DocumentDirectoryPath + '/config', {NSURLIsExcludedFromBackupKey: true})
             
-        let html = DownloadViaXhr(config)
+        let html = InstallVPNConfiguration(config)
 
-        let html_path = RNFS.DocumentDirectoryPath + '/config/download-via-xhr.html'
+        let html_path = RNFS.DocumentDirectoryPath + '/config/install-vpn-configuration.html'
 
         await RNFS.writeFile(html_path, html, 'utf8')
 
         let url = await this.staticServer.isRunning() ? this.staticServer.origin : await this.staticServer.start()
 
         SafariView.show({
-            url: url + '/download-via-xhr.html',
+            url: url + '/install-vpn-configuration.html',
             fromBottom: true
         }).then(() => {
             this.setState({status: 'Connect'})
@@ -125,6 +126,7 @@ class Welcome extends Component {
                 deploy = new Deploy(this.state.tokenData.access_token, 'fra1', this.setLog)
                 let vpnData = await deploy.run()
     
+                this.setLog('Installing VPN configuration')
                 this.installConfig(vpnData)
     
                 // RNNetworkExtension.connect({
@@ -142,6 +144,10 @@ class Welcome extends Component {
 
     triggerProviderSelectScreenModal = () => {
         this.props.ProviderSelectScreenModal(this.staticServer)
+    }
+
+    triggerServerSelectScreen = () => {
+        this.props.ServerSelectScreenModel(this.state.tokenData.access_token)
     }
 
     setLog = (...message) => {
@@ -249,6 +255,25 @@ class Welcome extends Component {
                         fontSize: 18
                         }}>{label}</Text>
                 </TouchableOpacity>
+                <View style={{marginTop: 10, marginBottom: 10}}>
+                    <TouchableOpacity
+                    onPress={this.triggerServerSelectScreen}
+                    style={{
+                        borderColor: '#0069ff',
+                        borderWidth: 1,
+                        borderRadius: 3,
+                        width: '100%',
+                        alignItems: 'center',
+                        padding: 15
+                    }}>
+                        <Text style={{position: 'absolute', alignSelf: 'flex-start', fontSize: 9, margin: 2}}>Current VPN server:</Text>
+                        <Text style={{
+                            color: '#0069ff', 
+                            fontWeight: '500', 
+                            fontSize: 14
+                            }}>DigitalOcean Frankfurt-1</Text>
+                    </TouchableOpacity>
+                </View>
                 <View>
                     <TouchableOpacity onPress={this.props.LogFileViewerScreenModal}>
                         {logs.map((log, index) => <Text key={index}>{log}</Text>)}

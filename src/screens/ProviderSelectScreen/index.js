@@ -50,6 +50,7 @@ class ProviderSelectScreen extends Component {
             `&redirect_uri=${url}/do-api-callback.html` +
             `&scope=read%20write`,
             fromBottom: true
+        }).then(() => {
         })
     }
 

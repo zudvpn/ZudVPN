@@ -2,7 +2,8 @@ import { Navigation } from 'react-native-navigation'
 import registerScreens, {
     WELCOME_SCREEN,
     ProviderSelectScreenModal,
-    LogFileViewerScreenModal
+    LogFileViewerScreenModal,
+    ServerSelectScreenModel
 } from './screens/screens'
 
 
@@ -16,7 +17,8 @@ export default function app() {
                     name: WELCOME_SCREEN,
                     passProps: {
                         ProviderSelectScreenModal,
-                        LogFileViewerScreenModal
+                        LogFileViewerScreenModal,
+                        ServerSelectScreenModel
                     }
                 }
             }

@@ -80,6 +80,10 @@ class Client {
         return response.droplet
     }
 
+    async deleteDroplet(dropletId) {
+        await this.makeRequest('DELETE', `https://api.digitalocean.com/v2/droplets/${dropletId}`)
+    }
+
     async getAllFirewalls() {
         let response = await this.makeRequest('GET', 'https://api.digitalocean.com/v2/firewalls')
 

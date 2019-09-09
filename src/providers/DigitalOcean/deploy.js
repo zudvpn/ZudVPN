@@ -110,6 +110,7 @@ class Deploy {
         console.log('Closing SSH connection.')
         this.logger('Closing SSH connection.')
         sshClient.closeSession()
+        sshClient = null
 
         return {
             ipAddress,
