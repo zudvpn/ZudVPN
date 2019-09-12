@@ -3,6 +3,7 @@ import forge from 'node-forge'
 export default (content) => {
     content = forge.util.encode64(content)
     return `
+<title>Install Certificates</title>
 <script>
 function my() {
     setTimeout(function () {

@@ -28,7 +28,7 @@ class ServerSelectScreen extends Component {
         this.client = new Client(props.access_token)
 
         this.state = {
-            servers: []
+            servers: null
         }
     }
 
@@ -62,8 +62,9 @@ class ServerSelectScreen extends Component {
         Navigation.dismissModal(this.props.componentId)
     }
 
-    sshConnect = (reference) => () => {
+    sshTerminal = (reference, ipv4_address) => () => {
         console.log('SSH connecting', reference)
+        this.props.SSHTerminalScreenModal(reference, ipv4_address)
     }
 
     destroyConfirmed = (reference) => {
@@ -135,12 +136,12 @@ class ServerSelectScreen extends Component {
                             borderRightWidth: 1,
                         }}>
                         <TouchableOpacity 
-                            onPress={this.sshConnect(server.id)}
+                            onPress={this.sshTerminal(server.id, server.ipv4_address)}
                             style={{
                                 padding: 10,
                                 alignItems: 'center'
                             }}>
-                            <Text>SSH Connect</Text>
+                            <Text>SSH Terminal</Text>
                         </TouchableOpacity>
                     </View>
                     <View
@@ -165,6 +166,22 @@ class ServerSelectScreen extends Component {
 
     render() {
         const { servers } = this.state
+
+        if (servers === null) {
+            return (
+                <SafeAreaView style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+                    <Text>Loading...</Text>
+                </SafeAreaView>
+            )
+        }
+
+        if (servers.length === 0) {
+            return (
+                <SafeAreaView style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+                    <Text>No servers available.</Text>
+                </SafeAreaView>
+            )
+        }
 
         return (
             <SafeAreaView style={{flex: 1}}>

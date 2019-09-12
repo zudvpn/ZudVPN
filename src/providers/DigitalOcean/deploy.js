@@ -78,6 +78,11 @@ class Deploy {
             await this.addFirewallToDroplet(DropletBaseName, droplet.id)
         }
 
+        // Save SSH by droplet key (used to ssh terminal connect)
+        console.log('Saving SSH by droplet key.')
+        this.logger('Saving SSH by droplet key.')
+        AsyncStorage.setItem('DROPLET_SSH_KEY_PAIR' + droplet.id, JSON.stringify(sshKeyPair))
+
         console.log('Waiting for the instance IP address.')
         this.logger('Waiting for the instance IP address.')
         let ipAddress = await this.getIpAddress(droplet)
