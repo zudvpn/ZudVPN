@@ -112,7 +112,7 @@ class Deploy {
         // caCertificate = caCertificate.replace(/^\s+|\s+$/g, '')
         // serverCertificate = serverCertificate.replace(/^\s+|\s+$/g, '')
 
-        let password = await sshClient.run(`docker exec strongswan /bin/sh -c "cat /etc/ipsec.d/client.cert.p12.password"`)
+        let password = await sshClient.run(`docker exec strongswan /bin/sh -c "cat /etc/ipsec.d/client.password"`)
 
         console.log('Closing SSH connection.')
         this.logger('Closing SSH connection.')
