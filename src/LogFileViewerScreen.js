@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, SafeAreaView, View, TouchableOpacity } from 'react-native'
+import { Text, SafeAreaView, ScrollView, TouchableOpacity } from 'react-native'
 import { Navigation } from 'react-native-navigation';
 import notification from './notification_core'
 
@@ -41,6 +41,9 @@ class LogFileViewerScreen extends Component {
         //         contents
         //     })
         // })
+        this.setState({
+            contents: notification.logs()
+        })
     }
 
     render() {
@@ -48,7 +51,9 @@ class LogFileViewerScreen extends Component {
 
         return (
             <SafeAreaView>
-                <Text>{contents}</Text>
+                <ScrollView>
+                    <Text>{contents}</Text>
+                </ScrollView>                
             </SafeAreaView>
         )
     }

@@ -1,4 +1,4 @@
-export default (key) => {
+export default (key, do_token) => {
     return `#cloud-config
 ssh_authorized_keys:
   - ${key}
@@ -127,6 +127,37 @@ coreos:
         ExecStartPre=-/bin/sh -c "ifconfig dummy0 inet6 add fd9d:bc11:4020::/48"
         ExecStartPre=-/bin/sh -c "ifconfig dummy0 1.1.1.2/32"
         ExecStart=/bin/sh -c "echo"
+    - name: dns-record.service
+      enable: true
+      command: start
+      content: |
+        [Unit]
+        Description=Creates DNS records
+
+        [Service]
+        User=core
+        Type=oneshot
+        ExecStartPre=/bin/sh -c '/usr/bin/echo "$public_ipv4" > /home/core/ipv4_address'
+        ExecStartPre=/bin/sh -c '/usr/bin/echo $(/usr/bin/cat /home/core/ipv4_address | tr "." "-")".zudvpn.com" > /home/core/domain'
+        ExecStartPre=/bin/sh -c "/usr/bin/echo '{\\"name\\":\\"'$(/usr/bin/cat /home/core/domain)'\\",\\"ip_address\\":\\"$public_ipv4\\"}' > /home/core/payload"
+        ExecStart=/usr/bin/curl -X POST -H "Content-Type: application/json" -H "Authorization: Bearer ${do_token}" -d "@/home/core/payload" "https://api.digitalocean.com/v2/domains"
+    - name: certbot.service
+      enable: true
+      command: start
+      content: |
+        [Unit]
+        Description=Create certificate using certbot/letsencrypt
+        After=docker.service dns-record.service
+
+        [Service]
+        User=core
+        Type=oneshot
+        ExecStartPre=/usr/bin/mkdir -p /home/core/digitalocean /home/core/letsencrypt
+        ExecStartPre=/usr/bin/chmod -R 755 /home/core/letsencrypt
+        ExecStartPre=/bin/sh -c '/usr/bin/echo "dns_digitalocean_token = ${do_token}" > /home/core/digitalocean/token.ini'
+        ExecStartPre=/bin/sh -c '/usr/bin/echo /usr/bin/docker run --rm --name certbot --user $(id -u):$(id -g) -v "/home/core/letsencrypt:/etc/letsencrypt" -v "/home/core/letsencrypt:/var/log/letsencrypt" -v "/home/core/letsencrypt:/var/lib/letsencrypt" -v "/home/core/digitalocean:/etc/digitalocean" certbot/dns-digitalocean certonly --dns-digitalocean --dns-digitalocean-credentials /etc/digitalocean/token.ini --non-interactive --agree-tos -m core@$(/usr/bin/cat /home/core/domain) -d $(/usr/bin/cat /home/core/domain) > /home/core/certbot-docker'
+        ExecStartPre=/usr/bin/docker pull certbot/dns-digitalocean:latest
+        ExecStart=/usr/bin/bash /home/core/certbot-docker
     - name: dosxvpn-sysctl.service
       enable: true
       command: start
@@ -172,12 +203,12 @@ coreos:
 
         [Timer]
         OnCalendar=*-*-* 0/12:00:00
-    - name: dosxvpn.service
+    - name: strongswan.service
       command: start
       content: |
         [Unit]
-        Description=dosxvpn
-        After=docker.service,dummy-interface.service
+        Description=strongswan
+        After=docker.service dummy-interface.service certbot.service
 
         [Service]
         User=core
@@ -185,11 +216,16 @@ coreos:
         TimeoutStartSec=0
         KillMode=none
         EnvironmentFile=/etc/environment
-        ExecStartPre=-/usr/bin/docker kill dosxvpn
-        ExecStartPre=-/usr/bin/docker rm dosxvpn
-        ExecStartPre=/usr/bin/docker pull dosxvpn/strongswan:latest
-        ExecStart=/usr/bin/docker run --name dosxvpn -e VPN_DNS="1.1.1.2" -e DUMMY_DEVICE="1.1.1.2/32" -e VPN_DOMAIN=$public_ipv4 --privileged --net=host -v ipsec.d:/etc/ipsec.d -v strongswan.d:/etc/strongswan.d -v /lib/modules:/lib/modules -v /etc/localtime:/etc/localtime dosxvpn/strongswan:latest
-        ExecStop=/usr/bin/docker stop dosxvpn
+        ExecStartPre=-/usr/bin/docker kill strongswan
+        ExecStartPre=-/usr/bin/docker rm strongswan
+        ExecStartPre=/usr/bin/docker pull miniyarov/strongswan:latest
+        ExecStartPre=/usr/bin/mkdir -p /home/core/ipsec.d /home/core/ipsec.d/certs /home/core/ipsec.d/private /home/core/ipsec.d/cacerts
+        ExecStartPre=/bin/sh -c "/usr/bin/cp /home/core/letsencrypt/live/$(/usr/bin/cat /home/core/domain)/fullchain.pem /home/core/ipsec.d/certs/"
+        ExecStartPre=/bin/sh -c "/usr/bin/cp /home/core/letsencrypt/live/$(/usr/bin/cat /home/core/domain)/privkey.pem /home/core/ipsec.d/private/"
+        ExecStartPre=/bin/sh -c "/usr/bin/cp /home/core/letsencrypt/live/$(/usr/bin/cat /home/core/domain)/chain.pem /home/core/ipsec.d/cacerts/"
+        ExecStartPre=/bin/sh -c '/usr/bin/echo /usr/bin/docker run --name strongswan -e VPN_DNS="1.1.1.2" -e DUMMY_DEVICE="1.1.1.2/32" -e VPN_DOMAIN=$(/usr/bin/cat /home/core/domain) --privileged --net=host -v /home/core/ipsec.d:/etc/ipsec.d -v strongswan.d:/etc/strongswan.d -v /lib/modules:/lib/modules -v /etc/localtime:/etc/localtime miniyarov/strongswan:latest > /home/core/strongswan-docker'
+        ExecStart=/usr/bin/bash /home/core/strongswan-docker
+        ExecStop=/usr/bin/docker stop strongswan
     - name: pihole-etc-host.service
       command: start
       content: |
@@ -206,7 +242,7 @@ coreos:
       content: |
         [Unit]
         Description=pihole
-        After=docker.service,dummy-interface.service
+        After=docker.service dummy-interface.service
 
         [Service]
         User=core
