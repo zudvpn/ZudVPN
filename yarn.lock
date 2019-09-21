@@ -5252,6 +5252,11 @@ react-native-navigation@^3.1.2:
     react-lifecycles-compat "2.0.0"
     tslib "1.9.3"
 
+react-native-network-extension@^0.1.23:
+  version "0.1.28"
+  resolved "https://registry.yarnpkg.com/react-native-network-extension/-/react-native-network-extension-0.1.28.tgz#f10ff21eeb7fa3334c126c994b25b7982d6ab929"
+  integrity sha512-2eddCAUuWTGHIbqM2khhHfrVyvB5WTFn9jPj4wbzGQYAv39GyXJOPExurFVbrcVZTv3kLmxmf50oRVksGyUKkA==
+
 react-native-rsa-native@^1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/react-native-rsa-native/-/react-native-rsa-native-1.1.2.tgz#5c500046661379e51651680a4da5873e3883af9b"

@@ -17,6 +17,7 @@
     "react-native": "0.60.5",
     "react-native-fs": "^2.14.1",
     "react-native-navigation": "^3.1.2",
+    "react-native-network-extension": "^0.1.23",
     "react-native-rsa-native": "^1.1.2",
     "react-native-safari-view": "^2.1.0",
     "react-native-ssh-sftp": "^1.0.3",

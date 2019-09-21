@@ -75,6 +75,8 @@ PODS:
     - React-cxxreact (= 0.60.5)
     - React-jsi (= 0.60.5)
   - React-jsinspector (0.60.5)
+  - react-native-network-extension (0.1.28):
+    - React
   - react-native-rsa-native (1.1.2):
     - React
   - react-native-safari-view (1.0.0):
@@ -129,6 +131,7 @@ DEPENDENCIES:
   - React-jsi (from `../node_modules/react-native/ReactCommon/jsi`)
   - React-jsiexecutor (from `../node_modules/react-native/ReactCommon/jsiexecutor`)
   - React-jsinspector (from `../node_modules/react-native/ReactCommon/jsinspector`)
+  - react-native-network-extension (from `../node_modules/react-native-network-extension`)
   - react-native-rsa-native (from `../node_modules/react-native-rsa-native`)
   - react-native-safari-view (from `../node_modules/react-native-safari-view/react-native-safari-view.podspec`)
   - react-native-static-server (from `../node_modules/react-native-static-server`)
@@ -182,6 +185,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/jsiexecutor"
   React-jsinspector:
     :path: "../node_modules/react-native/ReactCommon/jsinspector"
+  react-native-network-extension:
+    :path: "../node_modules/react-native-network-extension"
   react-native-rsa-native:
     :path: "../node_modules/react-native-rsa-native"
   react-native-safari-view:
@@ -219,6 +224,11 @@ EXTERNAL SOURCES:
   yoga:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
+CHECKOUT OPTIONS:
+  react-native-safari-view:
+    :commit: d828e7911b9588a5c1b3456c7934c587bd0d3c14
+    :git: https://github.com/naoufal/react-native-safari-view.git
+
 SPEC CHECKSUMS:
   AppCenter: 9784d2fc998c9bd0b8fbaf4fb9ed69526d12ce1a
   appcenter: e55cb133b100379be61158f511082196b8022424
@@ -237,6 +247,7 @@ SPEC CHECKSUMS:
   React-jsi: 4d8c9efb6312a9725b18d6fc818ffc103f60fec2
   React-jsiexecutor: 90ad2f9db09513fc763bc757fdc3c4ff8bde2a30
   React-jsinspector: e08662d1bf5b129a3d556eb9ea343a3f40353ae4
+  react-native-network-extension: c6e069be39fd12c3c3951111f6200b6a029d30f9
   react-native-rsa-native: 652fba77a36dda00de5c842408b126b69e1f4431
   react-native-safari-view: 955d7160d159241b8e9395d12d10ea0ef863dcdd
   react-native-static-server: 4ddb9afa1cda0f65194df42b8debd81b6e314531
@@ -256,6 +267,6 @@ SPEC CHECKSUMS:
   RNVectorIcons: 0bb4def82230be1333ddaeee9fcba45f0b288ed4
   yoga: 312528f5bbbba37b4dcea5ef00e8b4033fdd9411
 
-PODFILE CHECKSUM: d436f54e16ef58aa9b4538f7c26559d9ab1792e6
+PODFILE CHECKSUM: 8ccab139ee2aa9d7b9b39ad73f84610495bd917e
 
 COCOAPODS: 1.7.4

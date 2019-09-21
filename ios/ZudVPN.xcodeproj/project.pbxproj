@@ -21,7 +21,6 @@
 		BC9415F6231C9151002908C9 /* libRNSSHClient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BC9415F5231C913B002908C9 /* libRNSSHClient.a */; };
 		BC9415FB231C9437002908C9 /* AppCenter-Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = BC9415F9231C9437002908C9 /* AppCenter-Config.plist */; };
 		BCAE9BC02330321800CB50AD /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCAE9BBF2330321800CB50AD /* NetworkExtension.framework */; };
-		BCBCBF372336BED4003F3D27 /* libRNNetworkExtension.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BCBCBF0A2336B997003F3D27 /* libRNNetworkExtension.a */; };
 		BCBCBF392336C08A003F3D27 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCBCBF382336C08A003F3D27 /* File.swift */; };
 		CDA6967C30453181A7004651 /* libPods-ZudVPN.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 091080A238B989222CE4AEA6 /* libPods-ZudVPN.a */; };
 		D4CC9BCAF544298A68932139 /* libPods-ZudVPNTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DFF3E2C0A29E30E0B1DA2C6 /* libPods-ZudVPNTests.a */; };
@@ -48,13 +47,6 @@
 			proxyType = 2;
 			remoteGlobalIDString = 134814201AA4EA6300B7C361;
 			remoteInfo = RNSSHClient;
-		};
-		BCBCBF092336B997003F3D27 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BCBCBF042336B996003F3D27 /* RNNetworkExtension.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 134814201AA4EA6300B7C361;
-			remoteInfo = RNNetworkExtension;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -85,7 +77,6 @@
 		BC9415F9231C9437002908C9 /* AppCenter-Config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "AppCenter-Config.plist"; sourceTree = "<group>"; };
 		BCAE9BBF2330321800CB50AD /* NetworkExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NetworkExtension.framework; path = System/Library/Frameworks/NetworkExtension.framework; sourceTree = SDKROOT; };
 		BCAE9BC12330321800CB50AD /* ZudVPN.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = ZudVPN.entitlements; path = ZudVPN/ZudVPN.entitlements; sourceTree = "<group>"; };
-		BCBCBF042336B996003F3D27 /* RNNetworkExtension.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNNetworkExtension.xcodeproj; path = "../../network-extension/ios/RNNetworkExtension.xcodeproj"; sourceTree = "<group>"; };
 		BCBCBF382336C08A003F3D27 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		BCBCBF3D2336C0B9003F3D27 /* ZudVPN-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ZudVPN-Bridging-Header.h"; sourceTree = "<group>"; };
 		D22DC7CE54687847EB481833 /* libPods-ZudVPN-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ZudVPN-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -111,7 +102,6 @@
 				BC9415F6231C9151002908C9 /* libRNSSHClient.a in Frameworks */,
 				BCAE9BC02330321800CB50AD /* NetworkExtension.framework in Frameworks */,
 				CDA6967C30453181A7004651 /* libPods-ZudVPN.a in Frameworks */,
-				BCBCBF372336BED4003F3D27 /* libRNNetworkExtension.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -201,7 +191,6 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
-				BCBCBF042336B996003F3D27 /* RNNetworkExtension.xcodeproj */,
 				BC9415F0231C913B002908C9 /* RNSSHClient.xcodeproj */,
 			);
 			name = Libraries;
@@ -237,14 +226,6 @@
 			isa = PBXGroup;
 			children = (
 				BC9415F5231C913B002908C9 /* libRNSSHClient.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		BCBCBF052336B996003F3D27 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				BCBCBF0A2336B997003F3D27 /* libRNNetworkExtension.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -382,10 +363,6 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = BCBCBF052336B996003F3D27 /* Products */;
-					ProjectRef = BCBCBF042336B996003F3D27 /* RNNetworkExtension.xcodeproj */;
-				},
-				{
 					ProductGroup = BC9415F1231C913B002908C9 /* Products */;
 					ProjectRef = BC9415F0231C913B002908C9 /* RNSSHClient.xcodeproj */;
 				},
@@ -406,13 +383,6 @@
 			fileType = archive.ar;
 			path = libRNSSHClient.a;
 			remoteRef = BC9415F4231C913B002908C9 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		BCBCBF0A2336B997003F3D27 /* libRNNetworkExtension.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libRNNetworkExtension.a;
-			remoteRef = BCBCBF092336B997003F3D27 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */

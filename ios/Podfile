@@ -33,8 +33,6 @@ target 'ZudVPN' do
 
   pod 'ReactNativeNavigation', :podspec => '../node_modules/react-native-navigation/ReactNativeNavigation.podspec'
 
-  # pod 'react-native-network-extension', :podspec => '../node_modules/react-native-network-extension/react-native-network-extension.podspec'
-
   target 'ZudVPNTests' do
     inherit! :search_paths
     # Pods for testing
