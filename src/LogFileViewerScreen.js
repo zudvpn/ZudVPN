@@ -42,7 +42,7 @@ class LogFileViewerScreen extends Component {
         //     })
         // })
         this.setState({
-            contents: notification.logs()
+            contents: [...notification.logs()].reverse()
         })
     }
 
@@ -52,7 +52,7 @@ class LogFileViewerScreen extends Component {
         return (
             <SafeAreaView>
                 <ScrollView>
-                    <Text>{contents}</Text>
+                    {contents.map((log, index) => <Text selectable={true} key={index}>{log}</Text>)}
                 </ScrollView>                
             </SafeAreaView>
         )

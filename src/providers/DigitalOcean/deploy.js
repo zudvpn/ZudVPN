@@ -112,7 +112,10 @@ class Deploy {
         // caCertificate = caCertificate.replace(/^\s+|\s+$/g, '')
         // serverCertificate = serverCertificate.replace(/^\s+|\s+$/g, '')
 
-        let password = await sshClient.run(`docker exec strongswan /bin/sh -c "cat /etc/ipsec.d/client.password"`)
+        let [domain, password] = await Promise.all([
+            sshClient.run(`/usr/bin/cat /home/core/domain`),
+            sshClient.run(`docker exec strongswan /bin/sh -c "cat /etc/ipsec.d/client.password"`)
+        ])
 
         console.log('Closing SSH connection.')
         this.logger('Closing SSH connection.')
@@ -121,6 +124,7 @@ class Deploy {
 
         return {
             ipAddress,
+            domain,
             password
         }
 

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Button, Dimensions, Linking, Platform, Text, TouchableOpacity, View } from 'react-native'
 import SafariView from 'react-native-safari-view'
 import AsyncStorage from '@react-native-community/async-storage'
-//import RNNetworkExtension from 'react-native-network-extension'
+import RNNetworkExtension from 'react-native-network-extension'
 import Deploy from './../../providers/DigitalOcean/deploy'
 import StaticServer from 'react-native-static-server'
 import RNFS from 'react-native-fs'
@@ -35,9 +35,9 @@ class Welcome extends Component {
             Linking.addEventListener('url', this.handleCallbackEvent)
         }
 
-        //this.vpnStatusListener = RNNetworkExtension.addEventListener('status', this.networkStatusCallback)
+        this.vpnStatusListener = RNNetworkExtension.addEventListener('status', this.networkStatusCallback)
 
-        //this.vpnFailListener = RNNetworkExtension.addEventListener('fail', this.networkFailCallback)
+        this.vpnFailListener = RNNetworkExtension.addEventListener('fail', this.networkFailCallback)
 
         AsyncStorage.getItem(ACCESS_TOKEN_DATA).then(value => {
             if (value !== null) {
@@ -51,10 +51,10 @@ class Welcome extends Component {
         Linking.removeEventListener('url', this.handleCallbackEvent)
 
         this.vpnStatusListener.remove()
-        // RNNetworkExtension.removeEventListener('status', this.networkStatusCallback)
+        RNNetworkExtension.removeEventListener('status', this.networkStatusCallback)
 
         this.vpnFailListener.remove()
-        // RNNetworkExtension.removeEventListener('fail', this.networkFailCallback)
+        RNNetworkExtension.removeEventListener('fail', this.networkFailCallback)
     }
 
     networkStatusCallback = status => {
@@ -115,7 +115,7 @@ class Welcome extends Component {
     triggerVPN = async () => {
         if (this.state.status === 'Connected') {
             console.log('stopping vpn')
-            //RNNetworkExtension.disconnect()
+            RNNetworkExtension.disconnect()
         } else {
             this.setState({status:'Connecting'})
             console.log('triggered vpn')
@@ -127,13 +127,14 @@ class Welcome extends Component {
                 let vpnData = await deploy.run()
     
                 this.setLog('Installing VPN configuration')
-                this.installConfig(vpnData)
+                // this.installConfig(vpnData)
     
-                // RNNetworkExtension.connect({
-                //     IPAddress: vpnData.ipAddress,
-                //     clientCert: vpnData.privateKeyCertificate,
-                //     clientCertKey: vpnData.privateKeyPassword
-                // })
+                RNNetworkExtension.connect({
+                    ipAddress: vpnData.ipAddress,
+                    domain: vpnData.domain,
+                    username: "core",
+                    password: vpnData.password
+                })
             } catch (e) {
                 this.setState({status:'Disconnected'})
                 console.warn(e)
@@ -276,7 +277,7 @@ class Welcome extends Component {
                 </View>
                 <View>
                     <TouchableOpacity onPress={this.props.LogFileViewerScreenModal}>
-                        {logs.map((log, index) => <Text key={index}>{log}</Text>)}
+                        {logs.map((log, index) => <Text selectable={true} key={index}>{log}</Text>)}
                     </TouchableOpacity>
                 </View>
             </View>
