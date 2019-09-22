@@ -112,6 +112,26 @@ class Welcome extends Component {
         })
     }
 
+    configureVPN = async () => {
+        console.log('Installing VPN configuration')
+        this.setLog('Installing VPN configuration')
+        try {
+            deploy = new Deploy(this.state.tokenData.access_token, 'fra1', this.setLog)
+            let vpnData = await deploy.run()
+            // this.installConfig(vpnData)
+            await RNNetworkExtension.configure({
+                ipAddress: vpnData.ipAddress,
+                domain: vpnData.domain,
+                username: "core",
+                password: vpnData.password
+            })
+        } catch (e) {
+            this.setState({status:'Disconnected'})
+            console.warn(e)
+            this.setLog('ERROR:', e)
+        }
+    }
+
     triggerVPN = async () => {
         if (this.state.status === 'Connected') {
             console.log('stopping vpn')
@@ -119,27 +139,8 @@ class Welcome extends Component {
         } else {
             this.setState({status:'Connecting'})
             console.log('triggered vpn')
-            
-            // @TODO SELECT REGION IF NOT SELECTED
 
-            try {
-                deploy = new Deploy(this.state.tokenData.access_token, 'fra1', this.setLog)
-                let vpnData = await deploy.run()
-    
-                this.setLog('Installing VPN configuration')
-                // this.installConfig(vpnData)
-    
-                RNNetworkExtension.connect({
-                    ipAddress: vpnData.ipAddress,
-                    domain: vpnData.domain,
-                    username: "core",
-                    password: vpnData.password
-                })
-            } catch (e) {
-                this.setState({status:'Disconnected'})
-                console.warn(e)
-                this.setLog('ERROR:', e)
-            }
+            RNNetworkExtension.connect()
         }
     }
 
@@ -148,7 +149,7 @@ class Welcome extends Component {
     }
 
     triggerServerSelectScreen = () => {
-        this.props.ServerSelectScreenModel(this.state.tokenData.access_token)
+        this.props.ServerSelectScreenModel(this.state.tokenData.access_token, this.configureVPN)
     }
 
     setLog = (...message) => {

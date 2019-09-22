@@ -49,6 +49,14 @@ class LogFileViewerScreen extends Component {
     render() {
         const { contents } = this.state
 
+        if (contents === null) {
+            return (
+                <SafeAreaView style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+                    <Text>Loading...</Text>
+                </SafeAreaView>
+            )
+        }
+
         return (
             <SafeAreaView>
                 <ScrollView>

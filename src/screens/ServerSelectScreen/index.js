@@ -59,6 +59,7 @@ class ServerSelectScreen extends Component {
     }
 
     select = (reference) => () => {
+        this.props.configureVPN()
         Navigation.dismissModal(this.props.componentId)
     }
 

@@ -117,6 +117,9 @@ class Deploy {
             sshClient.run(`docker exec strongswan /bin/sh -c "cat /etc/ipsec.d/client.password"`)
         ])
 
+        domain = domain.replace(/[\n\r]+/g, '')
+        password = password.replace(/[\n\r]+/g, '')
+
         console.log('Closing SSH connection.')
         this.logger('Closing SSH connection.')
         sshClient.closeSession()

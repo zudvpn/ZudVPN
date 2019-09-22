@@ -47,7 +47,7 @@ export const LogFileViewerScreenModal = () => Navigation.showModal({
     }
 })
 
-export const ServerSelectScreenModel = (access_token) => Navigation.showModal({
+export const ServerSelectScreenModel = (access_token, configureVPN) => Navigation.showModal({
     stack: {
         children: [
             {
@@ -55,6 +55,7 @@ export const ServerSelectScreenModel = (access_token) => Navigation.showModal({
                     name: SERVER_SELECT_SCREEN,
                     passProps: {
                         access_token,
+                        configureVPN,
                         SSHTerminalScreenModal
                     }
                 }
