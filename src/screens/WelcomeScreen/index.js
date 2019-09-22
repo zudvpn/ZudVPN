@@ -64,6 +64,7 @@ class Welcome extends Component {
 
     networkFailCallback = reason => {
         console.log('network fail reason: ', reason)
+        this.setState({status: 'Connect'})
     }
 
     handleCallback = (url) => {
@@ -122,7 +123,7 @@ class Welcome extends Component {
             await RNNetworkExtension.configure({
                 ipAddress: vpnData.ipAddress,
                 domain: vpnData.domain,
-                username: "core",
+                username: "vpn",
                 password: vpnData.password
             })
         } catch (e) {
@@ -140,7 +141,12 @@ class Welcome extends Component {
             this.setState({status:'Connecting'})
             console.log('triggered vpn')
 
-            RNNetworkExtension.connect()
+            try {
+                await RNNetworkExtension.connect()
+            } catch (e) {
+                console.log('VPN connect error', e)
+                this.configureVPN()
+            }
         }
     }
 

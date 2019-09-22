@@ -5253,9 +5253,9 @@ react-native-navigation@^3.1.2:
     tslib "1.9.3"
 
 react-native-network-extension@^0.1.23:
-  version "0.1.30"
-  resolved "https://registry.yarnpkg.com/react-native-network-extension/-/react-native-network-extension-0.1.30.tgz#34d5eb39f8cbc975d06993c32f04bef0fba85507"
-  integrity sha512-aXR0mrAWGGugyGcY5oMkObR32wkn3FUd1eOH+tyuN4ozWY1shmSjFrR5XqI7Qt2FzV5e/jxKZZb17DhgSunSnw==
+  version "0.1.31"
+  resolved "https://registry.yarnpkg.com/react-native-network-extension/-/react-native-network-extension-0.1.31.tgz#41c9c298fd15af2b13bd32606f1327d6aea7ca52"
+  integrity sha512-c7F15wf+qBoTZMzxr+wulWgsxYYyHd0lZu77RU9n82pU1fqPUOuLylp8MFjV28iHfnAjRPiUkMzkl4Ee/LXITw==
 
 react-native-rsa-native@^1.1.2:
   version "1.1.2"
