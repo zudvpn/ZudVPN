@@ -1,14 +1,14 @@
 import React, { Component } from 'react'
-import { Button, Dimensions, Linking, Platform, Text, TouchableOpacity, View } from 'react-native'
+import { Linking, Platform, Text, TouchableOpacity, View } from 'react-native'
 import SafariView from 'react-native-safari-view'
 import AsyncStorage from '@react-native-community/async-storage'
 import RNNetworkExtension from 'react-native-network-extension'
 import Deploy from './../../providers/DigitalOcean/deploy'
-import StaticServer from 'react-native-static-server'
-import RNFS from 'react-native-fs'
-import VPNMobileConfig from './../../vpn.mobileconfig'
-import InstallVPNConfiguration from '../../install-vpn-configuration';
 import notification from '../../notification_core'
+import styles from './style'
+import { RoundButton, IconButton } from './buttons'
+import { Navigation } from 'react-native-navigation';
+import StaticServer from './../../static_server'
 
 const ACCESS_TOKEN_DATA = 'ACCESS_RESPONSE';
 
@@ -22,8 +22,6 @@ class Welcome extends Component {
             status: 'Disconnected',
             logs: []
         }
-
-        this.staticServer = new StaticServer(8080, RNFS.DocumentDirectoryPath + '/config', {localOnly: true})
     }
 
     componentDidMount() {
@@ -80,6 +78,8 @@ class Welcome extends Component {
             this.setState({ tokenData: result })
         }
 
+        StaticServer.stop()
+        Navigation.dismissAllModals()
         SafariView.dismiss()
     }
 
@@ -87,39 +87,12 @@ class Welcome extends Component {
         this.handleCallback(event.url)
     }
 
-    installConfig = async (vpnData) => {
-        let config = VPNMobileConfig('ZudVPN', vpnData)
-        
-        await RNFS.mkdir(RNFS.DocumentDirectoryPath + '/config', {NSURLIsExcludedFromBackupKey: true})
-            
-        let html = InstallVPNConfiguration(config)
-
-        let html_path = RNFS.DocumentDirectoryPath + '/config/install-vpn-configuration.html'
-
-        await RNFS.writeFile(html_path, html, 'utf8')
-
-        let url = await this.staticServer.isRunning() ? this.staticServer.origin : await this.staticServer.start()
-
-        SafariView.show({
-            url: url + '/install-vpn-configuration.html',
-            fromBottom: true
-        }).then(() => {
-            this.setState({status: 'Connect'})
-            // RNNetworkExtension.connect({
-            //     IPAddress: vpnData.ipAddress,
-            //     clientCert: vpnData.privateKeyCertificate,
-            //     clientCertKey: vpnData.privateKeyPassword
-            // })
-        })
-    }
-
     configureVPN = async () => {
-        console.log('Installing VPN configuration')
-        this.setLog('Installing VPN configuration')
+        console.log('Configuring VPN...')
+        this.setLog('Configuring VPN...')
         try {
             deploy = new Deploy(this.state.tokenData.access_token, 'fra1', this.setLog)
             let vpnData = await deploy.run()
-            // this.installConfig(vpnData)
             await RNNetworkExtension.configure({
                 ipAddress: vpnData.ipAddress,
                 domain: vpnData.domain,
@@ -145,13 +118,15 @@ class Welcome extends Component {
                 await RNNetworkExtension.connect()
             } catch (e) {
                 console.log('VPN connect error', e)
+                this.setLog('VPN is not configured. Creating new VPN server.')
+                this.setState({status:'Connecting'})
                 this.configureVPN()
             }
         }
     }
 
-    triggerProviderSelectScreenModal = () => {
-        this.props.ProviderSelectScreenModal(this.staticServer)
+    triggerProviderRegisterScreenModal = () => {
+        this.props.ProviderRegisterScreenModal()
     }
 
     triggerServerSelectScreen = () => {
@@ -169,45 +144,10 @@ class Welcome extends Component {
 
         if (tokenData === null) {
             return (
-                <View style={{                    
-                    flex:1, 
-                    alignItems: 'center',
-                    position: 'relative',
-                    paddingTop: '70%'
-                    }}>
-                    <View style={{
-                        flex: 1,
-                        height: Dimensions.get('window').width,
-                        width: Dimensions.get('window').width * 2,
-                        position: 'absolute',
-                        backgroundColor: '#C4DBF6',
-                        borderBottomStartRadius: Dimensions.get('window').height,
-                        borderBottomEndRadius: Dimensions.get('window').height,
-                    }}></View>
-                    <Text style={{position: 'absolute', top: 50, color: 'black'}}>Zud VPN</Text>
-                    <TouchableOpacity
-                        onPress={this.triggerProviderSelectScreenModal}
-                        style={{
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                            backgroundColor: '#3B8BEB',
-                            borderColor: '#E7E3D4',
-                            borderColor: 'white',
-                            borderWidth: 5,
-                            padding: 5,
-                            height: 200,
-                            width: 200,
-                            borderRadius: 400
-                        }}
-                    >
-                        <Text style={{
-                            color: 'white', 
-                            fontSize: 18
-                            }}>Connect</Text>
-                    </TouchableOpacity>
-                    <Text>
-                        Get Started!
-                    </Text>
+                <View style={styles.container}>
+                    <View style={styles.curtain}></View>
+                    <Text style={styles.logo}>Zud VPN</Text>
+                    <RoundButton label={'Get Started!'} onPress={this.triggerProviderRegisterScreenModal}/>
                 </View>
             )
         }
@@ -226,61 +166,12 @@ class Welcome extends Component {
         }
 
         return (
-            <View style={{
-                flex:1,
-                alignItems: 'center',
-                position: 'relative',
-                paddingTop: '70%'
-                }}>
-                <View style={{
-                    flex: 1,
-                    height: Dimensions.get('window').width,
-                    width: Dimensions.get('window').width * 2,
-                    position: 'absolute',
-                    backgroundColor: '#C4DBF6',
-                    borderBottomStartRadius: Dimensions.get('window').height,
-                    borderBottomEndRadius: Dimensions.get('window').height,
-                }}></View>
-                <Text style={{position: 'absolute', top: 50, color: 'black'}}>Zud VPN</Text>
-                <TouchableOpacity
-                    disabled={disabled}
-                    onPress={this.triggerVPN}
-                    style={{
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        backgroundColor: '#3B8BEB',
-                        borderColor: '#E7E3D4',
-                        borderColor: 'white',
-                        borderWidth: 5,
-                        padding: 5,
-                        height: 200,
-                        width: 200,
-                        borderRadius: 400
-                    }}
-                >
-                    <Text style={{
-                        color: 'white', 
-                        fontSize: 18
-                        }}>{label}</Text>
-                </TouchableOpacity>
+            <View style={styles.container}>
+                <View style={styles.curtain}></View>
+                <Text style={styles.logo}>Zud VPN</Text>
+                <RoundButton label={label} onPress={this.triggerVPN} disabled={disabled}/>
                 <View style={{marginTop: 10, marginBottom: 10}}>
-                    <TouchableOpacity
-                    onPress={this.triggerServerSelectScreen}
-                    style={{
-                        borderColor: '#0069ff',
-                        borderWidth: 1,
-                        borderRadius: 3,
-                        width: '100%',
-                        alignItems: 'center',
-                        padding: 15
-                    }}>
-                        <Text style={{position: 'absolute', alignSelf: 'flex-start', fontSize: 9, margin: 2}}>Current VPN server:</Text>
-                        <Text style={{
-                            color: '#0069ff', 
-                            fontWeight: '500', 
-                            fontSize: 14
-                            }}>DigitalOcean Frankfurt-1</Text>
-                    </TouchableOpacity>
+                    <IconButton label={'Frankfurt-1'} onPress={this.triggerServerSelectScreen}/>
                 </View>
                 <View>
                     <TouchableOpacity onPress={this.props.LogFileViewerScreenModal}>

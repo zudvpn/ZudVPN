@@ -75,7 +75,7 @@ PODS:
     - React-cxxreact (= 0.60.5)
     - React-jsi (= 0.60.5)
   - React-jsinspector (0.60.5)
-  - react-native-network-extension (0.1.31):
+  - react-native-network-extension (0.1.32):
     - React
   - react-native-rsa-native (1.1.2):
     - React
@@ -247,7 +247,7 @@ SPEC CHECKSUMS:
   React-jsi: 4d8c9efb6312a9725b18d6fc818ffc103f60fec2
   React-jsiexecutor: 90ad2f9db09513fc763bc757fdc3c4ff8bde2a30
   React-jsinspector: e08662d1bf5b129a3d556eb9ea343a3f40353ae4
-  react-native-network-extension: c886d343204e76b31f7b6b0b6392df0b57afc69b
+  react-native-network-extension: a4d2e15b1e9d815c2857391e1f5b69897752cde5
   react-native-rsa-native: 652fba77a36dda00de5c842408b126b69e1f4431
   react-native-safari-view: 955d7160d159241b8e9395d12d10ea0ef863dcdd
   react-native-static-server: 4ddb9afa1cda0f65194df42b8debd81b6e314531

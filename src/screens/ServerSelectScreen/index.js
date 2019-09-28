@@ -1,7 +1,11 @@
 import React, { Component } from 'react'
-import { Alert, Text, SafeAreaView, View, ScrollView, TouchableOpacity } from 'react-native'
+import { Alert, Text, SafeAreaView, View, ScrollView } from 'react-native'
 import { Navigation } from 'react-native-navigation';
 import Client from '../../providers/DigitalOcean/do_client';
+import { ip2domain } from './../../helper'
+import styles from './styles';
+import { SegmentButton } from './buttons';
+import RNNetworkExtension from 'react-native-network-extension'
 
 class ServerSelectScreen extends Component {
     static get options() {
@@ -69,14 +73,20 @@ class ServerSelectScreen extends Component {
     }
 
     destroyConfirmed = (reference) => {
-        this.client.deleteDroplet(reference)
+        let server = this.state.servers.filter(server => server.id === reference)
+
+        Promise.all([
+            this.client.deleteDroplet(reference),
+            this.client.deleteDomain(ip2domain(server[0].ipv4_address)),
+            RNNetworkExtension.remove()
+        ])
         // remove deleted from servers
         this.setState({ servers: this.state.servers.filter(server => server.id !== reference)})
     }
 
     destroy = (reference) => () => {
         Alert.alert(
-            '',
+            'Warning!',
             'Are you sure you want to destroy this server? This action cannot be undone.',
             [
                 {
@@ -96,70 +106,17 @@ class ServerSelectScreen extends Component {
         return (
             <View
                 key={server.id}
-                style={{
-                    borderColor: '#0069ff',
-                    borderWidth: 1,
-                    borderRadius: 3,
-                    margin: 20
-                }}>
-                <TouchableOpacity 
-                    onPress={this.select(server.id)}
-                    style={{
-                        padding: 15
-                        }}>
-                    <View>
-                        <Text>{server.name} ({server.region})</Text>
-                        <Text>{server.ipv4_address}</Text>
-                    </View>
-                </TouchableOpacity>
-                <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-                    <View 
-                        style={{
-                            flex: 1,
-                            borderColor: '#0069ff',
-                            borderTopWidth: 1,
-                            borderRightWidth: 1,
-                        }}>
-                        <TouchableOpacity 
-                            onPress={this.destroy(server.id)}
-                            style={{
-                                padding: 10,
-                                alignItems: 'center'
-                            }}>
-                            <Text style={{color: 'red'}}>Destroy</Text>
-                        </TouchableOpacity>
-                    </View>
-                    <View 
-                        style={{
-                            flex: 1,
-                            borderColor: '#0069ff',
-                            borderTopWidth: 1,
-                            borderRightWidth: 1,
-                        }}>
-                        <TouchableOpacity 
-                            onPress={this.sshTerminal(server.id, server.ipv4_address)}
-                            style={{
-                                padding: 10,
-                                alignItems: 'center'
-                            }}>
-                            <Text>SSH Terminal</Text>
-                        </TouchableOpacity>
-                    </View>
-                    <View
-                        style={{
-                            borderColor: '#0069ff',
-                            flex: 1,
-                            borderTopWidth: 1,
-                        }}>
-                        <TouchableOpacity 
-                            onPress={this.select(server.id)}
-                            style={{
-                                padding: 10,
-                                alignItems: 'center'
-                            }}>
-                            <Text>Select</Text>
-                        </TouchableOpacity>
-                    </View>
+                style={styles.server_container}>
+                <View style={{padding: 15}}>
+                    <Text>{server.name} ({server.region})</Text>
+                    <Text>{server.ipv4_address}</Text>
+                </View>
+                <View style={styles.button_container}>
+                    <SegmentButton label={'Destroy'} labelStyle={{color: 'red'}} onPress={this.destroy(server.id)}/>
+                    <View style={styles.button_separator}></View>
+                    <SegmentButton label={'SSH Terminal'} onPress={this.sshTerminal(server.id, server.ipv4_address)}/>
+                    <View style={styles.button_separator}></View>
+                    <SegmentButton label={'Select'} onPress={this.select(server.id)}/>
                 </View>
             </View>
         )
