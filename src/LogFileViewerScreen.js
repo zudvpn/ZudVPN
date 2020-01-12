@@ -1,37 +1,37 @@
-import React, { Component } from 'react'
-import { Text, SafeAreaView, ScrollView, TouchableOpacity } from 'react-native'
+import React, { Component } from 'react';
+import { Text, SafeAreaView, ScrollView, TouchableOpacity } from 'react-native';
 import { Navigation } from 'react-native-navigation';
-import notification from './notification_core'
+import notification from './notification_core';
 
 class LogFileViewerScreen extends Component {
     static get options() {
         return {
             topBar: {
                 title: {
-                    text: 'Log Viewer'
+                    text: 'Log Viewer',
                 },
                 leftButtons: [],
                 rightButtons: [
                     {
                         id: 'cancel',
-                        text: 'Cancel'
-                    }
-                ]
-            }
-        }
+                        text: 'Cancel',
+                    },
+                ],
+            },
+        };
     }
 
     constructor(props) {
-        super(props)
-        Navigation.events().bindComponent(this)
+        super(props);
+        Navigation.events().bindComponent(this);
         this.state = {
-            contents: null
-        }
+            contents: null,
+        };
     }
 
-    navigationButtonPressed({buttonId}) {
+    navigationButtonPressed({ buttonId }) {
         if (buttonId === 'cancel') {
-            Navigation.dismissModal(this.props.componentId)
+            Navigation.dismissModal(this.props.componentId);
         }
     }
 
@@ -42,29 +42,33 @@ class LogFileViewerScreen extends Component {
         //     })
         // })
         this.setState({
-            contents: [...notification.logs()].reverse()
-        })
+            contents: [...notification.logs()].reverse(),
+        });
     }
 
     render() {
-        const { contents } = this.state
+        const { contents } = this.state;
 
         if (contents === null) {
             return (
-                <SafeAreaView style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+                <SafeAreaView style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                     <Text>Loading...</Text>
                 </SafeAreaView>
-            )
+            );
         }
 
         return (
-            <SafeAreaView>
-                <ScrollView>
-                    {contents.map((log, index) => <Text selectable={true} key={index}>{log}</Text>)}
-                </ScrollView>                
+            <SafeAreaView style={{ flex: 1 }}>
+                <ScrollView style={{ flex: 1 }}>
+                    {contents.map((log, index) => (
+                        <Text selectable={true} key={index}>
+                            {log}
+                        </Text>
+                    ))}
+                </ScrollView>
             </SafeAreaView>
-        )
+        );
     }
 }
 
-export default LogFileViewerScreen
+export default LogFileViewerScreen;

@@ -12,3 +12,9 @@ export const SegmentButton = ({label, labelStyle, onPress}) => (
         <Text style={labelStyle}>{label}</Text>
     </TouchableOpacity>
 )
+
+export const AddButton = ({onPress}) => (
+    <TouchableOpacity onPress={onPress}>
+        <Text>Add server</Text>
+    </TouchableOpacity>
+)

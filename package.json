@@ -23,6 +23,7 @@
     "react-native-ssh-sftp": "^1.0.3",
     "react-native-static-server": "futurepress/react-native-static-server#master",
     "react-native-vector-icons": "^6.6.0",
+    "react-sweet-state": "^1.1.1",
     "uuid": "^3.3.3"
   },
   "devDependencies": {

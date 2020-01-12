@@ -2,7 +2,7 @@ import React from 'react'
 import { Text, TouchableOpacity } from 'react-native'
 import styles from './styles'
 
-export const ProvierButton = ({label, labelStyle = {}, buttonStyle = {}, onPress, sublabel = ''}) => (
+export const ProviderButton = ({label, labelStyle = {}, buttonStyle = {}, onPress, sublabel = ''}) => (
     <TouchableOpacity
         activeOpacity={0.5}
         onPress={onPress}
