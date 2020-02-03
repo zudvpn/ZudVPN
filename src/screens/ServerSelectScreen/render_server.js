@@ -8,14 +8,14 @@ const RenderServer = ({ server, select, sshTerminal, destroy }) => {
         <View style={styles.server_container}>
             <View style={{ padding: 15 }}>
                 <Text>
-                    {server.name} ({server.region.name})
+                    Location: {server.region.name} ({server.name})
                 </Text>
-                <Text>{server.ipv4_address}</Text>
+                <Text>IP Address: {server.ipv4_address}</Text>
             </View>
             <View style={styles.button_container}>
                 <SegmentButton label={'Destroy'} labelStyle={{ color: 'red' }} onPress={destroy(server.uid)} />
                 <View style={styles.button_separator} />
-                <SegmentButton label={'SSH Terminal'} onPress={sshTerminal(server.uid, server.ipv4_address)} />
+                <SegmentButton label={'Terminal'} onPress={sshTerminal(server.uid, server.ipv4_address)} />
                 <View style={styles.button_separator} />
                 <SegmentButton label={'Select'} onPress={select(server)} />
             </View>

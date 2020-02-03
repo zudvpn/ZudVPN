@@ -1,20 +1,30 @@
-import React from 'react'
-import { Text, TouchableOpacity } from 'react-native'
+import React from 'react';
+import { Text, TouchableOpacity } from 'react-native';
 
-export const SegmentButton = ({label, labelStyle, onPress}) => (
-    <TouchableOpacity 
+export const SegmentButton = ({ label, labelStyle, onPress }) => (
+    <TouchableOpacity
         onPress={onPress}
         style={{
             flex: 1,
             padding: 10,
-            alignItems: 'center'
+            alignItems: 'center',
         }}>
         <Text style={labelStyle}>{label}</Text>
     </TouchableOpacity>
-)
+);
 
-export const AddButton = ({onPress}) => (
-    <TouchableOpacity onPress={onPress}>
-        <Text>Add server</Text>
+export const AddButton = ({ onPress }) => (
+    <TouchableOpacity
+        onPress={onPress}
+        style={{
+            flex: 1,
+            padding: 10,
+            alignItems: 'center',
+            borderColor: '#0069ff',
+            borderWidth: 1,
+            margin: 10,
+            borderRadius: 3,
+        }}>
+        <Text style={{ color: '#0069ff', fontSize: 15 }}>Add Server</Text>
     </TouchableOpacity>
-)
+);

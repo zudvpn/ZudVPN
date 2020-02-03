@@ -1,6 +1,5 @@
-import { createContainer, createStore, createHook } from 'react-sweet-state';
+import { createStore, createHook } from 'react-sweet-state';
 import RNNetworkExtension from 'react-native-network-extension';
-import Deploy from '../providers/DigitalOcean/deploy';
 import AsyncStorage from '@react-native-community/async-storage';
 import notification from '../notification_core';
 

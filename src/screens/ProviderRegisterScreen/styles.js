@@ -1,5 +1,5 @@
-import React from 'react'
-import { StyleSheet } from 'react-native'
+import React from 'react';
+import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
     button: {
@@ -8,17 +8,17 @@ export default StyleSheet.create({
         borderRadius: 3,
         width: '100%',
         alignItems: 'center',
-        padding: 20
+        padding: 20,
     },
     button_label: {
-        color: '#0069ff', 
-        fontWeight: '500', 
-        fontSize: 22
+        color: '#0069ff',
+        fontWeight: '500',
+        fontSize: 22,
     },
     button_sublabel: {
         padding: 5,
         alignSelf: 'flex-end',
         position: 'absolute',
-        fontSize: 11
-    }
-})
+        fontSize: 11,
+    },
+});

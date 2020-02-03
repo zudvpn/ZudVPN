@@ -47,7 +47,7 @@ class SSHTerminalScreen extends Component {
         } else {
             let sshClient = new SSHClient(
                 this.props.ipv4_address,
-                22,
+                2222,
                 'core',
                 {
                     privateKey: sshKeyPair.privateKey,

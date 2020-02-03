@@ -32,7 +32,8 @@ const Welcome = () => {
 
     const currentServer = () => {
         if (current_vpn_server) {
-            return <IconButton label={current_vpn_server.name} onPress={ServerSelectScreenModel} />;
+            const label = `${current_vpn_server.region.name} (${current_vpn_server.name})`;
+            return <IconButton label={label} onPress={ServerSelectScreenModel} />;
         }
 
         return null;

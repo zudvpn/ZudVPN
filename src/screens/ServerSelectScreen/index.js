@@ -60,7 +60,7 @@ const ServerSelectScreen = props => {
 
         Promise.all([props.client.deleteServer(server[0]), RNNetworkExtension.remove()]);
 
-        if ((current_vpn_server.uid = uid)) {
+        if (current_vpn_server !== null && current_vpn_server.uid === uid) {
             setCurrentVPNServer(null);
         }
 
@@ -68,11 +68,11 @@ const ServerSelectScreen = props => {
         setServers(servers.filter(_server => _server.uid !== uid));
     };
 
-    const destroy = uuid => () => {
+    const destroy = uid => () => {
         Alert.alert('Warning!', 'Are you sure you want to destroy this server? This action cannot be undone.', [
             {
                 text: 'Destroy',
-                onPress: () => destroyConfirmed(uuid),
+                onPress: () => destroyConfirmed(uid),
                 style: 'destructive',
             },
             {

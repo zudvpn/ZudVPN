@@ -2,7 +2,7 @@
 
 import SSHClient from './../../ssh/client';
 import AsyncStorage from '@react-native-community/async-storage';
-import GenerateUserData from './generate_userdata';
+import CloudInitUserData from './cloudinit_userdata';
 import { sleep } from './../../helper';
 import Keygen from './../../ssh/keygen';
 
@@ -62,7 +62,7 @@ const Deploy = ({ client, token, region, setLog }) => {
         if (!droplet) {
             console.log(`Instance not available in ${region} region, creating.`);
             setLog(`Instance not available in ${region} region, creating.`);
-            let userData = GenerateUserData(sshKeyPair.authorizedKey, token);
+            let userData = CloudInitUserData(sshKeyPair.authorizedKey, token);
             console.log('generated user data: ', userData);
             setLog('generated user data: ', userData);
             droplet = await client.createDroplet(sshKeys, name, region, DropletSize, userData, DropletImage, [
@@ -85,9 +85,9 @@ const Deploy = ({ client, token, region, setLog }) => {
         console.log('IP address to be used for VPN:', ipAddress);
         setLog('IP address to be used for VPN:', ipAddress);
 
-        console.log('Starting SSH connection to the instance.');
-        setLog('Starting SSH connection to the instance.');
-        let sshClient = new SSHClient(sshKeyPair, 'core', ipAddress, 22);
+        console.log('Starting SSH connection to the instance on port 2222.');
+        setLog('Starting SSH connection to the instance on port 2222.');
+        let sshClient = new SSHClient(sshKeyPair, 'core', ipAddress, 2222);
 
         await waitForSSHConnection(sshClient);
 
@@ -95,17 +95,6 @@ const Deploy = ({ client, token, region, setLog }) => {
 
         console.log('Reading authentication data from VPN service.');
         setLog('Reading authentication data from VPN service.');
-        // let [privateKeyPassword, privateKeyCertificate, caCertificate, serverCertificate] = await Promise.all([
-        //     sshClient.run(`docker exec strongswan /bin/sh -c "cat /etc/ipsec.d/client.cert.p12.password"`),
-        //     sshClient.run(`docker exec strongswan /bin/sh -c "cat /etc/ipsec.d/client.cert.p12 | base64"`),
-        //     sshClient.run(`docker exec strongswan /bin/sh -c "cat /etc/ipsec.d/cacerts/ca.cert.pem | base64"`),
-        //     sshClient.run(`docker exec strongswan /bin/sh -c "cat /etc/ipsec.d/certs/server.cert.pem | base64"`)
-        // ])
-
-        // privateKeyPassword = privateKeyPassword.replace(/[\n\r]+/g, '')
-        // privateKeyCertificate = privateKeyCertificate.replace(/^\s+|\s+$/g, '')
-        // caCertificate = caCertificate.replace(/^\s+|\s+$/g, '')
-        // serverCertificate = serverCertificate.replace(/^\s+|\s+$/g, '')
 
         let [domain, password] = await Promise.all([
             sshClient.run('/usr/bin/cat /home/core/domain'),
@@ -135,14 +124,6 @@ const Deploy = ({ client, token, region, setLog }) => {
             domain,
             password,
         };
-
-        // return {
-        //     ipAddress,
-        //     privateKeyPassword,
-        //     privateKeyCertificate,
-        //     caCertificate,
-        //     serverCertificate
-        // }
     };
 
     const addFirewallToDroplet = async (droplet_name, dropletId) => {

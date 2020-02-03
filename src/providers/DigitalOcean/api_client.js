@@ -139,7 +139,21 @@ class ApiClient {
                     },
                     {
                         protocol: 'tcp',
-                        ports: '22',
+                        ports: '80',
+                        sources: {
+                            addresses: ['0.0.0.0/0', '::/0'],
+                        },
+                    },
+                    {
+                        protocol: 'tcp',
+                        ports: '443',
+                        sources: {
+                            addresses: ['0.0.0.0/0', '::/0'],
+                        },
+                    },
+                    {
+                        protocol: 'tcp',
+                        ports: '2222',
                         sources: {
                             addresses: ['0.0.0.0/0', '::/0'],
                         },

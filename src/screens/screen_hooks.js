@@ -75,13 +75,10 @@ const useScreen = () => {
                     ],
                 },
             }),
-        AddServerOverlayOverlay: access_token =>
+        AddServerOverlayOverlay: () =>
             Navigation.showOverlay({
                 component: {
                     name: ADD_SERVER_OVERLAY,
-                    passProps: {
-                        access_token,
-                    },
                     options: {
                         overlay: {
                             interceptTouchOutside: false,
