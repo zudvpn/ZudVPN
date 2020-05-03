@@ -8,7 +8,7 @@ import withInitState from '../../store/init_state';
 
 const Main = () => {
     const [{ provider_tokens, current_vpn_server, vpn_status, logs }, { triggerVPN, triggerSignOut }] = useStore();
-    const { ProviderRegisterScreenModal, ServerSelectScreenModel, LogFileViewerScreenModal } = useScreen();
+    const { ProviderRegisterScreenModal, SettingsScreenModel, LogFileViewerScreenModal } = useScreen();
 
     if (provider_tokens.length === 0) {
         return (
@@ -33,7 +33,7 @@ const Main = () => {
     const currentServer = () => {
         if (current_vpn_server) {
             const label = `${current_vpn_server.region.name} (${current_vpn_server.name})`;
-            return <IconButton label={label} onPress={ServerSelectScreenModel} />;
+            return <IconButton label={label} onPress={SettingsScreenModel} />;
         }
 
         return null;
@@ -43,7 +43,7 @@ const Main = () => {
         if (current_vpn_server) {
             triggerVPN();
         } else {
-            ServerSelectScreenModel();
+            SettingsScreenModel();
         }
     };
 

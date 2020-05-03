@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Alert, Text, SafeAreaView, ScrollView, View } from 'react-native';
+import { Alert, Text, SafeAreaView, ScrollView } from 'react-native';
 import { Navigation } from 'react-native-navigation';
 import { AddButton } from './buttons';
 import RNNetworkExtension from 'react-native-network-extension';
@@ -8,13 +8,13 @@ import RenderServer from './render_server';
 import useScreen from '../screen_hooks';
 import withClient from '../../providers/with_client';
 
-const ServerSelectScreen = props => {
+const SettingsScreen = props => {
     const [servers, setServers] = useState(null);
     const [{ current_vpn_server }, { setCurrentVPNServer, setVPNStatus, setLog }] = useStore();
     const { SSHTerminalScreenModal, AddServerOverlayOverlay } = useScreen();
 
     Navigation.events().registerNavigationButtonPressedListener(({ buttonId, componentId }) => {
-        if (componentId === props.componentId && buttonId === 'cancel') {
+        if (componentId === props.componentId && buttonId === 'done_button') {
             Navigation.dismissModal(props.componentId);
         }
     });
@@ -119,4 +119,4 @@ const ServerSelectScreen = props => {
     );
 };
 
-export default withClient(ServerSelectScreen);
+export default withClient(SettingsScreen);

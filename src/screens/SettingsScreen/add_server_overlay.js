@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Text, SafeAreaView, View, ScrollView, TouchableOpacity } from 'react-native';
 import { Navigation } from 'react-native-navigation';
 import { ProviderButton } from '../ProviderRegisterScreen/buttons';

@@ -3,7 +3,7 @@ import {
     ADD_SERVER_OVERLAY,
     LOG_FILE_VIEWER_SCREEN,
     PROVIDER_REGISTER_SCREEN,
-    SERVER_SELECT_SCREEN,
+    SETTINGS_SCREEN,
     SSH_TERMINAL_SCREEN,
 } from './screens';
 
@@ -33,23 +33,23 @@ const useScreen = () => {
                     ],
                 },
             }),
-        ServerSelectScreenModel: () =>
+        SettingsScreenModel: () =>
             Navigation.showModal({
                 stack: {
                     children: [
                         {
                             component: {
-                                name: SERVER_SELECT_SCREEN,
+                                name: SETTINGS_SCREEN,
                                 options: {
                                     topBar: {
                                         title: {
-                                            text: 'Servers',
+                                            text: 'Settings',
                                         },
                                         leftButtons: [],
                                         rightButtons: [
                                             {
-                                                id: 'cancel',
-                                                text: 'Cancel',
+                                                id: 'done_button',
+                                                text: 'Done',
                                             },
                                         ],
                                     },

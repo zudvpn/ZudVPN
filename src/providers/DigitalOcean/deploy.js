@@ -3,7 +3,7 @@
 import SSHClient from './../../ssh/client';
 import AsyncStorage from '@react-native-community/async-storage';
 import CloudInitUserData from './cloudinit_userdata';
-import { sleep } from './../../helper';
+import { sleep } from '../../helper';
 import Keygen from './../../ssh/keygen';
 
 const DropletBaseName = 'zudvpn';
@@ -122,6 +122,7 @@ const Deploy = ({ client, token, region, setLog }) => {
             },
             ipAddress,
             domain,
+            username: 'vpn',
             password,
         };
     };

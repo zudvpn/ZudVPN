@@ -24,7 +24,7 @@ class Client {
         await RNNetworkExtension.configure({
             ipAddress: vpnData.ipAddress,
             domain: vpnData.domain,
-            username: 'vpn',
+            username: vpnData.username,
             password: vpnData.password,
         });
 
