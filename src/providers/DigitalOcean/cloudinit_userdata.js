@@ -165,8 +165,10 @@ coreos:
         ExecStartPre=/usr/bin/sleep 30
         ExecStartPre=/bin/sh -c '/usr/bin/sudo chown -R core:core $HOME/.caddy'       
         ExecStartPre=/usr/bin/mkdir -p /home/core/ipsec.d /home/core/ipsec.d/certs /home/core/ipsec.d/private /home/core/ipsec.d/cacerts
+        ExecStartPre=/bin/sh -c '/usr/bin/curl -Ss https://letsencrypt.org/certs/letsencryptauthorityx3.pem.txt --output $HOME/ipsec.d/certs/chain.pem'
         ExecStartPre=/bin/sh -c '/usr/bin/cp $(/usr/bin/find $HOME/.caddy -type f -iname "*zudvpn.com.key") $HOME/ipsec.d/private/privkey.pem'
-        ExecStartPre=/bin/sh -c '/usr/bin/cp $(/usr/bin/find $HOME/.caddy -type f -iname "*zudvpn.com.crt") $HOME/ipsec.d/certs/fullchain.pem'
+        ExecStartPre=/bin/sh -c '/usr/bin/cp $(/usr/bin/find $HOME/.caddy -type f -iname "*zudvpn.com.crt") $HOME/ipsec.d/certs/cert.pem'
+        ExecStartPre=/bin/sh -c '/usr/bin/cat $HOME/ipsec.d/certs/cert.pem $HOME/ipsec.d/certs/chain.pem > $HOME/ipsec.d/certs/fullchain.pem'
         ExecStartPre=/bin/sh -c '/usr/bin/chmod 666 $HOME/ipsec.d/private/privkey.pem'
         ExecStartPre=/bin/sh -c '/usr/bin/chmod 666 $HOME/ipsec.d/certs/fullchain.pem'
         ExecStart=/usr/bin/docker stop caddy
@@ -212,8 +214,8 @@ coreos:
         EnvironmentFile=/etc/environment
         ExecStartPre=-/usr/bin/docker kill strongswan
         ExecStartPre=-/usr/bin/docker rm strongswan
-        ExecStartPre=/usr/bin/docker pull miniyarov/strongswan:latest
-        ExecStartPre=/bin/sh -c '/usr/bin/echo /usr/bin/docker run --name strongswan -e VPN_DNS="1.1.1.2" -e DUMMY_DEVICE="1.1.1.2/32" -e VPN_DOMAIN=$(/usr/bin/cat /home/core/domain) --privileged --net=host -v /home/core/ipsec.d:/etc/ipsec.d -v strongswan.d:/etc/strongswan.d -v /lib/modules:/lib/modules -v /etc/localtime:/etc/localtime miniyarov/strongswan:latest > /home/core/strongswan-docker'
+        ExecStartPre=/usr/bin/docker pull zudvpn/strongswan:0.1.8
+        ExecStartPre=/bin/sh -c '/usr/bin/echo /usr/bin/docker run --name strongswan -e VPN_DNS="1.1.1.2" -e DUMMY_DEVICE="1.1.1.2/32" -e VPN_DOMAIN=$(/usr/bin/cat /home/core/domain) --privileged --net=host -v /home/core/ipsec.d:/etc/ipsec.d -v strongswan.d:/etc/strongswan.d -v /lib/modules:/lib/modules -v /etc/localtime:/etc/localtime zudvpn/strongswan:0.1.8 > /home/core/strongswan-docker'
         ExecStart=/usr/bin/bash /home/core/strongswan-docker
         ExecStop=/usr/bin/docker stop strongswan
     - name: pihole-etc-host.service

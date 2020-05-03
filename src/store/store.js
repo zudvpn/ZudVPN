@@ -45,6 +45,9 @@ const actions = {
             }
         }
     },
+    triggerSignOut: () => ({ setState }) => {
+        setState({ provider_tokens: [] });
+    },
     setLog: (...message) => ({ setState, getState }) => {
         notification.log(message);
         const logs = [...notification.logs()];

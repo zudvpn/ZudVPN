@@ -131,7 +131,7 @@ const Deploy = ({ client, token, region, setLog }) => {
 
         const firewalls = await client.getAllFirewalls();
 
-        if (firewalls.length > 0) {
+        if (firewalls && firewalls.length > 0) {
             const firewall = firewalls.find(f => f.name === firewallName);
 
             if (firewall) {

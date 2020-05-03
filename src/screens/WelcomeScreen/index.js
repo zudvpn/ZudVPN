@@ -7,7 +7,7 @@ import Layout from './layout';
 import withInitState from '../../store/init_state';
 
 const Welcome = () => {
-    const [{ provider_tokens, current_vpn_server, vpn_status, logs }, { triggerVPN }] = useStore();
+    const [{ provider_tokens, current_vpn_server, vpn_status, logs }, { triggerVPN, triggerSignOut }] = useStore();
     const { ProviderRegisterScreenModal, ServerSelectScreenModel, LogFileViewerScreenModal } = useScreen();
 
     if (provider_tokens.length === 0) {
@@ -47,10 +47,19 @@ const Welcome = () => {
         }
     };
 
+    const signOutFromProvider = () => {
+        triggerSignOut();
+    };
+
     return (
         <Layout>
             <RoundButton label={button_label} onPress={triggerVPNorAddServer} disabled={disabled} />
             <View style={{ marginTop: 10, marginBottom: 10 }}>{currentServer()}</View>
+            <View>
+                <TouchableOpacity onPress={signOutFromProvider}>
+                    <Text>Sign out</Text>
+                </TouchableOpacity>
+            </View>
             <View>
                 <TouchableOpacity onPress={LogFileViewerScreenModal}>
                     {logs.map((log, index) => (
