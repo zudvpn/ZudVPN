@@ -6,7 +6,7 @@ import useScreen from '../screen_hooks';
 import Layout from './layout';
 import withInitState from '../../store/init_state';
 
-const Welcome = () => {
+const Main = () => {
     const [{ provider_tokens, current_vpn_server, vpn_status, logs }, { triggerVPN, triggerSignOut }] = useStore();
     const { ProviderRegisterScreenModal, ServerSelectScreenModel, LogFileViewerScreenModal } = useScreen();
 
@@ -73,4 +73,4 @@ const Welcome = () => {
     );
 };
 
-export default withInitState(Welcome);
+export default withInitState(Main);

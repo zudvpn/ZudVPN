@@ -1,12 +1,12 @@
-import React from 'react'
-import { Dimensions, StyleSheet } from 'react-native'
+import React from 'react';
+import { Dimensions, StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
-    container: {                    
-        flex:1, 
+    container: {
+        flex: 1,
         alignItems: 'center',
         position: 'relative',
-        paddingTop: '70%'
+        paddingTop: '70%',
     },
     curtain: {
         flex: 1,
@@ -19,8 +19,7 @@ export default StyleSheet.create({
     },
     logo: {
         position: 'absolute',
-        top: 50,        
-        color: 'black'
+        top: 50,
+        color: 'black',
     },
-
-})
+});

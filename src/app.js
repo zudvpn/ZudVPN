@@ -1,5 +1,5 @@
 import { Navigation } from 'react-native-navigation';
-import registerScreens, { WELCOME_SCREEN } from './screens/screens';
+import registerScreens, { MAIN_SCREEN } from './screens/screens';
 
 export default function app() {
     registerScreens();
@@ -8,7 +8,7 @@ export default function app() {
         Navigation.setRoot({
             root: {
                 component: {
-                    name: WELCOME_SCREEN,
+                    name: MAIN_SCREEN,
                 },
             },
         });
