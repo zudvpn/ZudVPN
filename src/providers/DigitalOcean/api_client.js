@@ -24,6 +24,14 @@ class ApiClient {
         return await response.text();
     }
 
+    async getAccount() {
+        let response = await this.makeRequest('GET', 'https://api.digitalocean.com/v2/account');
+
+        console.log('get account:', response);
+
+        return response.account.email;
+    }
+
     async getAccountSSHKeys() {
         let response = await this.makeRequest('GET', 'https://api.digitalocean.com/v2/account/keys');
 
@@ -101,7 +109,7 @@ class ApiClient {
 
         console.log('retrieved all regions', response);
 
-        return response.regions;
+        return response.regions.sort((a, b) => (a.name > b.name ? 1 : a.name < b.name ? -1 : 0));
     }
 
     async getAllFirewalls() {

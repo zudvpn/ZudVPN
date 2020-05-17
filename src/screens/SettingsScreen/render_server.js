@@ -7,6 +7,7 @@ const RenderServer = ({ server, select, sshTerminal, destroy }) => {
     return (
         <View style={styles.server_container}>
             <View style={{ padding: 15 }}>
+                <Text>Provider: {server.provider.name}</Text>
                 <Text>
                     Location: {server.region.name} ({server.name})
                 </Text>

@@ -1,26 +1,14 @@
 import { Navigation } from 'react-native-navigation';
 import {
-    ADD_SERVER_OVERLAY,
     LOG_FILE_VIEWER_SCREEN,
     PROVIDER_REGISTER_SCREEN,
+    PROVIDER_REGION_SCREEN,
     SETTINGS_SCREEN,
     SSH_TERMINAL_SCREEN,
-} from './screens';
+} from './screen_constants';
 
 const useScreen = () => {
     return {
-        ProviderRegisterScreenModal: () =>
-            Navigation.showModal({
-                stack: {
-                    children: [
-                        {
-                            component: {
-                                name: PROVIDER_REGISTER_SCREEN,
-                            },
-                        },
-                    ],
-                },
-            }),
         LogFileViewerScreenModal: () =>
             Navigation.showModal({
                 stack: {
@@ -59,6 +47,21 @@ const useScreen = () => {
                     ],
                 },
             }),
+        ProviderRegionScreenModal: provider =>
+            Navigation.showModal({
+                stack: {
+                    children: [
+                        {
+                            component: {
+                                name: PROVIDER_REGION_SCREEN,
+                                passProps: {
+                                    provider,
+                                },
+                            },
+                        },
+                    ],
+                },
+            }),
         SSHTerminalScreenModal: (dropletId, ipv4_address) =>
             Navigation.showModal({
                 stack: {
@@ -75,10 +78,13 @@ const useScreen = () => {
                     ],
                 },
             }),
-        AddServerOverlayOverlay: () =>
+        ProviderRegisterOverlay: provider =>
             Navigation.showOverlay({
                 component: {
-                    name: ADD_SERVER_OVERLAY,
+                    name: PROVIDER_REGISTER_SCREEN,
+                    passProps: {
+                        provider,
+                    },
                     options: {
                         overlay: {
                             interceptTouchOutside: false,

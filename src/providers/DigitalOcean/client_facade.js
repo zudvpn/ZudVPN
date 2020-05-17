@@ -12,6 +12,10 @@ class ClientFacade {
         this.api_client = new ApiClient(token);
     }
 
+    async getAccount() {
+        return await this.api_client.getAccount();
+    }
+
     async createServer(region, logger) {
         const deploy = Deploy({
             client: this.api_client,
@@ -29,7 +33,10 @@ class ClientFacade {
 
         return droplets.map(droplet => {
             return {
-                provider: 'digitalocean',
+                provider: {
+                    id: 'digitalocean',
+                    name: 'DigitalOcean',
+                },
                 uid: droplet.id,
                 name: droplet.name,
                 region: {

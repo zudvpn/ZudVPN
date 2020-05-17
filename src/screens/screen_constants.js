@@ -1,0 +1,6 @@
+export const MAIN_SCREEN = 'navigation.main_screen';
+export const PROVIDER_REGISTER_SCREEN = 'navigation.provider_register_screen';
+export const LOG_FILE_VIEWER_SCREEN = 'navigation.log_file_viewer_screen';
+export const SETTINGS_SCREEN = 'navigation.settings_screen';
+export const PROVIDER_REGION_SCREEN = 'navigation.provider_region_screen';
+export const SSH_TERMINAL_SCREEN = 'navigation.ssh_terminal_screen';

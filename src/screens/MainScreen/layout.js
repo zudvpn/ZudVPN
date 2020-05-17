@@ -8,7 +8,7 @@ const Layout = props => {
         <LinkingListener>
             <View style={styles.container}>
                 <View style={styles.curtain} />
-                <Text style={styles.logo}>Zud VPN</Text>
+                <Text style={styles.logo}>ZudVPN</Text>
                 {props.children}
             </View>
         </LinkingListener>

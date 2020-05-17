@@ -1,43 +1,22 @@
-import React, { Component } from 'react';
-import { ScrollView, Text, SafeAreaView, View, TouchableOpacity } from 'react-native';
+import React, { useState } from 'react';
+import { Text, View, TouchableOpacity } from 'react-native';
 import { Navigation } from 'react-native-navigation';
 import DOCallbackHtml from '../../providers/DigitalOcean/do-api-callback.html.js';
 import SafariView from 'react-native-safari-view';
 import StaticServer from '../../static_server';
-import { ProviderButton } from './buttons';
+import { Button, Divider, Input, Overlay } from 'react-native-elements';
 
-class ProviderRegisterScreen extends Component {
-    static get options() {
-        return {
-            topBar: {
-                title: {
-                    text: 'Zud VPN',
-                },
-                leftButtons: [],
-                rightButtons: [
-                    {
-                        id: 'cancel',
-                        text: 'Cancel',
-                    },
-                ],
-            },
-        };
-    }
+const ProviderRegisterScreen = props => {
+    const [visible, setVisible] = useState(true);
+    const [token, setToken] = useState('');
 
-    constructor(props) {
-        super(props);
-        Navigation.events().bindComponent(this);
-    }
+    const toggleOverlay = () => {
+        setVisible(!visible);
+        // Navigation.dismissModal(props.componentId);
+    };
 
-    navigationButtonPressed({ buttonId }) {
-        if (buttonId === 'cancel') {
-            Navigation.dismissModal(this.props.componentId);
-        }
-    }
-
-    signInWithDO = async () => {
+    const signInWithDO = async () => {
         const html = DOCallbackHtml();
-
         const url = await StaticServer.serveHtml(html);
 
         SafariView.show({
@@ -50,51 +29,67 @@ class ProviderRegisterScreen extends Component {
         });
     };
 
-    registerWithDO = () => {
+    const signUpWithDO = () => {
         SafariView.show({
             url: 'https://m.do.co/c/ad75f5779a2a',
             fromBottom: true,
         });
     };
 
-    render() {
-        return (
-            <SafeAreaView style={{ flex: 1, margin: 10 }}>
-                <ScrollView>
-                    <Text style={{ alignSelf: 'center' }}>Get Started!</Text>
-                    <View style={{ margin: 10, marginBottom: 80 }}>
-                        <Text>
-                            Hello, in order to create your very own personal VPN server please choose your desired Cloud
-                            Provider.
-                        </Text>
-                    </View>
-                    <View style={{ margin: 10 }}>
-                        <Text>VPN Providers:</Text>
-                    </View>
-                    <View>
-                        <ProviderButton onPress={this.signInWithDO} label={'Digital Ocean'} />
-                        <TouchableOpacity onPress={this.registerWithDO} style={{ padding: 10 }}>
-                            <Text style={{ fontSize: 13 }}>Don't have an account?</Text>
-                            <Text style={{ fontSize: 13 }}>
-                                <Text style={{ textDecorationLine: 'underline' }}>Tap here</Text> for a free $100 credit
-                                on DigitalOcean using our referral!
-                            </Text>
-                        </TouchableOpacity>
-                    </View>
-                    <View style={{ height: 20 }} />
-                    <View style={{ flexDirection: 'row' }}>
-                        <ProviderButton
-                            onPress={f => f}
-                            label={'Amazon Web Services'}
-                            sublabel={'coming soon!'}
-                            labelStyle={{ color: '#000' }}
-                            buttonStyle={{ opacity: 0.7, borderColor: '#efefef' }}
-                        />
-                    </View>
-                </ScrollView>
-            </SafeAreaView>
-        );
-    }
-}
+    const signInByTokenWithDO = async () => {
+        const html = DOCallbackHtml();
+        const url = await StaticServer.serveHtml(html);
+
+        SafariView.show({
+            url: url + `#access_token=${token}`,
+            fromBottom: true,
+        });
+    };
+
+    const signIn = () => {
+        if (props.provider.id === 'digitalocean') {
+            signInWithDO();
+        }
+
+        toggleOverlay();
+    };
+
+    const signUp = () => {
+        if (props.provider.id === 'digitalocean') {
+            signUpWithDO();
+        }
+
+        toggleOverlay();
+    };
+
+    const signInByToken = () => {
+        if (props.provider.id === 'digitalocean') {
+            signInByTokenWithDO();
+        }
+
+        toggleOverlay();
+    };
+
+    return (
+        <Overlay isVisible={visible} onBackdropPress={toggleOverlay}>
+            <View>
+                <Button raised={true} title={`Sign in with ${props.provider.name}`} onPress={() => signIn()} />
+                <Divider style={{ marginTop: 15, marginBottom: 15 }} />
+                <TouchableOpacity onPress={() => signUp()}>
+                    <Text>Don't have an account?</Text>
+                    <Text>
+                        <Text style={{ textDecorationLine: 'underline' }}>Tap here</Text> for a free $100 credit on
+                        DigitalOcean using our referral!
+                    </Text>
+                </TouchableOpacity>
+                <Divider style={{ marginTop: 15, marginBottom: 15 }} />
+                <Text>Do you have a personal access token?</Text>
+                <Text>Provide here without signing in:</Text>
+                <Input placeholder={'Token'} onChangeText={value => setToken(value)} />
+                <Button onPress={() => signInByToken()} title={'Submit'} />
+            </View>
+        </Overlay>
+    );
+};
 
 export default ProviderRegisterScreen;

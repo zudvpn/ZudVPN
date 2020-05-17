@@ -63,15 +63,26 @@
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = ZudVPN/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = ZudVPN/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = ZudVPN/main.m; sourceTree = "<group>"; };
+		16241D96A07D4DB5AF9D870A /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
+		194C9E60FB584999BA719FD2 /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
 		2130A25A2827099EBD697E22 /* Pods-ZudVPN.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZudVPN.release.xcconfig"; path = "Target Support Files/Pods-ZudVPN/Pods-ZudVPN.release.xcconfig"; sourceTree = "<group>"; };
+		25741958E5644519A7BC9C2C /* Fontisto.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Fontisto.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Fontisto.ttf"; sourceTree = "<group>"; };
+		25EDD821ED4B49FF95679C59 /* AntDesign.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = AntDesign.ttf; path = "../node_modules/react-native-vector-icons/Fonts/AntDesign.ttf"; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* ZudVPN-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ZudVPN-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* ZudVPN-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ZudVPN-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EB503398E8E87B384AD30CF /* Pods-ZudVPN.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZudVPN.debug.xcconfig"; path = "Target Support Files/Pods-ZudVPN/Pods-ZudVPN.debug.xcconfig"; sourceTree = "<group>"; };
+		30543D80C2B2446E870F6394 /* Feather.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Feather.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Feather.ttf"; sourceTree = "<group>"; };
+		3B8911A45EC7408DA4FE367D /* FontAwesome5_Solid.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Solid.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Solid.ttf"; sourceTree = "<group>"; };
 		3DFF3E2C0A29E30E0B1DA2C6 /* libPods-ZudVPNTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ZudVPNTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		515AC21F64FEEB8E9FCB7747 /* libPods-ZudVPN-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ZudVPN-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5E8CCE102D3D4A91B71B050F /* Entypo.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Entypo.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Entypo.ttf"; sourceTree = "<group>"; };
+		5F11E836B1A7477DA6DAD04D /* FontAwesome5_Brands.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Brands.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Brands.ttf"; sourceTree = "<group>"; };
 		61314CEBB1DC28C7107C0178 /* Pods-ZudVPNTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZudVPNTests.debug.xcconfig"; path = "Target Support Files/Pods-ZudVPNTests/Pods-ZudVPNTests.debug.xcconfig"; sourceTree = "<group>"; };
+		685B497D31BE443493DF5FEA /* FontAwesome5_Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Regular.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Regular.ttf"; sourceTree = "<group>"; };
 		75A94B763CFA2FD1F4D827C8 /* Pods-ZudVPN-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZudVPN-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-ZudVPN-tvOSTests/Pods-ZudVPN-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 		78F1E0A9EB6C6B58A7B0C9C7 /* Pods-ZudVPN-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZudVPN-tvOS.release.xcconfig"; path = "Target Support Files/Pods-ZudVPN-tvOS/Pods-ZudVPN-tvOS.release.xcconfig"; sourceTree = "<group>"; };
+		84ACCC3695AA49CB8508EFBD /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
+		93EC1F9AF7984C18910AA301 /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
 		94A46C35F0EB3DE82264DC9F /* Pods-ZudVPN-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZudVPN-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-ZudVPN-tvOS/Pods-ZudVPN-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
 		BC9415F0231C913B002908C9 /* RNSSHClient.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNSSHClient.xcodeproj; path = "../node_modules/react-native-ssh-sftp/ios/RNSSHClient.xcodeproj"; sourceTree = "<group>"; };
 		BC9415F9231C9437002908C9 /* AppCenter-Config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "AppCenter-Config.plist"; sourceTree = "<group>"; };
@@ -80,10 +91,15 @@
 		BCBCBF382336C08A003F3D27 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		BCBCBF3D2336C0B9003F3D27 /* ZudVPN-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ZudVPN-Bridging-Header.h"; sourceTree = "<group>"; };
 		D22DC7CE54687847EB481833 /* libPods-ZudVPN-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ZudVPN-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D5FB50861AFD49D7AA64AE32 /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
+		EBD90E1F27354411BDD933C8 /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
 		ECB724549693817DB14949E9 /* Pods-ZudVPNTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZudVPNTests.release.xcconfig"; path = "Target Support Files/Pods-ZudVPNTests/Pods-ZudVPNTests.release.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
+		F2B0A46EED364B1D9AE266BF /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
 		F47CC2E09FABA4CD5B8693BF /* Pods-ZudVPN-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZudVPN-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-ZudVPN-tvOSTests/Pods-ZudVPN-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
+		F9ECFB1AA8CB421AB8CB4E4A /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
+		FAF0842555064388BEC0CA2F /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -159,6 +175,29 @@
 			name = ZudVPN;
 			sourceTree = "<group>";
 		};
+		1FDA1FB6860242DD9A892A14 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				25EDD821ED4B49FF95679C59 /* AntDesign.ttf */,
+				5E8CCE102D3D4A91B71B050F /* Entypo.ttf */,
+				FAF0842555064388BEC0CA2F /* EvilIcons.ttf */,
+				30543D80C2B2446E870F6394 /* Feather.ttf */,
+				EBD90E1F27354411BDD933C8 /* FontAwesome.ttf */,
+				5F11E836B1A7477DA6DAD04D /* FontAwesome5_Brands.ttf */,
+				685B497D31BE443493DF5FEA /* FontAwesome5_Regular.ttf */,
+				3B8911A45EC7408DA4FE367D /* FontAwesome5_Solid.ttf */,
+				25741958E5644519A7BC9C2C /* Fontisto.ttf */,
+				16241D96A07D4DB5AF9D870A /* Foundation.ttf */,
+				84ACCC3695AA49CB8508EFBD /* Ionicons.ttf */,
+				194C9E60FB584999BA719FD2 /* MaterialCommunityIcons.ttf */,
+				F9ECFB1AA8CB421AB8CB4E4A /* MaterialIcons.ttf */,
+				93EC1F9AF7984C18910AA301 /* Octicons.ttf */,
+				F2B0A46EED364B1D9AE266BF /* SimpleLineIcons.ttf */,
+				D5FB50861AFD49D7AA64AE32 /* Zocial.ttf */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -205,6 +244,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				3021BB036979B32A87AB8D1B /* Pods */,
+				1FDA1FB6860242DD9A892A14 /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -318,7 +358,7 @@
 		83CBB9F71A601CBA00E9B192 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0940;
+				LastUpgradeCheck = 940;
 				ORGANIZATIONNAME = Facebook;
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {

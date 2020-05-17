@@ -6,6 +6,7 @@ import { useStore } from '../../store/store';
 import StaticServer from '../../static_server';
 import { Navigation } from 'react-native-navigation';
 import SafariView from 'react-native-safari-view';
+import withClient from '../../providers/with_client';
 
 const LinkingListener = props => {
     const [, actions] = useStore();
@@ -22,9 +23,13 @@ const LinkingListener = props => {
             actions.setVPNStatus('Connect');
         };
 
-        const handleCallback = url => {
+        const handleCallback = async url => {
             try {
+                console.log('handle callback received url', url);
                 const provider_token = parse_linking_url_params(url);
+                const client = props.client.createClient(provider_token.provider, provider_token.access_token);
+
+                provider_token.account = await client.getAccount();
                 actions.addProviderToken(provider_token);
             } catch (e) {
                 actions.setLog('Cannot add provider token.');
@@ -69,4 +74,4 @@ const LinkingListener = props => {
     return props.children;
 };
 
-export default LinkingListener;
+export default withClient(LinkingListener);

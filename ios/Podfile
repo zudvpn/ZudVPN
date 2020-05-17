@@ -35,10 +35,9 @@ target 'ZudVPN' do
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
 
   pod 'react-native-safari-view', :podspec => '../node_modules/react-native-safari-view/react-native-safari-view.podspec'
-
   pod 'NMSSH', '2.2.8'
-
   pod 'ReactNativeNavigation', :podspec => '../node_modules/react-native-navigation/ReactNativeNavigation.podspec'
+  pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
 
   target 'ZudVPNTests' do
     inherit! :search_paths

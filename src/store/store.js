@@ -23,8 +23,9 @@ const actions = {
         }
     },
     setCurrentVPNServer: server => ({ setState, dispatch }) => {
-        dispatch(actions.persistState());
         setState({ current_vpn_server: server });
+
+        dispatch(actions.persistState());
     },
     setVPNStatus: status => ({ setState, getState }) => {
         setState({ vpn_status: status });
@@ -45,8 +46,9 @@ const actions = {
             }
         }
     },
-    triggerSignOut: () => ({ setState }) => {
-        setState({ provider_tokens: [] });
+    triggerSignOut: provider => ({ setState, getState, dispatch }) => {
+        setState({ provider_tokens: getState().provider_tokens.filter(token => token.provider !== provider.id) });
+        dispatch(actions.persistState());
     },
     setLog: (...message) => ({ setState, getState }) => {
         notification.log(message);

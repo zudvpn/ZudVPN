@@ -9,9 +9,13 @@ class Client {
         this.logger = logger;
 
         for (const token of tokens) {
-            if (token.provider === 'digitalocean') {
-                this.clients[token.provider] = new DO_Client(token.access_token);
-            }
+            this.clients[token.provider] = this.createClient(token.provider, token.access_token);
+        }
+    }
+
+    createClient(provider, access_token) {
+        if (provider === 'digitalocean') {
+            return new DO_Client(access_token);
         }
     }
 
@@ -47,7 +51,7 @@ class Client {
     }
 
     async deleteServer(server) {
-        await this.clients[server.provider].deleteServer(server);
+        await this.clients[server.provider.id].deleteServer(server);
     }
 }
 
