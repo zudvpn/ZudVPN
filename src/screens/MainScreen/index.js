@@ -1,14 +1,16 @@
 import React from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
-import { RoundButton, IconButton } from './buttons';
+import { View } from 'react-native';
+import { RoundButton } from './buttons';
 import { useStore } from '../../store/store';
 import useScreen from '../screen_hooks';
 import Layout from './layout';
 import withInitState from '../../store/init_state';
+import Notifications from './notifications';
+import CurrentServer from './current_server';
 
-const Main = () => {
-    const [{ provider_tokens, current_vpn_server, vpn_status, logs }, { triggerVPN }] = useStore();
-    const { ProviderRegisterScreenModal, SettingsScreenModel, LogFileViewerScreenModal } = useScreen();
+const MainScreen = () => {
+    const [{ provider_tokens, current_vpn_server, vpn_status }, { toggleVPN }] = useStore();
+    const { SettingsScreenModel } = useScreen();
 
     if (provider_tokens.length === 0) {
         return (
@@ -30,18 +32,9 @@ const Main = () => {
             break;
     }
 
-    const currentServer = () => {
+    const toggleVPNOrSettingsScreenModel = () => {
         if (current_vpn_server) {
-            const label = `${current_vpn_server.region.name} (${current_vpn_server.name})`;
-            return <IconButton label={label} onPress={SettingsScreenModel} />;
-        }
-
-        return null;
-    };
-
-    const triggerVPNorAddServer = () => {
-        if (current_vpn_server) {
-            triggerVPN();
+            toggleVPN();
         } else {
             SettingsScreenModel();
         }
@@ -49,19 +42,15 @@ const Main = () => {
 
     return (
         <Layout>
-            <RoundButton label={button_label} onPress={triggerVPNorAddServer} disabled={disabled} />
-            <View style={{ marginTop: 10, marginBottom: 10 }}>{currentServer()}</View>
-            <View>
-                <TouchableOpacity onPress={LogFileViewerScreenModal}>
-                    {logs.map((log, index) => (
-                        <Text selectable={true} key={index}>
-                            {log}
-                        </Text>
-                    ))}
-                </TouchableOpacity>
+            <RoundButton label={button_label} onPress={toggleVPNOrSettingsScreenModel} disabled={disabled} />
+            <View style={{ marginTop: 10, marginBottom: 10 }}>
+                <CurrentServer />
+            </View>
+            <View style={{ marginTop: 10, marginBottom: 10 }}>
+                <Notifications />
             </View>
         </Layout>
     );
 };
 
-export default withInitState(Main);
+export default withInitState(MainScreen);

@@ -2,11 +2,11 @@
 
 import DO_Client from './DigitalOcean/client_facade';
 import RNNetworkExtension from 'react-native-network-extension';
+import logger from '../logger';
 
 class Client {
-    constructor(tokens, logger) {
+    constructor(tokens) {
         this.clients = {};
-        this.logger = logger;
 
         for (const token of tokens) {
             this.clients[token.provider] = this.createClient(token.provider, token.access_token);
@@ -19,12 +19,10 @@ class Client {
         }
     }
 
-    async createServer(provider, region) {
-        console.log('Configuring VPN...');
-        this.logger('Configuring VPN...');
+    async createServer(provider, region, notify) {
+        const vpnData = await this.clients[provider].createServer(region, notify);
 
-        const vpnData = await this.clients[provider].createServer(region, this.logger);
-
+        notify('progress', 'Configuring authentication');
         await RNNetworkExtension.configure({
             ipAddress: vpnData.ipAddress,
             domain: vpnData.domain,
@@ -36,18 +34,31 @@ class Client {
     }
 
     async getRegions(provider) {
-        return await this.clients[provider].getRegions();
+        try {
+            return await this.clients[provider].getRegions();
+        } catch (e) {
+            logger.warn([`Cannot load ${provider} regions`, e.message]);
+        }
+
+        return [];
     }
 
     async getServers() {
-        let servers = [];
+        const requests = Object.values(this.clients).map(client => client.getServers().catch(e => e));
 
-        for (const client of Object.values(this.clients)) {
-            const _servers = await client.getServers();
-            servers = [...servers, ..._servers];
-        }
+        const responses = await Promise.all(requests);
 
-        return servers;
+        return responses
+            .filter(response => {
+                if (response instanceof Error) {
+                    logger.warn('Retrieving servers failed, reason: ' + response.message);
+
+                    return false;
+                }
+
+                return true;
+            })
+            .flat();
     }
 
     async deleteServer(server) {

@@ -1,5 +1,9 @@
 'use strict';
 
+import ProviderAuthenticationError from '../../exceptions/ProviderAuthenticationError';
+import ProviderInvalidContentError from '../../exceptions/ProviderInvalidContentError';
+import ProviderUnexpectedError from '../../exceptions/ProviderUnexpectedError';
+
 class ApiClient {
     constructor(token) {
         this.token = token;
@@ -15,13 +19,33 @@ class ApiClient {
             body,
         });
 
-        const contentType = response.headers.get('content-type');
+        console.log('DigitalOcean API response:', response);
 
-        if (contentType && contentType.indexOf('application/json') !== -1) {
-            return await response.json();
+        if (!response.hasOwnProperty('headers')) {
+            throw new ProviderInvalidContentError('DigitalOcean API returned an invalid response.');
         }
 
-        return await response.text();
+        let content;
+        if (
+            response.headers.get('content-type') &&
+            response.headers.get('content-type').indexOf('application/json') !== -1
+        ) {
+            content = await response.json();
+        } else {
+            content = await response.text();
+        }
+
+        if (response.status > 399) {
+            const message = content.hasOwnProperty('message') ? content.message : JSON.stringify(content);
+
+            if (response.status === 401) {
+                throw new ProviderAuthenticationError(message);
+            }
+
+            throw new ProviderUnexpectedError(message);
+        }
+
+        return content;
     }
 
     async getAccount() {
@@ -98,10 +122,6 @@ class ApiClient {
 
     async deleteDroplet(dropletId) {
         await this.makeRequest('DELETE', `https://api.digitalocean.com/v2/droplets/${dropletId}`);
-    }
-
-    async deleteDomain(domain) {
-        await this.makeRequest('DELETE', `https://api.digitalocean.com/v2/domains/${domain}`);
     }
 
     async getRegions() {

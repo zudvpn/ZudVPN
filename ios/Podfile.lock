@@ -248,6 +248,8 @@ PODS:
     - React
   - RNCAsyncStorage (1.6.1):
     - React
+  - RNCMaskedView (0.1.10):
+    - React
   - RNFS (2.14.1):
     - React
   - RNVectorIcons (6.6.0):
@@ -292,6 +294,7 @@ DEPENDENCIES:
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
   - ReactNativeNavigation (from `../node_modules/react-native-navigation/ReactNativeNavigation.podspec`)
   - "RNCAsyncStorage (from `../node_modules/@react-native-community/async-storage`)"
+  - "RNCMaskedView (from `../node_modules/@react-native-community/masked-view`)"
   - RNFS (from `../node_modules/react-native-fs`)
   - RNVectorIcons (from `../node_modules/react-native-vector-icons`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
@@ -370,6 +373,8 @@ EXTERNAL SOURCES:
     :podspec: "../node_modules/react-native-navigation/ReactNativeNavigation.podspec"
   RNCAsyncStorage:
     :path: "../node_modules/@react-native-community/async-storage"
+  RNCMaskedView:
+    :path: "../node_modules/@react-native-community/masked-view"
   RNFS:
     :path: "../node_modules/react-native-fs"
   RNVectorIcons:
@@ -420,6 +425,7 @@ SPEC CHECKSUMS:
   ReactCommon: 198c7c8d3591f975e5431bec1b0b3b581aa1c5dd
   ReactNativeNavigation: 86a76f888e7e3c42c1b6eaee634142baab6420eb
   RNCAsyncStorage: 2e2e3feb9bdadc752a026703d8c4065ca912e75a
+  RNCMaskedView: 5a8ec07677aa885546a0d98da336457e2bea557f
   RNFS: a8fbe7060fa49157d819466404794ad9c58e58cf
   RNVectorIcons: 0bb4def82230be1333ddaeee9fcba45f0b288ed4
   Yoga: f2a7cd4280bfe2cca5a7aed98ba0eb3d1310f18b

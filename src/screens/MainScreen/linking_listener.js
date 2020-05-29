@@ -7,32 +7,36 @@ import StaticServer from '../../static_server';
 import { Navigation } from 'react-native-navigation';
 import SafariView from 'react-native-safari-view';
 import withClient from '../../providers/with_client';
+import logger from '../../logger';
 
 const LinkingListener = props => {
     const [, actions] = useStore();
 
     useEffect(() => {
-        console.log('linking listener use effect 1');
         const networkStatusCallback = status => {
-            console.log('newtork status: ', status);
+            logger.debug('Network status: ' + status);
             actions.setVPNStatus(status);
         };
 
         const networkFailCallback = reason => {
-            console.log('network fail reason: ', reason);
+            logger.debug('Network failed, reason: ' + reason);
             actions.setVPNStatus('Connect');
         };
 
         const handleCallback = async url => {
-            try {
-                console.log('handle callback received url', url);
-                const provider_token = parse_linking_url_params(url);
+            const provider_token = parse_linking_url_params(url);
+
+            if (provider_token.hasOwnProperty('provider') && provider_token.hasOwnProperty('access_token')) {
                 const client = props.client.createClient(provider_token.provider, provider_token.access_token);
 
-                provider_token.account = await client.getAccount();
-                actions.addProviderToken(provider_token);
-            } catch (e) {
-                actions.setLog('Cannot add provider token.');
+                try {
+                    provider_token.account = await client.getAccount();
+                    actions.addProviderToken(provider_token);
+                } catch (e) {
+                    logger.error('Cannot add provider token: ' + e.message);
+                }
+            } else {
+                logger.error('Cannot add provider token: Missing access token.');
             }
 
             // We assume that after receiving callback url from Provider registration/login page

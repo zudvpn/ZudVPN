@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Alert, FlatList, SafeAreaView, ScrollView, Text } from 'react-native';
+import { ActivityIndicator, Alert, FlatList, SafeAreaView, ScrollView, Text } from 'react-native';
 import RenderProviderRegion from './render_provider_region';
 import withClient from '../../providers/with_client';
 import { Navigation } from 'react-native-navigation';
@@ -39,7 +39,7 @@ const ProviderRegionScreen = props => {
 
         return (
             <SafeAreaView style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                <Text>Loading...</Text>
+                <ActivityIndicator size={'large'} />
             </SafeAreaView>
         );
     }
@@ -47,7 +47,9 @@ const ProviderRegionScreen = props => {
     return (
         <SafeAreaView style={{ flex: 1 }}>
             <ScrollView>
-                <Text style={{ fontSize: 18, alignSelf: 'center', padding: 10, paddingBottom: 0 }}>Regions on {props.provider.name}</Text>
+                <Text style={{ fontSize: 18, alignSelf: 'center', padding: 10, paddingBottom: 0 }}>
+                    Regions on {props.provider.name}
+                </Text>
                 <Text style={{ alignSelf: 'center' }}>Select a region to deploy a VPN server on</Text>
                 <FlatList
                     data={regions}

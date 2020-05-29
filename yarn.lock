@@ -1072,6 +1072,11 @@
     eslint-plugin-react-native "3.6.0"
     prettier "1.16.4"
 
+"@react-native-community/masked-view@^0.1.10":
+  version "0.1.10"
+  resolved "https://registry.yarnpkg.com/@react-native-community/masked-view/-/masked-view-0.1.10.tgz#5dda643e19e587793bc2034dd9bf7398ad43d401"
+  integrity sha512-rk4sWFsmtOw8oyx8SD3KSvawwaK7gRBSEIy2TAwURyGt+3TizssXP1r8nx3zY+R7v2vYYHXZ+k2/GULAT/bcaQ==
+
 "@types/babel__core@^7.1.0":
   version "7.1.2"
   resolved "https://registry.yarnpkg.com/@types/babel__core/-/babel__core-7.1.2.tgz#608c74f55928033fce18b99b213c16be4b3d114f"
@@ -5553,6 +5558,11 @@ react-native-fs@^2.14.1:
   dependencies:
     base-64 "^0.1.0"
     utf8 "^2.1.1"
+
+react-native-logs@^2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/react-native-logs/-/react-native-logs-2.2.0.tgz#1f59f44e208104e2a9de21c24086abfcd90e0275"
+  integrity sha512-NFW0ZeVOaJ76/0LHEM4+WMUHqT8eOHqWyc2IND8UZ8L1ZGKI7nDG1wUXT7A4cdpSoR4JxJmwx9kvgmZYzRH3HQ==
 
 react-native-navigation@^3.1.2:
   version "3.1.2"

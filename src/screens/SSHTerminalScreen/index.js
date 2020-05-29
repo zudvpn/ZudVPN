@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Alert, Text, TextInput, SafeAreaView, ScrollView, KeyboardAvoidingView } from 'react-native';
+import { Text, TextInput, SafeAreaView, ScrollView, KeyboardAvoidingView, ActivityIndicator } from 'react-native';
 import { Navigation } from 'react-native-navigation';
 import AsyncStorage from '@react-native-community/async-storage';
 import SSHClient from 'react-native-ssh-sftp';
@@ -106,7 +106,7 @@ class SSHTerminalScreen extends Component {
         if (output === null) {
             return (
                 <SafeAreaView style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                    <Text>Loading...</Text>
+                    <ActivityIndicator size={'large'} />
                 </SafeAreaView>
             );
         }

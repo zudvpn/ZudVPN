@@ -1,7 +1,6 @@
 'use strict';
 
 import { SERVER_TAG } from './constants';
-import { ip2domain } from '../../helper';
 import Deploy from './deploy';
 import ApiClient from './api_client';
 
@@ -16,20 +15,22 @@ class ClientFacade {
         return await this.api_client.getAccount();
     }
 
-    async createServer(region, logger) {
+    async createServer(region, notify) {
         const deploy = Deploy({
             client: this.api_client,
             token: this.token,
             region: region.slug,
-            setLog: logger,
+            notify,
         });
         return await deploy.run();
     }
 
+    async readServerVPN(server) {
+        // @todo implement
+    }
+
     async getServers() {
         let droplets = await this.api_client.getDropletsByTag(SERVER_TAG);
-
-        console.log('get droplets by tag', SERVER_TAG, droplets);
 
         return droplets.map(droplet => {
             return {
@@ -49,10 +50,7 @@ class ClientFacade {
     }
 
     deleteServer(server) {
-        Promise.all([
-            this.api_client.deleteDroplet(server.uid),
-            this.api_client.deleteDomain(ip2domain(server.ipv4_address)),
-        ]);
+        this.api_client.deleteDroplet(server.uid);
     }
 
     async getRegions() {

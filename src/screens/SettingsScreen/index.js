@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from 'react';
-import { Alert, Text, SafeAreaView, ScrollView, FlatList, RefreshControl } from 'react-native';
+import { Alert, Text, SafeAreaView, ScrollView, FlatList, RefreshControl, ActivityIndicator } from 'react-native';
 import { Navigation } from 'react-native-navigation';
 import RNNetworkExtension from 'react-native-network-extension';
 import { useStore } from '../../store/store';
@@ -8,13 +8,14 @@ import useScreen from '../screen_hooks';
 import withClient from '../../providers/with_client';
 import { RenderProviderItem } from './render_provider_item';
 import { AVAILABLE_PROVIDERS } from '../../providers';
-import {Divider} from "react-native-elements";
+import { Divider, ListItem } from 'react-native-elements';
+import logger from '../../logger';
 
 const SettingsScreen = props => {
     const [servers, setServers] = useState(null);
     const [refreshing, setRefreshing] = useState(false);
-    const [{ current_vpn_server }, { setCurrentVPNServer, setVPNStatus, setLog }] = useStore();
-    const { SSHTerminalScreenModal } = useScreen();
+    const [{ current_vpn_server }, { setCurrentVPNServer, setVPNStatus, notify }] = useStore();
+    const { SSHTerminalScreenModal, LogFileViewerScreenPush } = useScreen();
 
     Navigation.events().registerNavigationButtonPressedListener(({ buttonId, componentId }) => {
         if (componentId === props.componentId && buttonId === 'done_button') {
@@ -23,37 +24,38 @@ const SettingsScreen = props => {
     });
 
     const select = server => () => {
-        console.log('selecting server ', server);
-        setLog('Configuring VPN');
         setVPNStatus('Connecting');
 
-        try {
-            props.client.createServer(server.provider.id, server.region);
-            setCurrentVPNServer(server);
-        } catch (e) {
-            setVPNStatus('Connect');
-            setLog('Cannot create VPN server ', e);
-        }
+        props.client
+            .createServer(server.provider.id, server.region, notify)
+            .then(() => {
+                setCurrentVPNServer(server);
+                notify('success', 'VPN server is ready for connection');
+            })
+            .catch(e => {
+                setVPNStatus('Connect');
+                notify('error', `Failed to connect to VPN server: ${e.message || e}`);
+            });
 
         Navigation.dismissModal(props.componentId);
     };
 
     const sshTerminal = (uid, ipv4_address) => () => {
-        console.log('SSH connecting ', uid);
+        logger.debug(['SSH Terminal connection to uid:', uid]);
         SSHTerminalScreenModal(uid, ipv4_address);
     };
 
     const destroyConfirmed = uid => {
         const server = servers.filter(_server => _server.uid === uid);
 
-        Promise.all([props.client.deleteServer(server[0]), RNNetworkExtension.remove()]);
+        Promise.all([props.client.deleteServer(server[0]).catch(e => e), RNNetworkExtension.remove().catch(e => e)]);
 
         if (current_vpn_server !== null && current_vpn_server.uid === uid) {
             setCurrentVPNServer(null);
             setVPNStatus('Connect');
         }
 
-        // remove deleted from servers
+        // remove deleted server from servers list
         setServers(servers.filter(_server => _server.uid !== uid));
     };
 
@@ -72,13 +74,9 @@ const SettingsScreen = props => {
     };
 
     const retrieveServers = async () => {
-        try {
-            const _servers = await props.client.getServers();
+        const _servers = await props.client.getServers();
 
-            setServers(_servers);
-        } catch (e) {
-            setLog('Cannot retrieve server list from provider ', e);
-        }
+        setServers(_servers);
     };
 
     const onRefresh = useCallback(() => {
@@ -88,13 +86,9 @@ const SettingsScreen = props => {
     }, [refreshing]);
 
     if (servers === null) {
-        retrieveServers();
-
-        return (
-            <SafeAreaView style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                <Text>Loading...</Text>
-            </SafeAreaView>
-        );
+        setTimeout(() => {
+            retrieveServers();
+        }, 0);
     }
 
     return (
@@ -102,7 +96,9 @@ const SettingsScreen = props => {
             <ScrollView
                 style={{ flex: 1 }}
                 refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}>
-                {servers.length > 0 &&
+                {servers === null && <ActivityIndicator style={{ padding: 10 }} />}
+                {servers !== null &&
+                    servers.length > 0 &&
                     servers.map(server => (
                         <RenderServer
                             key={server.uid}
@@ -118,6 +114,15 @@ const SettingsScreen = props => {
                     data={AVAILABLE_PROVIDERS}
                     renderItem={({ item }) => <RenderProviderItem item={item} componentId={props.componentId} />}
                     keyExtractor={(item, index) => index.toString()}
+                />
+                <Divider />
+                <Text style={{ fontSize: 12, padding: 15, paddingBottom: 2 }}>LOGS</Text>
+                <Divider />
+                <ListItem
+                    onPress={() => LogFileViewerScreenPush(props.componentId)}
+                    title={'Application logs'}
+                    bottomDivider
+                    chevron
                 />
             </ScrollView>
         </SafeAreaView>

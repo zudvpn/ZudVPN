@@ -2,10 +2,6 @@ export function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-export function ip2domain(ipv4_address) {
-    return ipv4_address.split('.').join('-') + '.zudvpn.com';
-}
-
 export function parse_linking_url_params(url) {
     console.log('Parsing linking url callback ', url);
     let params = url
