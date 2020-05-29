@@ -1,9 +1,7 @@
 import { createStore, createHook } from 'react-sweet-state';
 import RNNetworkExtension from 'react-native-network-extension';
-import AsyncStorage from '@react-native-community/async-storage';
 import logger from '../logger';
-
-export const INITIAL_STATE_KEY = 'INITIAL_STATE_KEY';
+import Keychain from '../keychain';
 
 const initialState = {
     provider_tokens: [],
@@ -56,7 +54,7 @@ const actions = {
             current_vpn_server: getState().current_vpn_server,
         };
 
-        AsyncStorage.setItem(INITIAL_STATE_KEY, JSON.stringify(state));
+        Keychain.setInitialState(state);
     },
 };
 

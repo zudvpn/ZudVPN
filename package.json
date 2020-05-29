@@ -20,6 +20,7 @@
     "react-native": "0.61.5",
     "react-native-elements": "^2.0.0",
     "react-native-fs": "^2.14.1",
+    "react-native-keychain": "^6.0.0",
     "react-native-logs": "^2.2.0",
     "react-native-navigation": "^3.1.2",
     "react-native-network-extension": "^0.1.23",

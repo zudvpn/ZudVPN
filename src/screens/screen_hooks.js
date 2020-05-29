@@ -80,7 +80,7 @@ const useScreen = () => {
                     ],
                 },
             }),
-        SSHTerminalScreenModal: (dropletId, ipv4_address) =>
+        SSHTerminalScreenModal: (name, ipv4_address) =>
             Navigation.showModal({
                 stack: {
                     children: [
@@ -88,7 +88,7 @@ const useScreen = () => {
                             component: {
                                 name: SSH_TERMINAL_SCREEN,
                                 passProps: {
-                                    dropletId,
+                                    name,
                                     ipv4_address,
                                 },
                             },

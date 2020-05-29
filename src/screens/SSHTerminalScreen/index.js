@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Text, TextInput, SafeAreaView, ScrollView, KeyboardAvoidingView, ActivityIndicator } from 'react-native';
 import { Navigation } from 'react-native-navigation';
-import AsyncStorage from '@react-native-community/async-storage';
 import SSHClient from 'react-native-ssh-sftp';
+import Keychain from '../../keychain';
 
 class SSHTerminalScreen extends Component {
     static get options() {
@@ -39,8 +39,7 @@ class SSHTerminalScreen extends Component {
     }
 
     async componentDidMount() {
-        let sshKeyPair = await AsyncStorage.getItem('DROPLET_SSH_KEY_PAIR' + this.props.dropletId);
-        sshKeyPair = JSON.parse(sshKeyPair);
+        let sshKeyPair = await Keychain.getSSHKeyPair(this.props.name);
 
         if (!sshKeyPair) {
             this.setState({ output: 'SSH Keypair is not available.' });

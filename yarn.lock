@@ -5559,6 +5559,11 @@ react-native-fs@^2.14.1:
     base-64 "^0.1.0"
     utf8 "^2.1.1"
 
+react-native-keychain@^6.0.0:
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/react-native-keychain/-/react-native-keychain-6.0.0.tgz#687379dd8468e8c37caa3c4d1c91393c6e04cb1d"
+  integrity sha512-5jt2oS9WNBT/GXBRdb+9KHTQokI1eMRDa50aQFR1koXqUpkULhvxItgQ2CKTd+ZchZQK/hn85qHQOs/gWgUGYA==
+
 react-native-logs@^2.2.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/react-native-logs/-/react-native-logs-2.2.0.tgz#1f59f44e208104e2a9de21c24086abfcd90e0275"

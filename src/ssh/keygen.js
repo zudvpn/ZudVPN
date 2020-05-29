@@ -6,22 +6,21 @@ import forge from 'node-forge';
 class Keygen {
     static async generateKeyPair() {
         let keys = await RSA.generateKeys(4096);
-        console.log('generated ssh keys:', keys);
-        this.privateKey = keys.private;
-        this.publicKey = keys.public;
 
-        this.forgePrivateKey = forge.pki.privateKeyFromPem(this.privateKey);
-        this.forgePublicKey = forge.pki.setRsaPublicKey(this.forgePrivateKey.n, this.forgePrivateKey.e);
+        let privateKey = keys.private;
+        let publicKey = keys.public;
 
-        console.log(this.publicKey, forge.pki.publicKeyToPem(this.forgePublicKey));
+        let forgePrivateKey = forge.pki.privateKeyFromPem(privateKey);
+        let forgePublicKey = forge.pki.setRsaPublicKey(forgePrivateKey.n, forgePrivateKey.e);
 
-        this.authorizedKey = forge.ssh.publicKeyToOpenSSH(this.forgePublicKey);
-        console.log('authorized key: ', this.authorizedKey);
+        let authorizedKey = forge.ssh.publicKeyToOpenSSH(forgePublicKey);
+        let fingerprint = forge.ssh.getPublicKeyFingerprint(forgePublicKey, { encoding: 'hex', delimiter: ':' });
 
         return {
-            publicKey: this.publicKey,
-            privateKey: this.privateKey,
-            authorizedKey: this.authorizedKey,
+            authorizedKey,
+            fingerprint,
+            publicKey,
+            privateKey,
         };
     }
 }

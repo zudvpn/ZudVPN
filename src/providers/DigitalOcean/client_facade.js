@@ -3,6 +3,7 @@
 import { SERVER_TAG } from './constants';
 import Deploy from './deploy';
 import ApiClient from './api_client';
+import Keychain from '../../keychain';
 
 class ClientFacade {
     constructor(token) {
@@ -19,14 +20,22 @@ class ClientFacade {
         const deploy = Deploy({
             client: this.api_client,
             token: this.token,
-            region: region.slug,
             notify,
         });
-        return await deploy.run();
+
+        return await deploy.run(region.slug);
     }
 
-    async readServerVPN(server) {
-        // @todo implement
+    async readServerVPN(server, notify) {
+        const deploy = Deploy({
+            client: this.api_client,
+            token: this.token,
+            notify,
+        });
+
+        const sshKeyPair = await Keychain.getSSHKeyPair(server.name);
+
+        return await deploy.read(server, sshKeyPair, server.ipv4_address);
     }
 
     async getServers() {

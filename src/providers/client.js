@@ -33,6 +33,20 @@ class Client {
         return vpnData.server;
     }
 
+    async configureServer(provider, server, notify) {
+        const vpnData = await this.clients[provider].readServerVPN(server, notify);
+
+        notify('progress', 'Configuring authentication');
+        await RNNetworkExtension.configure({
+            ipAddress: vpnData.ipAddress,
+            domain: vpnData.domain,
+            username: vpnData.username,
+            password: vpnData.password,
+        });
+
+        return vpnData.server;
+    }
+
     async getRegions(provider) {
         try {
             return await this.clients[provider].getRegions();

@@ -9,13 +9,12 @@ import withClient from '../../providers/with_client';
 import { RenderProviderItem } from './render_provider_item';
 import { AVAILABLE_PROVIDERS } from '../../providers';
 import { Divider, ListItem } from 'react-native-elements';
-import logger from '../../logger';
 
 const SettingsScreen = props => {
     const [servers, setServers] = useState(null);
     const [refreshing, setRefreshing] = useState(false);
     const [{ current_vpn_server }, { setCurrentVPNServer, setVPNStatus, notify }] = useStore();
-    const { SSHTerminalScreenModal, LogFileViewerScreenPush } = useScreen();
+    const { LogFileViewerScreenPush } = useScreen();
 
     Navigation.events().registerNavigationButtonPressedListener(({ buttonId, componentId }) => {
         if (componentId === props.componentId && buttonId === 'done_button') {
@@ -27,7 +26,7 @@ const SettingsScreen = props => {
         setVPNStatus('Connecting');
 
         props.client
-            .createServer(server.provider.id, server.region, notify)
+            .configureServer(server.provider.id, server, notify)
             .then(() => {
                 setCurrentVPNServer(server);
                 notify('success', 'VPN server is ready for connection');
@@ -38,11 +37,6 @@ const SettingsScreen = props => {
             });
 
         Navigation.dismissModal(props.componentId);
-    };
-
-    const sshTerminal = (uid, ipv4_address) => () => {
-        logger.debug(['SSH Terminal connection to uid:', uid]);
-        SSHTerminalScreenModal(uid, ipv4_address);
     };
 
     const destroyConfirmed = uid => {
@@ -100,13 +94,7 @@ const SettingsScreen = props => {
                 {servers !== null &&
                     servers.length > 0 &&
                     servers.map(server => (
-                        <RenderServer
-                            key={server.uid}
-                            server={server}
-                            select={select}
-                            destroy={destroy}
-                            sshTerminal={sshTerminal}
-                        />
+                        <RenderServer key={server.uid} server={server} select={select} destroy={destroy} />
                     ))}
                 <Text style={{ fontSize: 12, padding: 15, paddingBottom: 2 }}>CLOUD PROVIDERS</Text>
                 <Divider />

@@ -47,7 +47,7 @@ const DigitalOceanOverlay = () => {
             url: url + `#access_token=${token}`,
             fromBottom: true,
         }).then(() => {
-            setTimeout(toggleOverlay, 500);
+            setTimeout(toggleOverlay, 1500);
         });
     };
 

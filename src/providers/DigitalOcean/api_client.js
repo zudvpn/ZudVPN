@@ -19,7 +19,7 @@ class ApiClient {
             body,
         });
 
-        console.log('DigitalOcean API response:', response);
+        console.log(`[DigitalOcean API] url: ${url}, response: `, response);
 
         if (!response.hasOwnProperty('headers')) {
             throw new ProviderInvalidContentError('DigitalOcean API returned an invalid response.');
@@ -51,30 +51,18 @@ class ApiClient {
     async getAccount() {
         let response = await this.makeRequest('GET', 'https://api.digitalocean.com/v2/account');
 
-        console.log('get account:', response);
-
         return response.account.email;
     }
 
-    async getAccountSSHKeys() {
-        let response = await this.makeRequest('GET', 'https://api.digitalocean.com/v2/account/keys');
-
-        console.log('get ssh keys:', response);
-
-        return response.ssh_keys.map(ssh_key => ssh_key.id);
-    }
-
-    async createSSHKey(name, publicKey) {
+    async createSSHKey(name, public_key) {
         let response = await this.makeRequest(
             'POST',
             'https://api.digitalocean.com/v2/account/keys',
             JSON.stringify({
                 name,
-                public_key: publicKey,
+                public_key,
             }),
         );
-
-        console.log('create ssh keys:', response);
 
         return response.ssh_key.id;
     }
@@ -82,20 +70,16 @@ class ApiClient {
     async getDropletsByTag(tag) {
         let response = await this.makeRequest('GET', 'https://api.digitalocean.com/v2/droplets?tag_name=' + tag);
 
-        console.log('get droplets by tag', tag, response);
-
         return response.droplets;
     }
 
     async getDropletById(dropletId) {
         let response = await this.makeRequest('GET', 'https://api.digitalocean.com/v2/droplets/' + dropletId);
 
-        console.log('wait for droplet ip:', response);
-
         return response.droplet;
     }
 
-    async createDroplet(sshKeys, name, region, size, data, image, tags) {
+    async createDroplet(ssh_fingerprint, name, region, size, user_data, image, tag) {
         let response = await this.makeRequest(
             'POST',
             'https://api.digitalocean.com/v2/droplets',
@@ -104,18 +88,16 @@ class ApiClient {
                 region,
                 size,
                 image,
-                ssh_keys: sshKeys,
+                ssh_keys: [ssh_fingerprint],
+                user_data,
+                tags: [tag],
                 backups: false,
                 private_networking: false,
                 monitoring: false,
                 ipv6: true,
-                user_data: data,
                 volumes: null,
-                tags: tags,
             }),
         );
-
-        console.log('create droplet:', response);
 
         return response.droplet;
     }
@@ -127,15 +109,11 @@ class ApiClient {
     async getRegions() {
         let response = await this.makeRequest('GET', 'https://api.digitalocean.com/v2/regions');
 
-        console.log('retrieved all regions', response);
-
         return response.regions.sort((a, b) => (a.name > b.name ? 1 : a.name < b.name ? -1 : 0));
     }
 
     async getAllFirewalls() {
         let response = await this.makeRequest('GET', 'https://api.digitalocean.com/v2/firewalls');
-
-        console.log('retrieved all firewalls:', response);
 
         return response.firewalls;
     }
@@ -148,8 +126,6 @@ class ApiClient {
                 droplet_ids: [dropletId],
             }),
         );
-
-        console.log('added droplet to firewall');
     }
 
     async createFirewall(name, dropletId) {
@@ -226,8 +202,6 @@ class ApiClient {
                 droplet_ids: [dropletId],
             }),
         );
-
-        console.log('create firewall:', response);
 
         return response.firewall.id;
     }
