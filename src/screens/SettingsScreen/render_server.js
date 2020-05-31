@@ -17,9 +17,7 @@ const RenderServer = ({ server, select, destroy }) => {
         <View style={styles.server_container}>
             <View style={{ padding: 15 }}>
                 <Text>Provider: {server.provider.name}</Text>
-                <Text>
-                    Location: {server.region.name} ({server.name})
-                </Text>
+                <Text>Region: {server.region.name}</Text>
                 <Text>IP Address: {server.ipv4_address}</Text>
             </View>
             <View style={styles.button_container}>

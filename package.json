@@ -29,8 +29,11 @@
     "react-native-ssh-sftp": "^1.0.3",
     "react-native-static-server": "futurepress/react-native-static-server#master",
     "react-native-vector-icons": "^6.6.0",
+    "react-native-webview": "^10.2.3",
     "react-sweet-state": "^1.1.1",
-    "uuid": "^3.3.3"
+    "uuid": "^3.3.3",
+    "xterm": "^4.6.0",
+    "xterm-addon-fit": "^0.4.0"
   },
   "devDependencies": {
     "@babel/core": "^7.6.2",

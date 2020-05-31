@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
-import { Text, TextInput, SafeAreaView, ScrollView, KeyboardAvoidingView, ActivityIndicator } from 'react-native';
+import { SafeAreaView, ActivityIndicator } from 'react-native';
 import { Navigation } from 'react-native-navigation';
 import SSHClient from 'react-native-ssh-sftp';
 import Keychain from '../../keychain';
+import WebView from 'react-native-webview';
+import TerminalServer from './terminal_server';
+import logger from '../../logger';
 
 class SSHTerminalScreen extends Component {
     static get options() {
@@ -28,7 +31,7 @@ class SSHTerminalScreen extends Component {
 
         this.state = {
             sshClient: null,
-            output: null,
+            terminalUrl: null,
         };
     }
 
@@ -38,11 +41,16 @@ class SSHTerminalScreen extends Component {
         }
     }
 
-    async componentDidMount() {
+    componentDidMount() {
+        this.startSSHClient();
+    }
+
+    async startSSHClient() {
+        logger.debug('Starting SSH Client');
         let sshKeyPair = await Keychain.getSSHKeyPair(this.props.name);
 
         if (!sshKeyPair) {
-            this.setState({ output: 'SSH Keypair is not available.' });
+            this.sendMessage('SSH Keypair is not available. Cannot cannot to server terminal.');
         } else {
             let sshClient = new SSHClient(
                 this.props.ipv4_address,
@@ -54,23 +62,18 @@ class SSHTerminalScreen extends Component {
                 },
                 error => {
                     if (error) {
-                        this.setState({ output: error });
+                        this.sendMessage(error);
                     } else {
                         this.setState({ sshClient });
 
-                        sshClient.startShell('vanilla', error => {
+                        sshClient.startShell('xterm', error => {
                             if (error) {
-                                this.setState({ output: error });
+                                this.sendMessage(error);
                             }
                         });
 
                         sshClient.on('Shell', event => {
-                            let { output } = this.state;
-                            if (output === null) {
-                                output = '';
-                            }
-
-                            this.setState({ output: output + event });
+                            this.sendMessage(event);
                         });
                     }
                 },
@@ -80,29 +83,49 @@ class SSHTerminalScreen extends Component {
 
     componentWillUnmount() {
         let { sshClient } = this.state;
+
         if (sshClient) {
             console.log('SSH client is disconnectiong.');
+            sshClient.closeShell();
             sshClient.disconnect();
         }
     }
 
-    write = event => {
-        let { sshClient, output } = this.state;
+    startTerminalServer = async () => {
+        const url = await TerminalServer.serveTerminal();
+        this.setState({ terminalUrl: url });
+    };
 
-        sshClient.writeToShell(event.nativeEvent.text + '\n', error => {
-            if (error) {
-                this.setState({ output: output + error });
-            }
-        });
+    onMessage = event => {
+        let { sshClient } = this.state;
 
-        this.input.clear();
-        this.input.focus();
+        this.command = JSON.parse(event.nativeEvent.data);
+        if (sshClient) {
+            console.log('SENDING COMMAND: ', this.command);
+            sshClient.writeToShell(this.command + '\n', error => {
+                if (error) {
+                    this.sendMessage(error);
+                }
+            });
+        }
+    };
+
+    sendMessage = message => {
+        if (this.webref) {
+            this.webref.injectJavaScript(`
+            window.localEcho.print(\`${message}\`)
+            window.localEcho.read("")
+                .then(input => window.ReactNativeWebView.postMessage(JSON.stringify(input)));
+            true;`);
+        }
     };
 
     render() {
-        let { output } = this.state;
+        let { terminalUrl } = this.state;
 
-        if (output === null) {
+        if (terminalUrl === null) {
+            this.startTerminalServer();
+
             return (
                 <SafeAreaView style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                     <ActivityIndicator size={'large'} />
@@ -111,23 +134,16 @@ class SSHTerminalScreen extends Component {
         }
 
         return (
-            <SafeAreaView style={{ flex: 1 }}>
-                <KeyboardAvoidingView style={{ flex: 1 }} behavior={'height'} keyboardVerticalOffset={90}>
-                    <ScrollView style={{ flex: 1 }}>
-                        <Text>{output}</Text>
-                        <TextInput
-                            style={{ borderWidth: 1, lineHeight: 22, fontSize: 18 }}
-                            ref={ref => {
-                                this.input = ref;
-                            }}
-                            autoFocus={true}
-                            autoCapitalize="none"
-                            autoCorrect="none"
-                            onSubmitEditing={this.write}
-                        />
-                    </ScrollView>
-                </KeyboardAvoidingView>
-            </SafeAreaView>
+            <WebView
+                ref={ref => (this.webref = ref)}
+                originWhitelist={['*']}
+                source={{ uri: terminalUrl }}
+                onMessage={this.onMessage}
+                onError={syntheticEvent => {
+                    const { nativeEvent } = syntheticEvent;
+                    logger.warn('Terminal WebView error:', nativeEvent);
+                }}
+            />
         );
     }
 }

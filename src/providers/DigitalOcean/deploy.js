@@ -18,14 +18,12 @@ const Deploy = ({ client, token, notify }) => {
     };
 
     const run = async region => {
+        notify('progress', 'Creating a server');
         const name = generateName(region);
-
         const sshKeyPair = await getSSHKeyPair(name);
-
         let userData = CloudInitUserData(sshKeyPair.authorizedKey, token);
 
         logger.debug(['[DigitalOcean] Generated user data: ', userData]);
-        notify('progress', 'Creating a server');
         let droplet = await client.createDroplet(
             sshKeyPair.fingerprint,
             name,
@@ -128,7 +126,7 @@ const Deploy = ({ client, token, notify }) => {
                 await sshClient.run('docker logs strongswan --until=5s &>/dev/null');
                 countWaitingForVPN = 0;
             } catch (e) {
-                logger.debug(`Attempt ${10 - countWaitingForVPN}/10 failed, reason: ${e}`);
+                logger.debug(`Attempt ${10 - countWaitingForVPN}/10 failed, reason: ${e.message || e}`);
 
                 if (countWaitingForVPN === 0) {
                     throw e;
@@ -148,7 +146,9 @@ const Deploy = ({ client, token, notify }) => {
                 await sshClient.openSession();
                 trialLeft = 0;
             } catch (e) {
-                logger.debug(`[DigitalOcean] SSH connection not ready: ${e}, retrying ${10 - trialLeft}/10`);
+                logger.debug(
+                    `[DigitalOcean] SSH connection not ready: ${e.message || e}, retrying ${10 - trialLeft}/10`,
+                );
 
                 await sleep(trialLeft * 1000);
             }

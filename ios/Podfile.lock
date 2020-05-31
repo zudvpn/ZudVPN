@@ -209,6 +209,8 @@ PODS:
     - React
   - react-native-static-server (0.4.2):
     - React
+  - react-native-webview (10.2.3):
+    - React
   - React-RCTActionSheet (0.61.5):
     - React-Core/RCTActionSheetHeaders (= 0.61.5)
   - React-RCTAnimation (0.61.5):
@@ -283,6 +285,7 @@ DEPENDENCIES:
   - react-native-rsa-native (from `../node_modules/react-native-rsa-native`)
   - react-native-safari-view (from `../node_modules/react-native-safari-view/react-native-safari-view.podspec`)
   - react-native-static-server (from `../node_modules/react-native-static-server`)
+  - react-native-webview (from `../node_modules/react-native-webview`)
   - React-RCTActionSheet (from `../node_modules/react-native/Libraries/ActionSheetIOS`)
   - React-RCTAnimation (from `../node_modules/react-native/Libraries/NativeAnimation`)
   - React-RCTBlob (from `../node_modules/react-native/Libraries/Blob`)
@@ -352,6 +355,8 @@ EXTERNAL SOURCES:
     :podspec: "../node_modules/react-native-safari-view/react-native-safari-view.podspec"
   react-native-static-server:
     :path: "../node_modules/react-native-static-server"
+  react-native-webview:
+    :path: "../node_modules/react-native-webview"
   React-RCTActionSheet:
     :path: "../node_modules/react-native/Libraries/ActionSheetIOS"
   React-RCTAnimation:
@@ -418,6 +423,7 @@ SPEC CHECKSUMS:
   react-native-rsa-native: 652fba77a36dda00de5c842408b126b69e1f4431
   react-native-safari-view: 955d7160d159241b8e9395d12d10ea0ef863dcdd
   react-native-static-server: 4ddb9afa1cda0f65194df42b8debd81b6e314531
+  react-native-webview: 0bacc79175bc44869e4c1a015b9bc21df8cf4feb
   React-RCTActionSheet: 600b4d10e3aea0913b5a92256d2719c0cdd26d76
   React-RCTAnimation: 791a87558389c80908ed06cc5dfc5e7920dfa360
   React-RCTBlob: d89293cc0236d9cb0933d85e430b0bbe81ad1d72

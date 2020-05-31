@@ -18,6 +18,7 @@
 		2DCD954D1E0B4F2C00145EB5 /* ZudVPNTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* ZudVPNTests.m */; };
 		6959BD2577273B59D00F3BCF /* libPods-ZudVPN-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 515AC21F64FEEB8E9FCB7747 /* libPods-ZudVPN-tvOSTests.a */; };
 		7617F431984284DA136DA073 /* libPods-ZudVPN-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D22DC7CE54687847EB481833 /* libPods-ZudVPN-tvOS.a */; };
+		BC056CBE2482D894000E9900 /* assets in Resources */ = {isa = PBXBuildFile; fileRef = BC056CBC2482D894000E9900 /* assets */; };
 		BC9415F6231C9151002908C9 /* libRNSSHClient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BC9415F5231C913B002908C9 /* libRNSSHClient.a */; };
 		BC9415FB231C9437002908C9 /* AppCenter-Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = BC9415F9231C9437002908C9 /* AppCenter-Config.plist */; };
 		BCAE9BC02330321800CB50AD /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCAE9BBF2330321800CB50AD /* NetworkExtension.framework */; };
@@ -84,6 +85,7 @@
 		84ACCC3695AA49CB8508EFBD /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
 		93EC1F9AF7984C18910AA301 /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
 		94A46C35F0EB3DE82264DC9F /* Pods-ZudVPN-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZudVPN-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-ZudVPN-tvOS/Pods-ZudVPN-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
+		BC056CBC2482D894000E9900 /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; name = assets; path = ../assets; sourceTree = "<group>"; };
 		BC9415F0231C913B002908C9 /* RNSSHClient.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNSSHClient.xcodeproj; path = "../node_modules/react-native-ssh-sftp/ios/RNSSHClient.xcodeproj"; sourceTree = "<group>"; };
 		BC9415F9231C9437002908C9 /* AppCenter-Config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "AppCenter-Config.plist"; sourceTree = "<group>"; };
 		BCAE9BBF2330321800CB50AD /* NetworkExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NetworkExtension.framework; path = System/Library/Frameworks/NetworkExtension.framework; sourceTree = SDKROOT; };
@@ -238,6 +240,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				BC056CBC2482D894000E9900 /* assets */,
 				13B07FAE1A68108700A75B9A /* ZudVPN */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* ZudVPNTests */,
@@ -440,6 +443,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				BC056CBE2482D894000E9900 /* assets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 				BC9415FB231C9437002908C9 /* AppCenter-Config.plist in Resources */,
 			);
