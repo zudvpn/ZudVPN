@@ -15,7 +15,9 @@ class TerminalServer {
     }
 
     async serveTerminal() {
-        let url = (await this.terminalServer.isRunning()) ? this.terminalServer.origin : await this.terminalServer.start();
+        let url = (await this.terminalServer.isRunning())
+            ? this.terminalServer.origin
+            : await this.terminalServer.start();
 
         console.log('URL SERVED', url);
 

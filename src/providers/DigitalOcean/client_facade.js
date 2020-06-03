@@ -19,7 +19,6 @@ class ClientFacade {
     async createServer(region, notify) {
         const deploy = Deploy({
             client: this.api_client,
-            token: this.token,
             notify,
         });
 
@@ -29,7 +28,6 @@ class ClientFacade {
     async readServerVPN(server, notify) {
         const deploy = Deploy({
             client: this.api_client,
-            token: this.token,
             notify,
         });
 

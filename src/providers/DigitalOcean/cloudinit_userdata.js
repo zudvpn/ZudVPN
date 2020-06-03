@@ -1,4 +1,4 @@
-export default (key, do_token) => {
+export default key => {
     return `#cloud-config
 ssh_authorized_keys:
   - ${key}

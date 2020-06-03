@@ -12,7 +12,7 @@ const DROPLET_BASE_NAME = 'zudvpn';
 const DROPLET_IMAGE = 'coreos-stable';
 const DROPLET_SIZE = 's-1vcpu-1gb';
 
-const Deploy = ({ client, token, notify }) => {
+const Deploy = ({ client, notify }) => {
     const generateName = region => {
         return `${DROPLET_BASE_NAME}-${region}-${uuidv4().slice(-12)}`;
     };
@@ -21,7 +21,7 @@ const Deploy = ({ client, token, notify }) => {
         notify('progress', 'Creating a server');
         const name = generateName(region);
         const sshKeyPair = await getSSHKeyPair(name);
-        let userData = CloudInitUserData(sshKeyPair.authorizedKey, token);
+        let userData = CloudInitUserData(sshKeyPair.authorizedKey);
 
         logger.debug(['[DigitalOcean] Generated user data: ', userData]);
         let droplet = await client.createDroplet(

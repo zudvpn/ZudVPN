@@ -101,7 +101,6 @@ class SSHTerminalScreen extends Component {
 
         this.command = JSON.parse(event.nativeEvent.data);
         if (sshClient) {
-            console.log('SENDING COMMAND: ', this.command);
             sshClient.writeToShell(this.command + '\n', error => {
                 if (error) {
                     this.sendMessage(error);
