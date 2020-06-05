@@ -6,10 +6,10 @@ import logger from '../logger';
 
 class Client {
     constructor(tokens) {
-        this.clients = {};
+        this.clients = new Map();
 
         for (const token of tokens) {
-            this.clients[token.provider] = this.createClient(token.provider, token.access_token);
+            this.clients.set(token.provider, this.createClient(token.provider, token.access_token));
         }
     }
 
@@ -20,7 +20,7 @@ class Client {
     }
 
     async createServer(provider, region, notify) {
-        const vpnData = await this.clients[provider].createServer(region, notify);
+        const vpnData = await this.clients.get(provider).createServer(region, notify);
 
         notify('progress', 'Configuring authentication');
         await RNNetworkExtension.configure({
@@ -34,7 +34,7 @@ class Client {
     }
 
     async configureServer(provider, server, notify) {
-        const vpnData = await this.clients[provider].readServerVPN(server, notify);
+        const vpnData = await this.clients.get(provider).readServerVPN(server, notify);
 
         notify('progress', 'Configuring authentication');
         await RNNetworkExtension.configure({
@@ -49,7 +49,7 @@ class Client {
 
     async getRegions(provider) {
         try {
-            return await this.clients[provider].getRegions();
+            return await this.clients.get(provider).getRegions();
         } catch (e) {
             logger.warn([`Cannot load ${provider} regions`, e.message]);
         }
@@ -58,7 +58,7 @@ class Client {
     }
 
     async getServers() {
-        const requests = Object.values(this.clients).map(client => client.getServers().catch(e => e));
+        const requests = Array.from(this.clients, ([, client]) => client.getServers().catch(e => e));
 
         const responses = await Promise.all(requests);
 
@@ -76,7 +76,7 @@ class Client {
     }
 
     async deleteServer(server) {
-        await this.clients[server.provider.id].deleteServer(server);
+        await this.clients.get(server.provider.id).deleteServer(server);
     }
 }
 
