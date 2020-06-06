@@ -3,7 +3,6 @@ export function sleep(ms) {
 }
 
 export function parse_linking_url_params(url) {
-    console.log('Parsing linking url callback ', url);
     let params = url
         .split('?')[1]
         .split('&')

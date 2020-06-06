@@ -1,9 +1,9 @@
 import React from 'react';
-import DigitalOceanOverlay from './digitalocean_overlay';
+import DigitalOceanLogin from './digitalocean_login';
 
 const ProviderRegisterScreen = props => {
     if (props.provider.id === 'digitalocean') {
-        return <DigitalOceanOverlay />;
+        return <DigitalOceanLogin {...props} />;
     }
 };
 

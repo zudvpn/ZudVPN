@@ -10,17 +10,17 @@ import withClient from '../../providers/with_client';
 import logger from '../../logger';
 
 const LinkingListener = props => {
-    const [, actions] = useStore();
+    const [, { addProviderToken, setVPNStatus, notify }] = useStore();
 
     useEffect(() => {
         const networkStatusCallback = status => {
             logger.debug('Network status: ' + status);
-            actions.setVPNStatus(status);
+            setVPNStatus(status);
         };
 
         const networkFailCallback = reason => {
             logger.debug('Network failed, reason: ' + reason);
-            actions.setVPNStatus('Connect');
+            setVPNStatus('Connect');
         };
 
         const handleCallback = async url => {
@@ -31,12 +31,12 @@ const LinkingListener = props => {
 
                 try {
                     provider_token.account = await client.getAccount();
-                    actions.addProviderToken(provider_token);
+                    addProviderToken(provider_token);
                 } catch (e) {
-                    logger.error('Cannot add provider token: ' + e.message);
+                    notify('error', 'Cannot add provider token: ' + e.message);
                 }
             } else {
-                logger.error('Cannot add provider token: Missing access token.');
+                notify('error', 'Cannot add provider token: Missing access token.');
             }
 
             // We assume that after receiving callback url from Provider registration/login page

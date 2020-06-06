@@ -16,6 +16,9 @@ const MainScreen = () => {
         return (
             <Layout>
                 <RoundButton label={'Get Started!'} onPress={SettingsScreenModel} />
+                <View style={{ marginVertical: 10 }}>
+                    <Notifications />
+                </View>
             </Layout>
         );
     }
@@ -43,10 +46,10 @@ const MainScreen = () => {
     return (
         <Layout>
             <RoundButton label={button_label} onPress={toggleVPNOrSettingsScreenModel} disabled={disabled} />
-            <View style={{ marginTop: 10, marginBottom: 10 }}>
+            <View style={{ marginVertical: 10 }}>
                 <CurrentServer />
             </View>
-            <View style={{ marginTop: 10, marginBottom: 10 }}>
+            <View style={{ marginVertical: 10 }}>
                 <Notifications />
             </View>
         </Layout>

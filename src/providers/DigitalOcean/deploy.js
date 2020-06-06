@@ -90,7 +90,7 @@ const Deploy = ({ client, notify }) => {
         const sshKeyPair = await Keygen.generateKeyPair();
         logger.debug('[DigitalOcean] SSH Keypair:', sshKeyPair);
 
-        await client.createSSHKey(DROPLET_BASE_NAME, sshKeyPair.authorizedKey);
+        await client.createSSHKey(name, sshKeyPair.authorizedKey);
 
         // Save SSH by droplet key (used to ssh terminal connect)
         Keychain.setSSHKeyPair(name, sshKeyPair);

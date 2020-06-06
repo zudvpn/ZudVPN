@@ -6,7 +6,7 @@ import useScreen from '../screen_hooks';
 
 export const RenderProviderItem = ({ item, componentId }) => {
     const [{ provider_tokens }] = useStore();
-    const { ProviderRegisterOverlay, ProviderRegionScreenPush } = useScreen();
+    const { ProviderRegisterScreenPush, ProviderRegionScreenPush } = useScreen();
 
     const getAccount = provider => {
         const token = provider_tokens.filter(token => token.provider === provider.id);
@@ -24,7 +24,7 @@ export const RenderProviderItem = ({ item, componentId }) => {
         if (token.length > 0) {
             ProviderRegionScreenPush(componentId, provider);
         } else {
-            ProviderRegisterOverlay(provider);
+            ProviderRegisterScreenPush({ componentId, provider });
         }
     };
 

@@ -9,6 +9,20 @@ import {
 
 const useScreen = () => {
     return {
+        ProviderRegisterScreenPush: props =>
+            Navigation.push(props.componentId, {
+                component: {
+                    name: PROVIDER_REGISTER_SCREEN,
+                    options: {
+                        topBar: {
+                            title: {
+                                text: props.provider.name,
+                            },
+                        },
+                    },
+                    passProps: props,
+                },
+            }),
         ProviderRegionScreenPush: (componentId, provider) =>
             Navigation.push(componentId, {
                 component: {
@@ -94,20 +108,6 @@ const useScreen = () => {
                             },
                         },
                     ],
-                },
-            }),
-        ProviderRegisterOverlay: provider =>
-            Navigation.showOverlay({
-                component: {
-                    name: PROVIDER_REGISTER_SCREEN,
-                    passProps: {
-                        provider,
-                    },
-                    options: {
-                        overlay: {
-                            interceptTouchOutside: false,
-                        },
-                    },
                 },
             }),
     };
