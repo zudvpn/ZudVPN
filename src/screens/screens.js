@@ -2,9 +2,9 @@ import { Navigation } from 'react-native-navigation';
 
 import MainScreen from './MainScreen';
 import ProviderRegisterScreen from './ProviderRegisterScreen';
-import LogFileViewerScreen from './SettingsScreen/logfile_viewer_screen';
+import LogFileViewerScreen from './SettingsScreen/LogViewerScreen';
 import SettingsScreen from './SettingsScreen';
-import ProviderRegionScreen from './SettingsScreen/provider_region_screen';
+import ProviderRegionScreen from './SettingsScreen/ProviderRegionScreen';
 import SSHTerminalScreen from './SSHTerminalScreen';
 
 import {

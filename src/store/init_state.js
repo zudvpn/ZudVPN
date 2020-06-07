@@ -3,6 +3,7 @@ import { ActivityIndicator, View } from 'react-native';
 import { useStore } from './store';
 import logger from '../logger';
 import Keychain from '../keychain';
+import { BACKGROUND_PRIMARY } from '../theme';
 
 const withInitState = Component => props => {
     const [loading, setLoading] = useState(true);
@@ -28,7 +29,7 @@ const withInitState = Component => props => {
     }, []);
 
     return (
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <View style={{ backgroundColor: BACKGROUND_PRIMARY, flex: 1, justifyContent: 'center', alignItems: 'center' }}>
             {loading ? <ActivityIndicator size={'large'} /> : <Component {...props} />}
         </View>
     );

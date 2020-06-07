@@ -1,5 +1,6 @@
 import React from 'react';
 import { Text, TouchableOpacity } from 'react-native';
+import { BACKGROUND_PRIMARY, COLOR_PRIMARY, COLOR_SECONDARY, COLOR_TERTIARY } from '../../theme';
 
 export const RoundButton = ({ label, onPress, disabled = false }) => (
     <TouchableOpacity
@@ -8,8 +9,8 @@ export const RoundButton = ({ label, onPress, disabled = false }) => (
         style={{
             justifyContent: 'center',
             alignItems: 'center',
-            backgroundColor: '#3B8BEB',
-            borderColor: 'white',
+            backgroundColor: BACKGROUND_PRIMARY,
+            borderColor: COLOR_PRIMARY,
             borderWidth: 5,
             padding: 5,
             height: 200,
@@ -18,7 +19,7 @@ export const RoundButton = ({ label, onPress, disabled = false }) => (
         }}>
         <Text
             style={{
-                color: 'white',
+                color: COLOR_PRIMARY,
                 fontSize: 18,
             }}>
             {label}
@@ -30,19 +31,19 @@ export const IconButton = ({ label, onPress }) => (
     <TouchableOpacity
         onPress={onPress}
         style={{
-            borderColor: '#0069ff',
+            borderColor: COLOR_TERTIARY,
             borderWidth: 1,
             borderRadius: 3,
             width: '100%',
             alignItems: 'center',
             padding: 15,
         }}>
-        <Text style={{ position: 'absolute', alignSelf: 'flex-start', fontSize: 9, margin: 2 }}>
+        <Text style={{ color: COLOR_SECONDARY, position: 'absolute', alignSelf: 'flex-start', fontSize: 9, margin: 2 }}>
             Current VPN server:
         </Text>
         <Text
             style={{
-                color: '#0069ff',
+                color: COLOR_TERTIARY,
                 fontWeight: '500',
                 fontSize: 14,
             }}>

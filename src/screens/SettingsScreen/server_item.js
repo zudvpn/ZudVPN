@@ -4,8 +4,9 @@ import { SegmentButton } from './buttons';
 import React from 'react';
 import logger from '../../logger';
 import useScreen from '../screen_hooks';
+import { COLOR_SECONDARY } from '../../theme';
 
-const RenderServer = ({ server, select, destroy }) => {
+const ServerItem = ({ server, select, destroy }) => {
     const { SSHTerminalScreenModal } = useScreen();
 
     const sshTerminal = (name, ipv4_address) => () => {
@@ -16,9 +17,9 @@ const RenderServer = ({ server, select, destroy }) => {
     return (
         <View style={styles.server_container}>
             <View style={{ padding: 15 }}>
-                <Text>Provider: {server.provider.name}</Text>
-                <Text>Region: {server.region.name}</Text>
-                <Text>IP Address: {server.ipv4_address}</Text>
+                <Text style={{ color: COLOR_SECONDARY }}>Provider: {server.provider.name}</Text>
+                <Text style={{ color: COLOR_SECONDARY }}>Region: {server.region.name}</Text>
+                <Text style={{ color: COLOR_SECONDARY }}>IP Address: {server.ipv4_address}</Text>
             </View>
             <View style={styles.button_container}>
                 <SegmentButton label={'Destroy'} labelStyle={{ color: 'red' }} onPress={destroy(server.uid)} />
@@ -31,4 +32,4 @@ const RenderServer = ({ server, select, destroy }) => {
     );
 };
 
-export default RenderServer;
+export default ServerItem;

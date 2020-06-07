@@ -3,12 +3,14 @@ import { Alert, Text, SafeAreaView, ScrollView, FlatList, RefreshControl, Activi
 import { Navigation } from 'react-native-navigation';
 import RNNetworkExtension from 'react-native-network-extension';
 import { useStore } from '../../store/store';
-import RenderServer from './render_server';
+import ServerItem from './server_item';
 import useScreen from '../screen_hooks';
 import withClient from '../../providers/with_client';
-import { RenderProviderItem } from './render_provider_item';
+import { ProviderListItem } from './provider_list_item';
 import { AVAILABLE_PROVIDERS } from '../../providers';
 import { Divider, ListItem } from 'react-native-elements';
+import { BACKGROUND_PRIMARY, BACKGROUND_SECONDARY, COLOR_SECONDARY } from '../../theme';
+import style from './styles';
 
 const SettingsScreen = props => {
     const [servers, setServers] = useState(null);
@@ -86,7 +88,7 @@ const SettingsScreen = props => {
     }
 
     return (
-        <SafeAreaView style={{ flex: 1 }}>
+        <SafeAreaView style={{ flex: 1, backgroundColor: BACKGROUND_PRIMARY }}>
             <ScrollView
                 style={{ flex: 1 }}
                 refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}>
@@ -94,21 +96,23 @@ const SettingsScreen = props => {
                 {servers !== null &&
                     servers.length > 0 &&
                     servers.map(server => (
-                        <RenderServer key={server.uid} server={server} select={select} destroy={destroy} />
+                        <ServerItem key={server.uid} server={server} select={select} destroy={destroy} />
                     ))}
-                <Text style={{ fontSize: 12, padding: 15, paddingBottom: 2 }}>CLOUD PROVIDERS</Text>
+                <Text style={style.section_title}>CLOUD PROVIDERS</Text>
                 <Divider />
                 <FlatList
                     data={AVAILABLE_PROVIDERS}
-                    renderItem={({ item }) => <RenderProviderItem item={item} componentId={props.componentId} />}
+                    renderItem={({ item }) => <ProviderListItem item={item} componentId={props.componentId} />}
                     keyExtractor={(item, index) => index.toString()}
                 />
                 <Divider />
-                <Text style={{ fontSize: 12, padding: 15, paddingBottom: 2 }}>LOGS</Text>
+                <Text style={style.section_title}>LOGS</Text>
                 <Divider />
                 <ListItem
+                    containerStyle={{ backgroundColor: BACKGROUND_SECONDARY }}
                     onPress={() => LogFileViewerScreenPush(props.componentId)}
                     title={'Application logs'}
+                    titleStyle={{ color: COLOR_SECONDARY }}
                     bottomDivider
                     chevron
                 />

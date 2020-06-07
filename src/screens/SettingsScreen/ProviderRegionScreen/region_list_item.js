@@ -2,11 +2,12 @@ import React from 'react';
 import { Alert, StyleSheet } from 'react-native';
 import { ListItem } from 'react-native-elements';
 import { Navigation } from 'react-native-navigation';
-import { useStore } from '../../store/store';
-import withClient from '../../providers/with_client';
-import logger from '../../logger';
+import { useStore } from '../../../store/store';
+import withClient from '../../../providers/with_client';
+import logger from '../../../logger';
+import { BACKGROUND_SECONDARY, COLOR_SECONDARY } from '../../../theme';
 
-const RenderProviderRegion = ({ item, provider, client }) => {
+const RegionListItem = ({ item, provider, client }) => {
     const [, { setCurrentVPNServer, setVPNStatus, notify }] = useStore();
 
     const addServer = region => {
@@ -44,10 +45,12 @@ const RenderProviderRegion = ({ item, provider, client }) => {
     if (item.available) {
         return (
             <ListItem
+                containerStyle={{ backgroundColor: BACKGROUND_SECONDARY }}
                 onPress={() => confirmAddServer(item)}
                 title={item.name}
+                titleStyle={{ color: COLOR_SECONDARY }}
                 subtitle={item.slug}
-                subtitleStyle={{ opacity: 0.5 }}
+                subtitleStyle={{ opacity: 0.5, color: COLOR_SECONDARY }}
                 bottomDivider
                 chevron
             />
@@ -56,18 +59,19 @@ const RenderProviderRegion = ({ item, provider, client }) => {
 
     return (
         <ListItem
-            titleStyle={styles.disabled}
+            containerStyle={{ backgroundColor: BACKGROUND_SECONDARY }}
+            titleStyle={[styles.disabled, { color: COLOR_SECONDARY }]}
             title={item.name}
             subtitle={item.slug}
-            subtitleStyle={{ opacity: 0.5 }}
+            subtitleStyle={{ opacity: 0.5, color: COLOR_SECONDARY }}
             rightTitle={'unavailable'}
-            rightTitleStyle={{ opacity: 0.3 }}
+            rightTitleStyle={{ opacity: 0.3, color: COLOR_SECONDARY }}
             bottomDivider
         />
     );
 };
 
-export default withClient(RenderProviderRegion);
+export default withClient(RegionListItem);
 
 const styles = StyleSheet.create({
     disabled: {

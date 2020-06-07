@@ -1,5 +1,6 @@
 import React from 'react';
 import { Text, TouchableOpacity } from 'react-native';
+import { COLOR_SECONDARY } from '../../theme';
 
 export const SegmentButton = ({ label, labelStyle, onPress }) => (
     <TouchableOpacity
@@ -9,7 +10,7 @@ export const SegmentButton = ({ label, labelStyle, onPress }) => (
             padding: 10,
             alignItems: 'center',
         }}>
-        <Text style={labelStyle}>{label}</Text>
+        <Text style={[{ color: COLOR_SECONDARY }, labelStyle]}>{label}</Text>
     </TouchableOpacity>
 );
 

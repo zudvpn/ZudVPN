@@ -8,7 +8,7 @@ const CurrentServer = () => {
     const { SettingsScreenModel } = useScreen();
 
     if (current_vpn_server) {
-        const label = `${current_vpn_server.region.name} (${current_vpn_server.name})`;
+        const label = `Provider: ${current_vpn_server.provider.name}\nRegion: ${current_vpn_server.region.name}\nIP Address: ${current_vpn_server.ipv4_address}`;
         return <IconButton label={label} onPress={SettingsScreenModel} />;
     }
 

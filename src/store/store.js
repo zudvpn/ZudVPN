@@ -42,6 +42,9 @@ const actions = {
 
         dispatch(actions.persistState());
     },
+    resetNotification: () => ({ setState }) => {
+        setState({ notifications: [] });
+    },
     notify: (type, notification) => ({ setState, getState }) => {
         setState({ notifications: [{ type, notification }, ...getState().notifications] });
 

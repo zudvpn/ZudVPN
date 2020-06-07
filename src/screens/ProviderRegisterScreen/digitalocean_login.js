@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import DOCallbackHtml from '../../providers/DigitalOcean/do-api-callback.html.js';
 import StaticServer from '../../static_server';
 import SafariView from 'react-native-safari-view';
-import { Button, Divider, Input } from 'react-native-elements';
+import { Button, colors, Divider, Input } from 'react-native-elements';
 import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import useScreen from '../screen_hooks';
+import { BACKGROUND_PRIMARY, BACKGROUND_SECONDARY, COLOR_SECONDARY } from '../../theme';
 
 const DigitalOceanLogin = props => {
     const [token, setToken] = useState('');
@@ -35,7 +36,9 @@ const DigitalOceanLogin = props => {
         const html = DOCallbackHtml();
         const url = await StaticServer.serveHtml(html);
 
-        if (token.length === 0) return;
+        if (token.length === 0) {
+            return;
+        }
 
         SafariView.show({
             url: url + `#access_token=${token}`,
@@ -44,31 +47,38 @@ const DigitalOceanLogin = props => {
     };
 
     const toggleTokenInput = () => {
-        ProviderRegisterScreenPush({ ...props, tokenInput: true});
+        ProviderRegisterScreenPush({ ...props, tokenInput: true });
     };
 
     if (props.tokenInput) {
         return (
-            <ScrollView style={{ flex: 1 }}>
-                <Text style={{ marginTop: 15, fontSize: 18, alignSelf: 'center' }}>Connect a DigitalOcean Account</Text>
-                <Divider style={{ marginVertical: 15 }} />
-                <Text style={{ margin: 15 }}>
-                    Provide your personal DigitalOcean API access token to start deploying VPN servers.
+            <ScrollView style={{ flex: 1, backgroundColor: BACKGROUND_PRIMARY }}>
+                <Text style={{ color: COLOR_SECONDARY, marginVertical: 15, fontSize: 18, alignSelf: 'center' }}>
+                    Connect a DigitalOcean Account
                 </Text>
+                <Divider />
+                <View style={{ backgroundColor: BACKGROUND_SECONDARY }}>
+                    <Text style={{ color: COLOR_SECONDARY, margin: 15 }}>
+                        Provide your personal DigitalOcean API access token to start deploying VPN servers.
+                    </Text>
+                </View>
                 <Input
+                    containerStyle={{ backgroundColor: BACKGROUND_SECONDARY }}
                     leftIcon={{ type: 'material-community', name: 'account-key-outline' }}
                     label={'Personal Access Token'}
-                    placeholder={''}
+                    labelStyle={{ color: COLOR_SECONDARY }}
+                    placeholder={'Type or paste here'}
                     onChangeText={value => setToken(value)}
                 />
-                <View style={{ marginHorizontal: 15 }}>
+                <View style={{ margin: 15 }}>
                     <Button
-                        containerStyle={{ flex: 1 }}
+                        buttonStyle={{ backgroundColor: BACKGROUND_SECONDARY, borderColor: colors.divider }}
                         icon={{ type: 'font-awesome-5', name: 'digital-ocean' }}
                         type={'outline'}
                         raised={true}
                         onPress={() => signInByToken()}
                         title={'Sign in'}
+                        titleStyle={{ color: COLOR_SECONDARY }}
                     />
                 </View>
             </ScrollView>
@@ -76,42 +86,50 @@ const DigitalOceanLogin = props => {
     }
 
     return (
-        <ScrollView style={{ flex: 1 }}>
-            <Text style={{ marginTop: 15, fontSize: 18, alignSelf: 'center' }}>Connect a DigitalOcean Account</Text>
-            <Divider style={{ marginVertical: 15 }} />
-            <Text style={{ margin: 15 }}>
-                ZudVPN uses DigitalOcean API to create a VPN server. Choose a step to sign in to DigitalOcean and start
-                deploying your own VPN server.
+        <ScrollView style={{ flex: 1, backgroundColor: BACKGROUND_PRIMARY }}>
+            <Text style={{ color: COLOR_SECONDARY, marginVertical: 15, fontSize: 18, alignSelf: 'center' }}>
+                Connect a DigitalOcean Account
             </Text>
+            <Divider />
+            <View style={{ backgroundColor: BACKGROUND_SECONDARY }}>
+                <Text style={{ color: COLOR_SECONDARY, margin: 15 }}>
+                    ZudVPN uses DigitalOcean API to create a VPN server. Choose a step to sign in to DigitalOcean and
+                    start deploying your own VPN server.
+                </Text>
+            </View>
+            <Divider />
             <View style={{ margin: 15 }}>
                 <Button
+                    buttonStyle={{ backgroundColor: BACKGROUND_SECONDARY, borderColor: colors.divider }}
                     icon={{ type: 'font-awesome-5', name: 'digital-ocean' }}
                     type={'outline'}
                     raised={true}
                     title={'Sign in with DigitalOcean'}
+                    titleStyle={{ color: COLOR_SECONDARY }}
                     onPress={() => signIn()}
                 />
             </View>
-            <Divider style={{ marginVertical: 15 }} />
-            <View style={{ marginHorizontal: 15 }}>
-                <TouchableOpacity onPress={() => signUp()}>
-                    <Text>Don't have an account?</Text>
-                    <Text>
-                        <Text style={{ textDecorationLine: 'underline' }}>Tap here</Text> for a free $100 credit on
-                        DigitalOcean using our referral!
+            <Divider />
+            <View style={{ backgroundColor: BACKGROUND_SECONDARY }}>
+                <TouchableOpacity style={{ margin: 15 }} onPress={() => signUp()}>
+                    <Text style={{ color: COLOR_SECONDARY }}>Don't have an account?</Text>
+                    <Text style={{ color: COLOR_SECONDARY }}>
+                        <Text style={{ textDecorationLine: 'underline', color: COLOR_SECONDARY }}>Tap here</Text> for a
+                        free $100 credit on DigitalOcean using our referral!
                     </Text>
                 </TouchableOpacity>
             </View>
-            <Divider style={{ marginVertical: 15 }} />
-            <View style={{ marginHorizontal: 15 }}>
-                <TouchableOpacity onPress={() => toggleTokenInput()}>
-                    <Text>Do you have a personal access token?</Text>
-                    <Text>
-                        <Text style={{ textDecorationLine: 'underline' }}>Tap here</Text> to sign in using a token.
+            <Divider />
+            <View style={{ backgroundColor: BACKGROUND_SECONDARY }}>
+                <TouchableOpacity style={{ margin: 15 }} onPress={() => toggleTokenInput()}>
+                    <Text style={{ color: COLOR_SECONDARY }}>Do you have a personal access token?</Text>
+                    <Text style={{ color: COLOR_SECONDARY }}>
+                        <Text style={{ textDecorationLine: 'underline', color: COLOR_SECONDARY }}>Tap here</Text> to
+                        sign in using a token.
                     </Text>
                 </TouchableOpacity>
             </View>
-            <Divider style={{ marginTop: 15, marginBottom: 15 }} />
+            <Divider />
         </ScrollView>
     );
 };

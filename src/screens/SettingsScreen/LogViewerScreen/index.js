@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { Text, SafeAreaView, ScrollView, ActivityIndicator, Alert } from 'react-native';
+import { SafeAreaView, ScrollView, ActivityIndicator, Alert, TextInput } from 'react-native';
 import RNFS from 'react-native-fs';
-import { APPLICATION_LOG_FILENAME } from '../../logger';
+import { APPLICATION_LOG_FILENAME } from '../../../logger';
 import { Navigation } from 'react-native-navigation';
+import { BACKGROUND_PRIMARY, COLOR_SECONDARY } from '../../../theme';
 
 const LogFileViewerScreen = props => {
     const [logs, setLogs] = useState(null);
@@ -51,9 +52,11 @@ const LogFileViewerScreen = props => {
     }
 
     return (
-        <SafeAreaView style={{ flex: 1 }}>
+        <SafeAreaView style={{ flex: 1, backgroundColor: BACKGROUND_PRIMARY }}>
             <ScrollView style={{ flex: 1 }}>
-                <Text selectable={true}>{logs}</Text>
+                <TextInput editable={false} multiline={true} style={{ color: COLOR_SECONDARY }} selectable={true}>
+                    {logs}
+                </TextInput>
             </ScrollView>
         </SafeAreaView>
     );

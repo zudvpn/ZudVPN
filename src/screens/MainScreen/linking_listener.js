@@ -10,7 +10,7 @@ import withClient from '../../providers/with_client';
 import logger from '../../logger';
 
 const LinkingListener = props => {
-    const [, { addProviderToken, setVPNStatus, notify }] = useStore();
+    const [, { addProviderToken, setVPNStatus, notify, resetNotification }] = useStore();
 
     useEffect(() => {
         const networkStatusCallback = status => {
@@ -24,6 +24,8 @@ const LinkingListener = props => {
         };
 
         const handleCallback = async url => {
+            // Reset/remove previous notifications from main screen.
+            resetNotification();
             const provider_token = parse_linking_url_params(url);
 
             if (provider_token.hasOwnProperty('provider') && provider_token.hasOwnProperty('access_token')) {

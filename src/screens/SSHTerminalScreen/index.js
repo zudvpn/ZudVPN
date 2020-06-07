@@ -6,25 +6,9 @@ import Keychain from '../../keychain';
 import WebView from 'react-native-webview';
 import TerminalServer from './terminal_server';
 import logger from '../../logger';
+import { BACKGROUND_PRIMARY } from '../../theme';
 
 class SSHTerminalScreen extends Component {
-    static get options() {
-        return {
-            topBar: {
-                title: {
-                    text: 'Terminal',
-                },
-                leftButtons: [],
-                rightButtons: [
-                    {
-                        id: 'cancel',
-                        text: 'Cancel',
-                    },
-                ],
-            },
-        };
-    }
-
     constructor(props) {
         super(props);
         Navigation.events().bindComponent(this);
@@ -66,9 +50,9 @@ class SSHTerminalScreen extends Component {
                     } else {
                         this.setState({ sshClient });
 
-                        sshClient.startShell('xterm', error => {
-                            if (error) {
-                                this.sendMessage(error);
+                        sshClient.startShell('xterm', shell_error => {
+                            if (shell_error) {
+                                this.sendMessage(shell_error);
                             }
                         });
 
@@ -126,7 +110,7 @@ class SSHTerminalScreen extends Component {
             this.startTerminalServer();
 
             return (
-                <SafeAreaView style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                <SafeAreaView style={{ backgroundColor: BACKGROUND_PRIMARY, flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                     <ActivityIndicator size={'large'} />
                 </SafeAreaView>
             );
