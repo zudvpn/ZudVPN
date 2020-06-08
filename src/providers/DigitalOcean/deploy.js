@@ -14,7 +14,7 @@ const DROPLET_SIZE = 's-1vcpu-1gb';
 
 const Deploy = ({ client, notify }) => {
     const generateName = region => {
-        return `${DROPLET_BASE_NAME}-${region}-${uuidv4().slice(-12)}`;
+        return `${DROPLET_BASE_NAME}-${region}-${uuidv4().slice(-4)}`;
     };
 
     const run = async region => {
@@ -39,19 +39,24 @@ const Deploy = ({ client, notify }) => {
         let ipAddress = await getIpAddress(droplet);
 
         const server = {
+            provider: {
+                id: 'digitalocean',
+                name: 'DigitalOcean',
+            },
             uid: droplet.id,
             name: droplet.name,
             region: {
                 name: droplet.region.name,
                 slug: droplet.region.slug,
             },
+            ipv4_address: ipAddress,
         };
 
-        return await read(server, sshKeyPair, ipAddress);
+        return await read(server, sshKeyPair);
     };
 
-    const read = async (server, sshKeyPair, ipAddress) => {
-        let sshClient = new SSHClient(sshKeyPair, 'core', ipAddress, 2222);
+    const read = async (server, sshKeyPair) => {
+        let sshClient = new SSHClient(sshKeyPair, 'core', server.ipv4_address, 2222);
         await waitForSSHConnection(sshClient);
 
         await waitForVPNService(sshClient);
@@ -69,17 +74,8 @@ const Deploy = ({ client, notify }) => {
         sshClient = null;
 
         return {
-            server: {
-                provider: 'digitalocean',
-                uid: server.uid,
-                name: server.name,
-                region: {
-                    name: server.region.name,
-                    slug: server.region.slug,
-                },
-                ipv4_address: ipAddress,
-            },
-            ipAddress,
+            server,
+            ipAddress: server.ipv4_address,
             domain,
             username: 'vpn',
             password,
@@ -126,7 +122,7 @@ const Deploy = ({ client, notify }) => {
                 await sshClient.run('docker logs strongswan --until=5s &>/dev/null');
                 countWaitingForVPN = 0;
             } catch (e) {
-                logger.debug(`Attempt ${10 - countWaitingForVPN}/10 failed, reason: ${e.message || e}`);
+                logger.debug(`Attempt ${10 - countWaitingForVPN}/10 failed, reason: ${JSON.stringify(e)}`);
 
                 if (countWaitingForVPN === 0) {
                     throw e;
@@ -147,7 +143,7 @@ const Deploy = ({ client, notify }) => {
                 trialLeft = 0;
             } catch (e) {
                 logger.debug(
-                    `[DigitalOcean] SSH connection not ready: ${e.message || e}, retrying ${10 - trialLeft}/10`,
+                    `[DigitalOcean] SSH connection not ready: ${JSON.stringify(e)}, retrying ${10 - trialLeft}/10`,
                 );
 
                 await sleep(trialLeft * 1000);

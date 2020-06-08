@@ -33,7 +33,7 @@ const actions = {
             try {
                 await RNNetworkExtension.connect();
             } catch (e) {
-                dispatch(actions.notify('error', `Failed to start VPN connection: ${e.message}`));
+                dispatch(actions.notify('error', `Failed to start VPN connection: ${e.message || JSON.stringify(e)}`));
             }
         }
     },

@@ -24,6 +24,8 @@
   [AppCenterReactNativeAnalytics registerWithInitiallyEnabled:true];
   [AppCenterReactNativeCrashes registerWithAutomaticProcessing];
   
+  self.window.backgroundColor = [UIColor blackColor];
+  
   return YES;
 }
 

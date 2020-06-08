@@ -45,9 +45,15 @@ const LogFileViewerScreen = props => {
 
     if (logs === null) {
         return (
-            <ScrollView style={{ flex: 1 }}>
+            <SafeAreaView
+                style={{
+                    backgroundColor: BACKGROUND_PRIMARY,
+                    flex: 1,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                }}>
                 <ActivityIndicator size={'large'} />
-            </ScrollView>
+            </SafeAreaView>
         );
     }
 

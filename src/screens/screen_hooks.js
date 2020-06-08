@@ -6,7 +6,6 @@ import {
     SETTINGS_SCREEN,
     SSH_TERMINAL_SCREEN,
 } from './screen_constants';
-import { BACKGROUND_PRIMARY, COLOR_SECONDARY } from '../theme';
 
 const useScreen = () => {
     return {
@@ -15,13 +14,9 @@ const useScreen = () => {
                 component: {
                     name: PROVIDER_REGISTER_SCREEN,
                     options: {
-                        statusBar: {
-                            backgroundColor: BACKGROUND_PRIMARY,
-                        },
                         topBar: {
                             title: {
                                 text: props.provider.name,
-                                color: COLOR_SECONDARY,
                             },
                         },
                     },
@@ -36,9 +31,7 @@ const useScreen = () => {
                         topBar: {
                             title: {
                                 text: 'Regions',
-                                color: COLOR_SECONDARY,
                             },
-                            leftButtons: [],
                             rightButtons: [
                                 {
                                     id: 'sign_out',
@@ -61,9 +54,7 @@ const useScreen = () => {
                         topBar: {
                             title: {
                                 text: 'Log Viewer',
-                                color: COLOR_SECONDARY,
                             },
-                            leftButtons: [],
                             rightButtons: [
                                 {
                                     id: 'clear_log',
@@ -85,15 +76,13 @@ const useScreen = () => {
                                 options: {
                                     modalPresentationStyle: 'pageSheet',
                                     statusBar: {
-                                        backgroundColor: BACKGROUND_PRIMARY,
                                         style: 'dark',
+                                        backgroundColor: 'red',
                                     },
                                     topBar: {
                                         title: {
                                             text: 'Settings',
-                                            color: COLOR_SECONDARY,
                                         },
-                                        leftButtons: [],
                                         rightButtons: [
                                             {
                                                 id: 'done_button',
@@ -118,9 +107,7 @@ const useScreen = () => {
                                     topBar: {
                                         title: {
                                             text: 'Terminal',
-                                            color: COLOR_SECONDARY,
                                         },
-                                        leftButtons: [],
                                         rightButtons: [
                                             {
                                                 id: 'cancel',

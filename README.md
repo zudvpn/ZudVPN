@@ -54,6 +54,24 @@ FAQ
 11. How do I uninstall VPN profiles?
     - You can destroy VPN server from within the application. This will automatically delete the VPN profile from your phone as well. However, if you delete the profile manually from iOS VPN settings, the server would still be active. You must destroy the server in order to not get charged by the provider.
 
+Troubleshoot
+--
+- VPN service failures
+    - Occasionally obtaining SSL certificate from Let's Encrypt may fail. The easiest way to resolve the issue is to destroy and re-create the server.
+
+Todo
+--
+- Finish work on Android version
+- Work on tvOS version
+- Add AWS, GCP and other cloud providers
+- Keychain/Keystore shared VPN
+- Add WireGuard as a VPN solution
+
+Donate
+--
+All donations support continued development of ZudVPN.
+- We accept donations via [Patreon](https://www.patreon.com/miniyarov).
+
 Powered by
 --
 - [strongSwan](https://strongswan.org/) - IPSec-based VPN software.

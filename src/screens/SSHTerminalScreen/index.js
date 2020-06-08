@@ -110,7 +110,13 @@ class SSHTerminalScreen extends Component {
             this.startTerminalServer();
 
             return (
-                <SafeAreaView style={{ backgroundColor: BACKGROUND_PRIMARY, flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                <SafeAreaView
+                    style={{
+                        backgroundColor: BACKGROUND_PRIMARY,
+                        flex: 1,
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                    }}>
                     <ActivityIndicator size={'large'} />
                 </SafeAreaView>
             );
@@ -118,6 +124,7 @@ class SSHTerminalScreen extends Component {
 
         return (
             <WebView
+                style={{ backgroundColor: BACKGROUND_PRIMARY }}
                 ref={ref => (this.webref = ref)}
                 originWhitelist={['*']}
                 source={{ uri: terminalUrl }}

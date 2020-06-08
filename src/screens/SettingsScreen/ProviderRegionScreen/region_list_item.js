@@ -24,7 +24,7 @@ const RegionListItem = ({ item, provider, client }) => {
                 notify('success', 'Voila! VPN server is ready for connection.');
             } catch (e) {
                 setVPNStatus('Connect');
-                notify('error', `Failed to create VPN Server: ${e.message || e}`);
+                notify('error', `Failed to create VPN Server: ${e.message || JSON.stringify(e)}`);
             }
         }, 500);
     };

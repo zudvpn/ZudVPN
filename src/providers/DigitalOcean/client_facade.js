@@ -33,7 +33,7 @@ class ClientFacade {
 
         const sshKeyPair = await Keychain.getSSHKeyPair(server.name);
 
-        return await deploy.read(server, sshKeyPair, server.ipv4_address);
+        return await deploy.read(server, sshKeyPair);
     }
 
     async getServers() {

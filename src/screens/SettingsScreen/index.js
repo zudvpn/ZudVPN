@@ -11,11 +11,12 @@ import { AVAILABLE_PROVIDERS } from '../../providers';
 import { Divider, ListItem } from 'react-native-elements';
 import { BACKGROUND_PRIMARY, BACKGROUND_SECONDARY, COLOR_SECONDARY } from '../../theme';
 import style from './styles';
+import SafariView from 'react-native-safari-view';
 
 const SettingsScreen = props => {
     const [servers, setServers] = useState(null);
     const [refreshing, setRefreshing] = useState(false);
-    const [{ current_vpn_server }, { setCurrentVPNServer, setVPNStatus, notify }] = useStore();
+    const [{ current_vpn_server, vpn_status }, { setCurrentVPNServer, setVPNStatus, notify }] = useStore();
     const { LogFileViewerScreenPush } = useScreen();
 
     Navigation.events().registerNavigationButtonPressedListener(({ buttonId, componentId }) => {
@@ -35,7 +36,7 @@ const SettingsScreen = props => {
             })
             .catch(e => {
                 setVPNStatus('Connect');
-                notify('error', `Failed to connect to VPN server: ${e.message || e}`);
+                notify('error', `Failed to connect to VPN server: ${e.message || JSON.stringify(e)}`);
             });
 
         Navigation.dismissModal(props.componentId);
@@ -87,6 +88,13 @@ const SettingsScreen = props => {
         }, 0);
     }
 
+    const togglePiHoleWebPage = () => {
+        SafariView.show({
+            url: 'http://pi.hole:81/',
+            fromBottom: true,
+        });
+    };
+
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: BACKGROUND_PRIMARY }}>
             <ScrollView
@@ -106,7 +114,7 @@ const SettingsScreen = props => {
                     keyExtractor={(item, index) => index.toString()}
                 />
                 <Divider />
-                <Text style={style.section_title}>LOGS</Text>
+                <Text style={style.section_title}>ADVANCED</Text>
                 <Divider />
                 <ListItem
                     containerStyle={{ backgroundColor: BACKGROUND_SECONDARY }}
@@ -116,6 +124,16 @@ const SettingsScreen = props => {
                     bottomDivider
                     chevron
                 />
+                {vpn_status === 'Connected' && (
+                    <ListItem
+                        containerStyle={{ backgroundColor: BACKGROUND_SECONDARY }}
+                        onPress={() => togglePiHoleWebPage()}
+                        title={'PiHole Ad-blocker'}
+                        titleStyle={{ color: COLOR_SECONDARY }}
+                        bottomDivider
+                        chevron
+                    />
+                )}
             </ScrollView>
         </SafeAreaView>
     );
