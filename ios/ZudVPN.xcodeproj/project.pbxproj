@@ -789,7 +789,7 @@
 				CODE_SIGN_ENTITLEMENTS = ZudVPN/ZudVPN.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = G7AQRR3KRQ;
 				INFOPLIST_FILE = ZudVPN/Info.plist;
@@ -836,7 +836,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.zudvpn.zudvpn;
+				PRODUCT_BUNDLE_IDENTIFIER = com.zudvpn.app;
 				PRODUCT_NAME = ZudVPN;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "ZudVPN-Bridging-Header.h";
@@ -855,7 +855,7 @@
 				CODE_SIGN_ENTITLEMENTS = ZudVPN/ZudVPN.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = G7AQRR3KRQ;
 				INFOPLIST_FILE = ZudVPN/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -901,7 +901,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.zudvpn.zudvpn;
+				PRODUCT_BUNDLE_IDENTIFIER = com.zudvpn.app;
 				PRODUCT_NAME = ZudVPN;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "ZudVPN-Bridging-Header.h";
