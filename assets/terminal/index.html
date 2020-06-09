@@ -4,7 +4,6 @@
     <link rel="stylesheet" href="xterm.css" />
     <script src="xterm.js"></script>
     <script type="module" src="xterm-addon-fit.js"></script>
-    <script src="local-echo.js"></script>
     <title>Terminal</title>
     <meta http-equiv="cache-control" content="max-age=0" />
     <meta http-equiv="cache-control" content="no-cache" />
@@ -24,10 +23,10 @@
         terminal.open(document.getElementById('terminal'));
         fitAddon.fit();
         terminal.focus();
-        let localEcho = window.localEcho = new LocalEchoController();
-        terminal.loadAddon(localEcho);
 
         window.addEventListener('resize', resizeScreen, false);
+
+        terminal.onData(data => window.ReactNativeWebView.postMessage(JSON.stringify(data)));
 
         function resizeScreen () {
             fitAddon.fit();

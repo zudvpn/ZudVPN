@@ -85,7 +85,7 @@ class SSHTerminalScreen extends Component {
 
         this.command = JSON.parse(event.nativeEvent.data);
         if (sshClient) {
-            sshClient.writeToShell(this.command + '\n', error => {
+            sshClient.writeToShell(this.command, error => {
                 if (error) {
                     this.sendMessage(error);
                 }
@@ -95,11 +95,8 @@ class SSHTerminalScreen extends Component {
 
     sendMessage = message => {
         if (this.webref) {
-            this.webref.injectJavaScript(`
-            window.localEcho.print(\`${message}\`)
-            window.localEcho.read("")
-                .then(input => window.ReactNativeWebView.postMessage(JSON.stringify(input)));
-            true;`);
+            message = message.replace(/\n/gi, '\\r');
+            this.webref.injectJavaScript(`window.terminal.write(\`${message}\`);true;`);
         }
     };
 
