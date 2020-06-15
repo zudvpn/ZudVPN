@@ -16,7 +16,8 @@ Features
 How to install?
 --
 - The easiest way is to install ZudVPN from App Store or Google Play (soon).
-- It is also possible to [build from the source](#Building from source).
+    - Join our Beta Test Program: https://testflight.apple.com/join/o2U4Ljbh
+- It is also possible to [build from the source](INSTALL.md).
 
 
 How to use?
