@@ -2,6 +2,8 @@ ZudVPN
 ==
 A mobile application to deploy a personal VPN server in the cloud (DigitalOcean, AWS, GCP, Azure and others) with DNS ad-blocking and other features
 
+![Create your own private VPN using ZudVPN](./screenshots/app.jpeg?raw=true "Create your own private VPN using ZudVPN")
+
 Features
 --
 - Deploys a VPN server to major Cloud Providers (DigitalOcean only, others coming soon).
