@@ -15,7 +15,7 @@
     "appcenter": "2.3.0",
     "appcenter-analytics": "2.3.0",
     "appcenter-crashes": "2.3.0",
-    "node-forge": "^0.8.5",
+    "node-forge": "^0.10.0",
     "react": "16.9.0",
     "react-native": "0.61.5",
     "react-native-elements": "^2.0.0",
