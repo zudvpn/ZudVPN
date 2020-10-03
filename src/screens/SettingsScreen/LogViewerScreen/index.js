@@ -5,7 +5,7 @@ import { APPLICATION_LOG_FILENAME } from '../../../logger';
 import { Navigation } from 'react-native-navigation';
 import { BACKGROUND_PRIMARY, COLOR_SECONDARY } from '../../../theme';
 
-const LogFileViewerScreen = props => {
+const LogFileViewerScreen = (props) => {
     const [logs, setLogs] = useState(null);
     const logFile = RNFS.DocumentDirectoryPath + '/' + APPLICATION_LOG_FILENAME + '.txt';
 
@@ -41,6 +41,7 @@ const LogFileViewerScreen = props => {
         };
 
         read_log_file();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     if (logs === null) {

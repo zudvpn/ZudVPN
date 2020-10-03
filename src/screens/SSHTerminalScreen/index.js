@@ -44,19 +44,19 @@ class SSHTerminalScreen extends Component {
                     privateKey: sshKeyPair.privateKey,
                     publicKey: sshKeyPair.authorizedKey,
                 },
-                error => {
+                (error) => {
                     if (error) {
                         this.sendMessage(error);
                     } else {
                         this.setState({ sshClient });
 
-                        sshClient.startShell('xterm', shell_error => {
+                        sshClient.startShell('xterm', (shell_error) => {
                             if (shell_error) {
                                 this.sendMessage(shell_error);
                             }
                         });
 
-                        sshClient.on('Shell', event => {
+                        sshClient.on('Shell', (event) => {
                             this.sendMessage(event);
                         });
                     }
@@ -80,12 +80,12 @@ class SSHTerminalScreen extends Component {
         this.setState({ terminalUrl: url });
     };
 
-    onMessage = event => {
+    onMessage = (event) => {
         let { sshClient } = this.state;
 
         this.command = JSON.parse(event.nativeEvent.data);
         if (sshClient) {
-            sshClient.writeToShell(this.command, error => {
+            sshClient.writeToShell(this.command, (error) => {
                 if (error) {
                     this.sendMessage(error);
                 }
@@ -93,7 +93,7 @@ class SSHTerminalScreen extends Component {
         }
     };
 
-    sendMessage = message => {
+    sendMessage = (message) => {
         if (this.webref) {
             message = message.replace(/\n/gi, '\\r');
             this.webref.injectJavaScript(`window.terminal.write(\`${message}\`);true;`);
@@ -122,11 +122,11 @@ class SSHTerminalScreen extends Component {
         return (
             <WebView
                 style={{ backgroundColor: BACKGROUND_PRIMARY }}
-                ref={ref => (this.webref = ref)}
+                ref={(ref) => (this.webref = ref)}
                 originWhitelist={['*']}
                 source={{ uri: terminalUrl }}
                 onMessage={this.onMessage}
-                onError={syntheticEvent => {
+                onError={(syntheticEvent) => {
                     const { nativeEvent } = syntheticEvent;
                     logger.warn('Terminal WebView error:', nativeEvent);
                 }}

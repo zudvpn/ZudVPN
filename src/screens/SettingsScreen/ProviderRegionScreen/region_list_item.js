@@ -10,7 +10,7 @@ import { BACKGROUND_SECONDARY, COLOR_SECONDARY } from '../../../theme';
 const RegionListItem = ({ item, provider, client }) => {
     const [, { setCurrentVPNServer, setVPNStatus, notify }] = useStore();
 
-    const addServer = region => {
+    const addServer = (region) => {
         Navigation.dismissAllModals();
 
         setTimeout(async () => {
@@ -29,7 +29,7 @@ const RegionListItem = ({ item, provider, client }) => {
         }, 500);
     };
 
-    const confirmAddServer = region => {
+    const confirmAddServer = (region) => {
         Alert.alert('Confirm', `This will create a VPN server on "${region.name}" region on ${provider.name}`, [
             {
                 text: 'Proceed',

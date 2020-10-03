@@ -13,11 +13,11 @@ const DROPLET_IMAGE = 'coreos-stable';
 const DROPLET_SIZE = 's-1vcpu-1gb';
 
 const Deploy = ({ client, notify }) => {
-    const generateName = region => {
+    const generateName = (region) => {
         return `${DROPLET_BASE_NAME}-${region}-${uuidv4().slice(-4)}`;
     };
 
-    const run = async region => {
+    const run = async (region) => {
         notify('progress', 'Creating a server');
         const name = generateName(region);
         const sshKeyPair = await getSSHKeyPair(name);
@@ -82,7 +82,7 @@ const Deploy = ({ client, notify }) => {
         };
     };
 
-    const getSSHKeyPair = async name => {
+    const getSSHKeyPair = async (name) => {
         const sshKeyPair = await Keygen.generateKeyPair();
         logger.debug('[DigitalOcean] SSH Keypair:', sshKeyPair);
 
@@ -102,7 +102,7 @@ const Deploy = ({ client, notify }) => {
         const firewalls = await client.getAllFirewalls();
 
         if (firewalls && firewalls.length > 0) {
-            const firewall = firewalls.find(f => f.name === firewallName);
+            const firewall = firewalls.find((f) => f.name === firewallName);
 
             if (firewall) {
                 await client.addDropletToFirewall(firewall.id, dropletId);
@@ -112,7 +112,7 @@ const Deploy = ({ client, notify }) => {
         }
     };
 
-    const waitForVPNService = async sshClient => {
+    const waitForVPNService = async (sshClient) => {
         notify('progress', 'Waiting for VPN service');
 
         let countWaitingForVPN = 10;
@@ -132,7 +132,7 @@ const Deploy = ({ client, notify }) => {
         } while (countWaitingForVPN > 0);
     };
 
-    const waitForSSHConnection = async sshClient => {
+    const waitForSSHConnection = async (sshClient) => {
         notify('progress', 'Connecting to server');
 
         let trialLeft = 10;
@@ -151,7 +151,7 @@ const Deploy = ({ client, notify }) => {
         } while (trialLeft > 0);
     };
 
-    const getIpAddress = async droplet => {
+    const getIpAddress = async (droplet) => {
         notify('progress', 'Waiting for server IP address');
 
         for (let i = 1; i < 10; i++) {

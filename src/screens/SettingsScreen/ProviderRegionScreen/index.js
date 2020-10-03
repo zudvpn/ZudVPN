@@ -6,7 +6,7 @@ import { Navigation } from 'react-native-navigation';
 import { useStore } from '../../../store/store';
 import { BACKGROUND_PRIMARY, COLOR_SECONDARY } from '../../../theme';
 
-const ProviderRegionScreen = props => {
+const ProviderRegionScreen = (props) => {
     const [regions, setRegions] = useState(null);
     const [, { triggerSignOut }] = useStore();
 

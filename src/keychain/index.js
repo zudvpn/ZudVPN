@@ -3,7 +3,7 @@ import * as RNKeychain from 'react-native-keychain';
 export const INITIAL_STATE_KEY = 'INITIAL_STATE_KEY';
 
 const Keychain = {
-    setInitialState: state => {
+    setInitialState: (state) => {
         Keychain.set(INITIAL_STATE_KEY, state);
     },
 
@@ -15,7 +15,7 @@ const Keychain = {
         Keychain.set(name, keypair);
     },
 
-    getSSHKeyPair: async name => {
+    getSSHKeyPair: async (name) => {
         return await Keychain.get(name);
     },
 
@@ -23,7 +23,7 @@ const Keychain = {
         RNKeychain.setInternetCredentials(key, '', JSON.stringify(value));
     },
 
-    get: async key => {
+    get: async (key) => {
         const available = await RNKeychain.hasInternetCredentials(key);
 
         if (available) {

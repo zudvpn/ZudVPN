@@ -11,17 +11,17 @@ const initialState = {
 };
 
 const actions = {
-    addProviderToken: token => ({ setState, getState, dispatch }) => {
+    addProviderToken: (token) => ({ setState, getState, dispatch }) => {
         setState({ provider_tokens: [...getState().provider_tokens, token] });
 
         dispatch(actions.persistState());
     },
-    setCurrentVPNServer: server => ({ setState, dispatch }) => {
+    setCurrentVPNServer: (server) => ({ setState, dispatch }) => {
         setState({ current_vpn_server: server });
 
         dispatch(actions.persistState());
     },
-    setVPNStatus: status => ({ setState }) => {
+    setVPNStatus: (status) => ({ setState }) => {
         setState({ vpn_status: status });
     },
     toggleVPN: () => async ({ setState, getState, dispatch }) => {
@@ -37,8 +37,8 @@ const actions = {
             }
         }
     },
-    triggerSignOut: provider => ({ setState, getState, dispatch }) => {
-        setState({ provider_tokens: getState().provider_tokens.filter(token => token.provider !== provider.id) });
+    triggerSignOut: (provider) => ({ setState, getState, dispatch }) => {
+        setState({ provider_tokens: getState().provider_tokens.filter((token) => token.provider !== provider.id) });
 
         dispatch(actions.persistState());
     },
@@ -50,7 +50,7 @@ const actions = {
 
         logger.log(type, notification);
     },
-    initState: state => ({ setState }) => setState(state),
+    initState: (state) => ({ setState }) => setState(state),
     persistState: () => ({ setState, getState }) => {
         const state = {
             provider_tokens: getState().provider_tokens,

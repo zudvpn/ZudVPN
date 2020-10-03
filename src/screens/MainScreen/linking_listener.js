@@ -9,21 +9,21 @@ import SafariView from 'react-native-safari-view';
 import withClient from '../../providers/with_client';
 import logger from '../../logger';
 
-const LinkingListener = props => {
+const LinkingListener = (props) => {
     const [, { addProviderToken, setVPNStatus, notify, resetNotification }] = useStore();
 
     useEffect(() => {
-        const networkStatusCallback = status => {
+        const networkStatusCallback = (status) => {
             logger.debug('Network status: ' + status);
             setVPNStatus(status);
         };
 
-        const networkFailCallback = reason => {
+        const networkFailCallback = (reason) => {
             logger.debug('Network failed, reason: ' + reason);
             setVPNStatus('Connect');
         };
 
-        const handleCallback = async url => {
+        const handleCallback = async (url) => {
             // Reset/remove previous notifications from main screen.
             resetNotification();
             const provider_token = parse_linking_url_params(url);
@@ -49,12 +49,12 @@ const LinkingListener = props => {
             SafariView.dismiss();
         };
 
-        const handleCallbackEvent = event => {
+        const handleCallbackEvent = (event) => {
             handleCallback(event.url);
         };
 
         if (Platform.OS === 'android') {
-            Linking.getInitialURL().then(url => {
+            Linking.getInitialURL().then((url) => {
                 handleCallback(url);
             });
         } else {
@@ -75,6 +75,7 @@ const LinkingListener = props => {
             vpnFailListener.remove();
             RNNetworkExtension.removeEventListener('fail', networkFailCallback);
         };
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return props.children;

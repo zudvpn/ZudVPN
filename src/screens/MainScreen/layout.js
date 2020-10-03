@@ -3,7 +3,7 @@ import styles from './style';
 import LinkingListener from './linking_listener';
 import { Text, View } from 'react-native';
 
-const Layout = props => {
+const Layout = (props) => {
     return (
         <LinkingListener>
             <View style={styles.container}>

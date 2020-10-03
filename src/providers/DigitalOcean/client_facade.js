@@ -39,7 +39,7 @@ class ClientFacade {
     async getServers() {
         let droplets = await this.api_client.getDropletsByTag(SERVER_TAG);
 
-        return droplets.map(droplet => {
+        return droplets.map((droplet) => {
             return {
                 provider: {
                     id: 'digitalocean',

@@ -21,7 +21,7 @@ class Client {
                         privateKey: this.keypair.privateKey,
                         publicKey: this.keypair.authorizedKey,
                     },
-                    error => {
+                    (error) => {
                         if (error) {
                             console.log('An error occurred while establishing SSH connection:', error);
                             this.nativeSshClient = null;

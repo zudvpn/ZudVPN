@@ -5,7 +5,7 @@ import logger from '../logger';
 import Keychain from '../keychain';
 import { BACKGROUND_PRIMARY } from '../theme';
 
-const withInitState = Component => props => {
+const withInitState = (Component) => (props) => {
     const [loading, setLoading] = useState(true);
     const [, { initState }] = useStore();
 
@@ -26,6 +26,7 @@ const withInitState = Component => props => {
         };
 
         init();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return (

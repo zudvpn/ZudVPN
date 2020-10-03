@@ -9,8 +9,8 @@ export const ProviderListItem = ({ item, componentId }) => {
     const [{ provider_tokens }] = useStore();
     const { ProviderRegisterScreenPush, ProviderRegionScreenPush } = useScreen();
 
-    const getAccount = provider => {
-        const token = provider_tokens.filter(t => t.provider === provider.id);
+    const getAccount = (provider) => {
+        const token = provider_tokens.filter((t) => t.provider === provider.id);
 
         if (token.length > 0) {
             return `connected as ${token[0].account}`;
@@ -19,8 +19,8 @@ export const ProviderListItem = ({ item, componentId }) => {
         return false;
     };
 
-    const onPress = provider => {
-        const token = provider_tokens.filter(t => t.provider === provider.id);
+    const onPress = (provider) => {
+        const token = provider_tokens.filter((t) => t.provider === provider.id);
 
         if (token.length > 0) {
             ProviderRegionScreenPush(componentId, provider);

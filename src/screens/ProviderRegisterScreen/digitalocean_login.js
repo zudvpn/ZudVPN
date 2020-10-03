@@ -7,7 +7,7 @@ import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import useScreen from '../screen_hooks';
 import { BACKGROUND_PRIMARY, BACKGROUND_SECONDARY, COLOR_SECONDARY } from '../../theme';
 
-const DigitalOceanLogin = props => {
+const DigitalOceanLogin = (props) => {
     const [token, setToken] = useState('');
     const { ProviderRegisterScreenPush } = useScreen();
 
@@ -68,7 +68,7 @@ const DigitalOceanLogin = props => {
                     label={'Personal Access Token'}
                     labelStyle={{ color: COLOR_SECONDARY }}
                     placeholder={'Type or paste here'}
-                    onChangeText={value => setToken(value)}
+                    onChangeText={(value) => setToken(value)}
                 />
                 <View style={{ margin: 15 }}>
                     <Button

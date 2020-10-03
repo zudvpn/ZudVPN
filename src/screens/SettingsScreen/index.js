@@ -13,7 +13,7 @@ import { BACKGROUND_PRIMARY, BACKGROUND_SECONDARY, COLOR_SECONDARY } from '../..
 import style from './styles';
 import SafariView from 'react-native-safari-view';
 
-const SettingsScreen = props => {
+const SettingsScreen = (props) => {
     const [servers, setServers] = useState(null);
     const [refreshing, setRefreshing] = useState(false);
     const [{ current_vpn_server, vpn_status }, { setCurrentVPNServer, setVPNStatus, notify }] = useStore();
@@ -25,7 +25,7 @@ const SettingsScreen = props => {
         }
     });
 
-    const select = server => () => {
+    const select = (server) => () => {
         setVPNStatus('Connecting');
 
         props.client
@@ -34,7 +34,7 @@ const SettingsScreen = props => {
                 setCurrentVPNServer(server);
                 notify('success', 'VPN server is ready for connection');
             })
-            .catch(e => {
+            .catch((e) => {
                 setVPNStatus('Connect');
                 notify('error', `Failed to connect to VPN server: ${e.message || JSON.stringify(e)}`);
             });
@@ -42,10 +42,13 @@ const SettingsScreen = props => {
         Navigation.dismissModal(props.componentId);
     };
 
-    const destroyConfirmed = uid => {
-        const server = servers.filter(_server => _server.uid === uid);
+    const destroyConfirmed = (uid) => {
+        const server = servers.filter((_server) => _server.uid === uid);
 
-        Promise.all([props.client.deleteServer(server[0]).catch(e => e), RNNetworkExtension.remove().catch(e => e)]);
+        Promise.all([
+            props.client.deleteServer(server[0]).catch((e) => e),
+            RNNetworkExtension.remove().catch((e) => e),
+        ]);
 
         if (current_vpn_server !== null && current_vpn_server.uid === uid) {
             setCurrentVPNServer(null);
@@ -53,10 +56,10 @@ const SettingsScreen = props => {
         }
 
         // remove deleted server from servers list
-        setServers(servers.filter(_server => _server.uid !== uid));
+        setServers(servers.filter((_server) => _server.uid !== uid));
     };
 
-    const destroy = uid => () => {
+    const destroy = (uid) => () => {
         Alert.alert('Warning!', 'Are you sure you want to destroy this server? This action cannot be undone.', [
             {
                 text: 'Destroy',
@@ -80,6 +83,7 @@ const SettingsScreen = props => {
         setRefreshing(true);
 
         retrieveServers().then(() => setRefreshing(false));
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [refreshing]);
 
     if (servers === null) {
@@ -103,7 +107,7 @@ const SettingsScreen = props => {
                 {servers === null && <ActivityIndicator style={{ padding: 10 }} />}
                 {servers !== null &&
                     servers.length > 0 &&
-                    servers.map(server => (
+                    servers.map((server) => (
                         <ServerItem key={server.uid} server={server} select={select} destroy={destroy} />
                     ))}
                 <Text style={style.section_title}>CLOUD PROVIDERS</Text>

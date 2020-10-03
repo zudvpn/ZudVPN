@@ -9,7 +9,7 @@ import {
 
 const useScreen = () => {
     return {
-        ProviderRegisterScreenPush: props =>
+        ProviderRegisterScreenPush: (props) =>
             Navigation.push(props.componentId, {
                 component: {
                     name: PROVIDER_REGISTER_SCREEN,
@@ -46,7 +46,7 @@ const useScreen = () => {
                     },
                 },
             }),
-        LogFileViewerScreenPush: componentId =>
+        LogFileViewerScreenPush: (componentId) =>
             Navigation.push(componentId, {
                 component: {
                     name: LOG_FILE_VIEWER_SCREEN,

@@ -58,12 +58,12 @@ class Client {
     }
 
     async getServers() {
-        const requests = Array.from(this.clients, ([, client]) => client.getServers().catch(e => e));
+        const requests = Array.from(this.clients, ([, client]) => client.getServers().catch((e) => e));
 
         const responses = await Promise.all(requests);
 
         return responses
-            .filter(response => {
+            .filter((response) => {
                 if (response instanceof Error) {
                     logger.warn('Retrieving servers failed, reason: ' + response.message);
 
