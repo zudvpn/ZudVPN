@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* ZudVPNTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* ZudVPNTests.m */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
-		13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB11A68108700A75B9A /* LaunchScreen.xib */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		2D02E4BC1E0B4A80006451C7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
@@ -18,13 +17,12 @@
 		2DCD954D1E0B4F2C00145EB5 /* ZudVPNTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* ZudVPNTests.m */; };
 		6959BD2577273B59D00F3BCF /* libPods-ZudVPN-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 515AC21F64FEEB8E9FCB7747 /* libPods-ZudVPN-tvOSTests.a */; };
 		7617F431984284DA136DA073 /* libPods-ZudVPN-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D22DC7CE54687847EB481833 /* libPods-ZudVPN-tvOS.a */; };
+		7DA1A284E9AB7640FF312039 /* libPods-ZudVPN-ZudVPNTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C609E633E65D888980D353E /* libPods-ZudVPN-ZudVPNTests.a */; };
 		BC056CBE2482D894000E9900 /* assets in Resources */ = {isa = PBXBuildFile; fileRef = BC056CBC2482D894000E9900 /* assets */; };
 		BC9415F6231C9151002908C9 /* libRNSSHClient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BC9415F5231C913B002908C9 /* libRNSSHClient.a */; };
-		BC9415FB231C9437002908C9 /* AppCenter-Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = BC9415F9231C9437002908C9 /* AppCenter-Config.plist */; };
 		BCAE9BC02330321800CB50AD /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCAE9BBF2330321800CB50AD /* NetworkExtension.framework */; };
-		BCBCBF392336C08A003F3D27 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCBCBF382336C08A003F3D27 /* File.swift */; };
+		BCFF0CAE2528D4B200292DCC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BCFF0CAC2528D4B200292DCC /* LaunchScreen.storyboard */; };
 		CDA6967C30453181A7004651 /* libPods-ZudVPN.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 091080A238B989222CE4AEA6 /* libPods-ZudVPN.a */; };
-		D4CC9BCAF544298A68932139 /* libPods-ZudVPNTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DFF3E2C0A29E30E0B1DA2C6 /* libPods-ZudVPNTests.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,10 +55,10 @@
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* ZudVPNTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZudVPNTests.m; sourceTree = "<group>"; };
 		091080A238B989222CE4AEA6 /* libPods-ZudVPN.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ZudVPN.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0C6AACEFE5AFE1991DD348B3 /* Pods-ZudVPN-ZudVPNTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZudVPN-ZudVPNTests.release.xcconfig"; path = "Target Support Files/Pods-ZudVPN-ZudVPNTests/Pods-ZudVPN-ZudVPNTests.release.xcconfig"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* ZudVPN.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZudVPN.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = ZudVPN/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = ZudVPN/AppDelegate.m; sourceTree = "<group>"; };
-		13B07FB21A68108700A75B9A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = ZudVPN/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = ZudVPN/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = ZudVPN/main.m; sourceTree = "<group>"; };
@@ -74,7 +72,6 @@
 		2EB503398E8E87B384AD30CF /* Pods-ZudVPN.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZudVPN.debug.xcconfig"; path = "Target Support Files/Pods-ZudVPN/Pods-ZudVPN.debug.xcconfig"; sourceTree = "<group>"; };
 		30543D80C2B2446E870F6394 /* Feather.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Feather.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Feather.ttf"; sourceTree = "<group>"; };
 		3B8911A45EC7408DA4FE367D /* FontAwesome5_Solid.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Solid.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Solid.ttf"; sourceTree = "<group>"; };
-		3DFF3E2C0A29E30E0B1DA2C6 /* libPods-ZudVPNTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ZudVPNTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		515AC21F64FEEB8E9FCB7747 /* libPods-ZudVPN-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ZudVPN-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E8CCE102D3D4A91B71B050F /* Entypo.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Entypo.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Entypo.ttf"; sourceTree = "<group>"; };
 		5F11E836B1A7477DA6DAD04D /* FontAwesome5_Brands.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Brands.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Brands.ttf"; sourceTree = "<group>"; };
@@ -85,13 +82,13 @@
 		84ACCC3695AA49CB8508EFBD /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
 		93EC1F9AF7984C18910AA301 /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
 		94A46C35F0EB3DE82264DC9F /* Pods-ZudVPN-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZudVPN-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-ZudVPN-tvOS/Pods-ZudVPN-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
+		9C609E633E65D888980D353E /* libPods-ZudVPN-ZudVPNTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ZudVPN-ZudVPNTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B2219ABA80B13AA053FECB9C /* Pods-ZudVPN-ZudVPNTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZudVPN-ZudVPNTests.debug.xcconfig"; path = "Target Support Files/Pods-ZudVPN-ZudVPNTests/Pods-ZudVPN-ZudVPNTests.debug.xcconfig"; sourceTree = "<group>"; };
 		BC056CBC2482D894000E9900 /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; name = assets; path = ../assets; sourceTree = "<group>"; };
 		BC9415F0231C913B002908C9 /* RNSSHClient.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNSSHClient.xcodeproj; path = "../node_modules/react-native-ssh-sftp/ios/RNSSHClient.xcodeproj"; sourceTree = "<group>"; };
-		BC9415F9231C9437002908C9 /* AppCenter-Config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "AppCenter-Config.plist"; sourceTree = "<group>"; };
 		BCAE9BBF2330321800CB50AD /* NetworkExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NetworkExtension.framework; path = System/Library/Frameworks/NetworkExtension.framework; sourceTree = SDKROOT; };
 		BCAE9BC12330321800CB50AD /* ZudVPN.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = ZudVPN.entitlements; path = ZudVPN/ZudVPN.entitlements; sourceTree = "<group>"; };
-		BCBCBF382336C08A003F3D27 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
-		BCBCBF3D2336C0B9003F3D27 /* ZudVPN-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ZudVPN-Bridging-Header.h"; sourceTree = "<group>"; };
+		BCFF0CAD2528D4B200292DCC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = ZudVPN/Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D22DC7CE54687847EB481833 /* libPods-ZudVPN-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ZudVPN-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5FB50861AFD49D7AA64AE32 /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
 		EBD90E1F27354411BDD933C8 /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
@@ -109,7 +106,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D4CC9BCAF544298A68932139 /* libPods-ZudVPNTests.a in Frameworks */,
+				7DA1A284E9AB7640FF312039 /* libPods-ZudVPN-ZudVPNTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -162,17 +159,14 @@
 		13B07FAE1A68108700A75B9A /* ZudVPN */ = {
 			isa = PBXGroup;
 			children = (
+				BCFF0CAC2528D4B200292DCC /* LaunchScreen.storyboard */,
 				BCAE9BC12330321800CB50AD /* ZudVPN.entitlements */,
-				BC9415F9231C9437002908C9 /* AppCenter-Config.plist */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
-				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
 				13B07FB71A68108700A75B9A /* main.m */,
-				BCBCBF382336C08A003F3D27 /* File.swift */,
-				BCBCBF3D2336C0B9003F3D27 /* ZudVPN-Bridging-Header.h */,
 			);
 			name = ZudVPN;
 			sourceTree = "<group>";
@@ -209,7 +203,7 @@
 				091080A238B989222CE4AEA6 /* libPods-ZudVPN.a */,
 				D22DC7CE54687847EB481833 /* libPods-ZudVPN-tvOS.a */,
 				515AC21F64FEEB8E9FCB7747 /* libPods-ZudVPN-tvOSTests.a */,
-				3DFF3E2C0A29E30E0B1DA2C6 /* libPods-ZudVPNTests.a */,
+				9C609E633E65D888980D353E /* libPods-ZudVPN-ZudVPNTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -225,6 +219,8 @@
 				F47CC2E09FABA4CD5B8693BF /* Pods-ZudVPN-tvOSTests.release.xcconfig */,
 				61314CEBB1DC28C7107C0178 /* Pods-ZudVPNTests.debug.xcconfig */,
 				ECB724549693817DB14949E9 /* Pods-ZudVPNTests.release.xcconfig */,
+				B2219ABA80B13AA053FECB9C /* Pods-ZudVPN-ZudVPNTests.debug.xcconfig */,
+				0C6AACEFE5AFE1991DD348B3 /* Pods-ZudVPN-ZudVPNTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -284,6 +280,7 @@
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
+				52F9E812CF944C1F33398A0B /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -442,10 +439,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BCFF0CAE2528D4B200292DCC /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				BC056CBE2482D894000E9900 /* assets in Resources */,
-				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
-				BC9415FB231C9437002908C9 /* AppCenter-Config.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -532,11 +528,61 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-ZudVPNTests-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-ZudVPN-ZudVPNTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		52F9E812CF944C1F33398A0B /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ZudVPN-ZudVPNTests/Pods-ZudVPN-ZudVPNTests-resources.sh",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/AntDesign.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Entypo.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Feather.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Brands.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Regular.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Solid.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Fontisto.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Foundation.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Octicons.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Zocial.ttf",
+				"${PODS_CONFIGURATION_BUILD_DIR}/React-Core/AccessibilityResources.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AntDesign.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Entypo.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/EvilIcons.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Feather.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FontAwesome.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FontAwesome5_Brands.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FontAwesome5_Regular.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FontAwesome5_Solid.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Fontisto.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Foundation.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Ionicons.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MaterialCommunityIcons.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MaterialIcons.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Octicons.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SimpleLineIcons.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Zocial.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AccessibilityResources.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ZudVPN-ZudVPNTests/Pods-ZudVPN-ZudVPNTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		6B8EE7C45AACC8B78CE4D7A4 /* [CP] Check Pods Manifest.lock */ = {
@@ -584,6 +630,7 @@
 				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Octicons.ttf",
 				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf",
 				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Zocial.ttf",
+				"${PODS_CONFIGURATION_BUILD_DIR}/React-Core/AccessibilityResources.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
@@ -603,6 +650,7 @@
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Octicons.ttf",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SimpleLineIcons.ttf",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Zocial.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AccessibilityResources.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -685,7 +733,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
-				BCBCBF392336C08A003F3D27 /* File.swift in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -723,13 +770,12 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		13B07FB11A68108700A75B9A /* LaunchScreen.xib */ = {
+		BCFF0CAC2528D4B200292DCC /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				13B07FB21A68108700A75B9A /* Base */,
+				BCFF0CAD2528D4B200292DCC /* Base */,
 			);
-			name = LaunchScreen.xib;
-			path = ZudVPN;
+			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -737,9 +783,8 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 61314CEBB1DC28C7107C0178 /* Pods-ZudVPNTests.debug.xcconfig */;
+			baseConfigurationReference = B2219ABA80B13AA053FECB9C /* Pods-ZudVPN-ZudVPNTests.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -761,9 +806,8 @@
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = ECB724549693817DB14949E9 /* Pods-ZudVPNTests.release.xcconfig */;
+			baseConfigurationReference = 0C6AACEFE5AFE1991DD348B3 /* Pods-ZudVPN-ZudVPNTests.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
 				INFOPLIST_FILE = ZudVPNTests/Info.plist;
