@@ -189,6 +189,8 @@ PODS:
     - React-cxxreact (= 0.63.3)
     - React-jsi (= 0.63.3)
   - React-jsinspector (0.63.3)
+  - react-native-get-random-values (1.5.0):
+    - React
   - react-native-network-extension (0.1.32):
     - React
   - react-native-rsa-native (1.1.4):
@@ -294,6 +296,7 @@ DEPENDENCIES:
   - React-jsi (from `../node_modules/react-native/ReactCommon/jsi`)
   - React-jsiexecutor (from `../node_modules/react-native/ReactCommon/jsiexecutor`)
   - React-jsinspector (from `../node_modules/react-native/ReactCommon/jsinspector`)
+  - react-native-get-random-values (from `../node_modules/react-native-get-random-values`)
   - react-native-network-extension (from `../node_modules/react-native-network-extension`)
   - react-native-rsa-native (from `../node_modules/react-native-rsa-native`)
   - react-native-safari-view (from `../node_modules/react-native-safari-view`)
@@ -354,6 +357,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/jsiexecutor"
   React-jsinspector:
     :path: "../node_modules/react-native/ReactCommon/jsinspector"
+  react-native-get-random-values:
+    :path: "../node_modules/react-native-get-random-values"
   react-native-network-extension:
     :path: "../node_modules/react-native-network-extension"
   react-native-rsa-native:
@@ -418,6 +423,7 @@ SPEC CHECKSUMS:
   React-jsi: df07aa95b39c5be3e41199921509bfa929ed2b9d
   React-jsiexecutor: b56c03e61c0dd5f5801255f2160a815f4a53d451
   React-jsinspector: 8e68ffbfe23880d3ee9bafa8be2777f60b25cbe2
+  react-native-get-random-values: 1404bd5cc0ab0e287f75ee1c489555688fc65f89
   react-native-network-extension: a4d2e15b1e9d815c2857391e1f5b69897752cde5
   react-native-rsa-native: 348b5057073920db0e154724c3a49e6b34e1da6b
   react-native-safari-view: 955d7160d159241b8e9395d12d10ea0ef863dcdd
