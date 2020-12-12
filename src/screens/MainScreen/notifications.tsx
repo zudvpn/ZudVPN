@@ -6,7 +6,7 @@ import { COLOR_SECONDARY } from '../../theme';
 const Notifications = () => {
     const [{ notifications }] = useStore();
 
-    if (notifications.length > 0) {
+    if (notifications.length === 0) {
         return <></>;
     }
 

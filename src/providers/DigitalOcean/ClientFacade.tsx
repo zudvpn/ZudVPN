@@ -43,6 +43,8 @@ class ClientFacade implements Client {
 
         return droplets.map(
             (droplet: any): Server => {
+                const ipAddress = droplet.networks.v4.filter((ip: any) => ip.type === 'public');
+
                 return {
                     provider: {
                         id: 'digitalocean',
@@ -55,7 +57,7 @@ class ClientFacade implements Client {
                         slug: droplet.region.slug,
                         available: droplet.region.available,
                     },
-                    ipv4Address: droplet.networks.v4[0].ip_address,
+                    ipv4Address: ipAddress[0].ip_address,
                 };
             },
         );

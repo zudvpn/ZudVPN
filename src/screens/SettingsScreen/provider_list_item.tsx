@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
+// import { StyleSheet } from 'react-native';
 import { ListItem } from 'react-native-elements';
 import { useStore } from '../../store/store';
 import useScreen from '../useScreen';
@@ -22,7 +22,7 @@ export const ProviderListItem = ({ item, componentId }: Props) => {
             return `connected as ${token[0].account?.email}`;
         }
 
-        return <></>;
+        return null;
     };
 
     const onPress = (provider: Provider) => {
@@ -36,34 +36,44 @@ export const ProviderListItem = ({ item, componentId }: Props) => {
     };
 
     if (item.available) {
+        const account = getAccount(item);
+
         return (
             <ListItem
                 containerStyle={{ backgroundColor: BACKGROUND_SECONDARY }}
-                onPress={() => onPress(item)}
-                title={item.name}
-                titleStyle={{ color: COLOR_SECONDARY }}
-                subtitle={getAccount(item)}
-                subtitleStyle={{ opacity: 0.7, color: COLOR_SECONDARY }}
                 bottomDivider
-                chevron
-            />
+                onPress={() => onPress(item)}>
+                <ListItem.Content>
+                    <ListItem.Title style={{ color: COLOR_SECONDARY }}>{item.name}</ListItem.Title>
+                    {account && (
+                        <ListItem.Subtitle style={{ opacity: 0.7, color: COLOR_SECONDARY }}>
+                            {account}
+                        </ListItem.Subtitle>
+                    )}
+                </ListItem.Content>
+                <ListItem.Chevron />
+            </ListItem>
         );
     }
 
-    return (
-        <ListItem
-            containerStyle={{ backgroundColor: BACKGROUND_SECONDARY }}
-            titleStyle={[styles.disabled, { color: COLOR_SECONDARY }]}
-            title={item.name}
-            rightTitle={'coming soon'}
-            rightTitleStyle={{ opacity: 0.3, fontSize: 12, color: COLOR_SECONDARY }}
-            bottomDivider
-        />
-    );
+    return <></>;
+
+    // return (
+    //     <ListItem containerStyle={{ backgroundColor: BACKGROUND_SECONDARY }} bottomDivider>
+    //         <ListItem.Content>
+    //             <ListItem.Title style={[styles.disabled, { color: COLOR_SECONDARY }]}>{item.name}</ListItem.Title>
+    //         </ListItem.Content>
+    //         <ListItem.Content right>
+    //             <ListItem.Title right style={{ opacity: 0.3, fontSize: 12, color: COLOR_SECONDARY }}>
+    //                 {'coming soon'}
+    //             </ListItem.Title>
+    //         </ListItem.Content>
+    //     </ListItem>
+    // );
 };
 
-const styles = StyleSheet.create({
-    disabled: {
-        opacity: 0.7,
-    },
-});
+// const styles = StyleSheet.create({
+//     disabled: {
+//         opacity: 0.7,
+//     },
+// });

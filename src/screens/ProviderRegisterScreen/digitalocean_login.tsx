@@ -67,7 +67,7 @@ const DigitalOceanLogin = (props: any) => {
                     containerStyle={{ backgroundColor: BACKGROUND_SECONDARY }}
                     leftIcon={{ type: 'material-community', name: 'account-key-outline' }}
                     label={'Personal Access Token'}
-                    labelStyle={{ color: COLOR_SECONDARY }}
+                    inputStyle={{ color: COLOR_SECONDARY }}
                     placeholder={'Type or paste here'}
                     onChangeText={(value) => setToken(value)}
                 />

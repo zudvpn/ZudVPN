@@ -15,7 +15,7 @@ import { VPNCredentials } from 'providers/types/VPNCredentials';
 import { Server } from 'providers/types/Server';
 
 const DROPLET_BASE_NAME = 'zudvpn';
-const DROPLET_IMAGE = 'coreos-stable';
+const DROPLET_IMAGE = 'rancheros';
 const DROPLET_SIZE = 's-1vcpu-1gb';
 
 class Deploy {
@@ -166,7 +166,7 @@ class Deploy {
 
         for (let i = 1; i < 10; i++) {
             for (const ip of droplet.networks.v4) {
-                if (ip.ip_address) {
+                if (ip.type === 'public' && ip.ip_address) {
                     this.notify('progress', 'VPN IP address: ' + ip.ip_address);
 
                     return ip.ip_address;

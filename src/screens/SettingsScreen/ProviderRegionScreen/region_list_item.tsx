@@ -55,28 +55,31 @@ const RegionListItem = ({ item, provider, client }: Props) => {
         return (
             <ListItem
                 containerStyle={{ backgroundColor: BACKGROUND_SECONDARY }}
-                onPress={() => confirmAddServer(item)}
-                title={item.name}
-                titleStyle={{ color: COLOR_SECONDARY }}
-                subtitle={item.slug}
-                subtitleStyle={{ opacity: 0.5, color: COLOR_SECONDARY }}
                 bottomDivider
-                chevron
-            />
+                onPress={() => confirmAddServer(item)}>
+                <ListItem.Content>
+                    <ListItem.Title style={{ color: COLOR_SECONDARY }}>{item.name}</ListItem.Title>
+                    <ListItem.Subtitle style={{ opacity: 0.5, color: COLOR_SECONDARY }}>{item.slug}</ListItem.Subtitle>
+                </ListItem.Content>
+                <ListItem.Chevron />
+            </ListItem>
         );
     }
 
     return (
         <ListItem
             containerStyle={{ backgroundColor: BACKGROUND_SECONDARY }}
-            titleStyle={[styles.disabled, { color: COLOR_SECONDARY }]}
-            title={item.name}
-            subtitle={item.slug}
-            subtitleStyle={{ opacity: 0.5, color: COLOR_SECONDARY }}
-            rightTitle={'unavailable'}
-            rightTitleStyle={{ opacity: 0.3, color: COLOR_SECONDARY }}
             bottomDivider
-        />
+            onPress={() => confirmAddServer(item)}>
+            <ListItem.Content>
+                <ListItem.Title style={[styles.disabled, { color: COLOR_SECONDARY }]}>{item.name}</ListItem.Title>
+                <ListItem.Subtitle style={{ opacity: 0.5, color: COLOR_SECONDARY }}>{item.slug}</ListItem.Subtitle>
+            </ListItem.Content>
+            <ListItem.Content right>
+                <ListItem.Title right style={{ opacity: 0.3, color: COLOR_SECONDARY }}>{'unavailable'}</ListItem.Title>
+            </ListItem.Content>
+            <ListItem.Chevron />
+        </ListItem>
     );
 };
 

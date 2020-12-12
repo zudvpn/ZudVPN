@@ -53,26 +53,24 @@ const ProviderRegionScreen = (props: any) => {
 
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: BACKGROUND_PRIMARY }}>
-            <ScrollView>
-                <Text
-                    style={{
-                        color: COLOR_SECONDARY,
-                        fontSize: 18,
-                        alignSelf: 'center',
-                        padding: 10,
-                        paddingBottom: 0,
-                    }}>
-                    Regions on {props.provider.name}
-                </Text>
-                <Text style={{ color: COLOR_SECONDARY, alignSelf: 'center', marginBottom: 10 }}>
-                    Select a region to deploy a VPN server on
-                </Text>
-                <FlatList
-                    data={regions}
-                    renderItem={({ item }) => <RegionListItem provider={props.provider} item={item} />}
-                    keyExtractor={(item, index) => index.toString()}
-                />
-            </ScrollView>
+            <Text
+                style={{
+                    color: COLOR_SECONDARY,
+                    fontSize: 18,
+                    alignSelf: 'center',
+                    padding: 10,
+                    paddingBottom: 0,
+                }}>
+                Regions on {props.provider.name}
+            </Text>
+            <Text style={{ color: COLOR_SECONDARY, alignSelf: 'center', marginBottom: 10 }}>
+                Select a region to deploy a VPN server on
+            </Text>
+            <FlatList
+                data={regions}
+                renderItem={({ item }) => <RegionListItem provider={props.provider} item={item} />}
+                keyExtractor={(item, index) => index.toString()}
+            />
         </SafeAreaView>
     );
 };

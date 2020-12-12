@@ -15,8 +15,14 @@ import style from './styles';
 // @ts-ignore
 import SafariView from 'react-native-safari-view';
 import { Server } from 'providers/types/Server';
+import Client from 'providers/client';
 
-const SettingsScreen = (props: any) => {
+interface Props {
+    componentId: string;
+    client: Client;
+}
+
+const SettingsScreen = (props: Props) => {
     const [servers, setServers] = useState<Server[] | null>(null);
     const [refreshing, setRefreshing] = useState(false);
     const [{ currentServer, vpnStatus }, { setCurrentVPNServer, setVPNStatus, notify }] = useStore();
@@ -133,21 +139,23 @@ const SettingsScreen = (props: any) => {
                 <Divider />
                 <ListItem
                     containerStyle={{ backgroundColor: BACKGROUND_SECONDARY }}
-                    onPress={() => LogFileViewerScreenPush(props.componentId)}
-                    title={'Application logs'}
-                    titleStyle={{ color: COLOR_SECONDARY }}
                     bottomDivider
-                    chevron
-                />
+                    onPress={() => LogFileViewerScreenPush(props.componentId)}>
+                    <ListItem.Content>
+                        <ListItem.Title style={{ color: COLOR_SECONDARY }}>{'Application logs'}</ListItem.Title>
+                    </ListItem.Content>
+                    <ListItem.Chevron />
+                </ListItem>
                 {vpnStatus === 'Connected' && (
                     <ListItem
                         containerStyle={{ backgroundColor: BACKGROUND_SECONDARY }}
-                        onPress={() => togglePiHoleWebPage()}
-                        title={'PiHole Ad-blocker'}
-                        titleStyle={{ color: COLOR_SECONDARY }}
                         bottomDivider
-                        chevron
-                    />
+                        onPress={() => togglePiHoleWebPage()}>
+                        <ListItem.Content>
+                            <ListItem.Title style={{ color: COLOR_SECONDARY }}>{'PiHole Ad-blocker'}</ListItem.Title>
+                        </ListItem.Content>
+                        <ListItem.Chevron />
+                    </ListItem>
                 )}
             </ScrollView>
         </SafeAreaView>
