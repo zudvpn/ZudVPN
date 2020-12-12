@@ -26,7 +26,7 @@
     "react-native-ssh-sftp": "shaqian/react-native-ssh-sftp#master",
     "react-native-static-server": "futurepress/react-native-static-server#master",
     "react-native-vector-icons": "^7.1.0",
-    "react-native-webview": "^10.9.1",
+    "react-native-webview": "^11.0.0",
     "react-sweet-state": "^2.3.1",
     "uuid": "^8.3.0",
     "xterm": "^4.9.0",
