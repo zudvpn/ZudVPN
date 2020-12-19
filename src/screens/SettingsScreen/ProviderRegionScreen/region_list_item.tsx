@@ -67,16 +67,15 @@ const RegionListItem = ({ item, provider, client }: Props) => {
     }
 
     return (
-        <ListItem
-            containerStyle={{ backgroundColor: BACKGROUND_SECONDARY }}
-            bottomDivider
-            onPress={() => confirmAddServer(item)}>
+        <ListItem containerStyle={{ backgroundColor: BACKGROUND_SECONDARY }} bottomDivider>
             <ListItem.Content>
                 <ListItem.Title style={[styles.disabled, { color: COLOR_SECONDARY }]}>{item.name}</ListItem.Title>
                 <ListItem.Subtitle style={{ opacity: 0.5, color: COLOR_SECONDARY }}>{item.slug}</ListItem.Subtitle>
             </ListItem.Content>
             <ListItem.Content right>
-                <ListItem.Title right style={{ opacity: 0.3, color: COLOR_SECONDARY }}>{'unavailable'}</ListItem.Title>
+                <ListItem.Title right style={{ opacity: 0.3, color: COLOR_SECONDARY }}>
+                    {'unavailable'}
+                </ListItem.Title>
             </ListItem.Content>
             <ListItem.Chevron />
         </ListItem>
