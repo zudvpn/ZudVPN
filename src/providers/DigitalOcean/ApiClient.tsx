@@ -28,11 +28,10 @@ class ApiClient {
             throw new ProviderInvalidContentError('DigitalOcean API returned an invalid response.');
         }
 
-        let content;
-        if (response.headers.get('content-type')?.indexOf('application/json') !== -1) {
-            content = await response.json();
-        } else {
-            content = await response.text();
+        let content: any = await response.text();
+        console.log('[DigitalOcean API] content: ', content);
+        if (response.headers.get('content-type')?.includes('application/json')) {
+            content = JSON.parse(content);
         }
 
         if (response.status > 399) {
@@ -114,6 +113,10 @@ class ApiClient {
         await this.makeRequest('DELETE', `https://api.digitalocean.com/v2/droplets/${dropletId}`);
     }
 
+    async deleteSshKey(fingerprint: string): Promise<void> {
+        await this.makeRequest('DELETE', `https://api.digitalocean.com/v2/account/keys/${fingerprint}`);
+    }
+
     async getRegions() {
         let response = await this.makeRequest('GET', 'https://api.digitalocean.com/v2/regions');
 
@@ -165,7 +168,7 @@ class ApiClient {
                     },
                     {
                         protocol: 'tcp',
-                        ports: '2222',
+                        ports: '22',
                         sources: {
                             addresses: ['0.0.0.0/0', '::/0'],
                         },

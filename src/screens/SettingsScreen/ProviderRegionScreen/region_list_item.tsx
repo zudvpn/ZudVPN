@@ -4,7 +4,6 @@ import { ListItem } from 'react-native-elements';
 import { Navigation } from 'react-native-navigation';
 import { useStore } from '../../../store/store';
 import withClient from '../../../providers/with_client';
-import logger from '../../../logger';
 import { BACKGROUND_SECONDARY, COLOR_SECONDARY } from '../../../theme';
 import { Region } from 'providers/types/Region';
 import { Provider } from 'providers/types/Provider';
@@ -19,12 +18,11 @@ interface Props {
 const RegionListItem = ({ item, provider, client }: Props) => {
     const [, { setCurrentVPNServer, setVPNStatus, notify }] = useStore();
 
-    const addServer = (region: Region) => {
+    const createServer = (region: Region) => {
         Navigation.dismissAllModals();
 
         setTimeout(async () => {
             try {
-                logger.info('VPN is not configured. Creating a new VPN server.');
                 setVPNStatus('Connecting');
 
                 const server = await client.createServer(provider.id, region, notify);
@@ -38,11 +36,11 @@ const RegionListItem = ({ item, provider, client }: Props) => {
         }, 500);
     };
 
-    const confirmAddServer = (region: Region) => {
+    const confirmCreateServer = (region: Region) => {
         Alert.alert('Confirm', `This will create a VPN server on "${region.name}" region on ${provider.name}`, [
             {
                 text: 'Proceed',
-                onPress: () => addServer(region),
+                onPress: () => createServer(region),
             },
             {
                 text: 'Cancel',
@@ -56,7 +54,7 @@ const RegionListItem = ({ item, provider, client }: Props) => {
             <ListItem
                 containerStyle={{ backgroundColor: BACKGROUND_SECONDARY }}
                 bottomDivider
-                onPress={() => confirmAddServer(item)}>
+                onPress={() => confirmCreateServer(item)}>
                 <ListItem.Content>
                     <ListItem.Title style={{ color: COLOR_SECONDARY }}>{item.name}</ListItem.Title>
                     <ListItem.Subtitle style={{ opacity: 0.5, color: COLOR_SECONDARY }}>{item.slug}</ListItem.Subtitle>

@@ -94,7 +94,7 @@ class Client {
     }
 
     async deleteServer(server: Server): Promise<void> {
-        await this.clients.get(server.provider.id)?.deleteServer(server);
+        this.clients.get(server.provider.id)?.deleteServer(server);
     }
 }
 

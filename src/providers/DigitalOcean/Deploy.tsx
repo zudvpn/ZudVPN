@@ -1,7 +1,7 @@
 'use strict';
 
 import SSHClient from './../../ssh/client';
-import CloudInitUserData from './cloudinit_userdata';
+import CloudConfig from './cloudconfig';
 import { sleep } from '../../helper';
 import Keygen, { Keypair } from './../../ssh/keygen';
 import logger from '../../logger';
@@ -31,7 +31,7 @@ class Deploy {
         this.notify('progress', 'Creating a server');
         const name = this.generateName(region);
         const sshKeyPair = await this.getSSHKeyPair(name);
-        let userData = CloudInitUserData(sshKeyPair.authorizedKey);
+        let userData = CloudConfig(sshKeyPair.authorizedKey);
 
         logger.debug(['[DigitalOcean] Generated user data: ', userData]);
         let droplet = await this.client.createDroplet(
@@ -49,11 +49,11 @@ class Deploy {
         let ipAddress = await this.getIpAddress(droplet);
 
         const server = {
+            uid: droplet.id,
             provider: {
                 id: 'digitalocean',
                 name: 'DigitalOcean',
             },
-            uid: droplet.id,
             name: droplet.name,
             region: {
                 name: droplet.region.name,
@@ -67,14 +67,14 @@ class Deploy {
     }
 
     async read(server: Server, sshKeyPair: Keypair): Promise<VPNCredentials> {
-        let sshClient = new SSHClient(sshKeyPair, 'core', server.ipv4Address, 2222);
+        let sshClient = new SSHClient(sshKeyPair, 'rancher', server.ipv4Address, 22);
         await this.waitForSSHConnection(sshClient);
 
         await this.waitForVPNService(sshClient);
 
         this.notify('progress', 'Loading VPN authentication credentials');
         let [domain, password] = await Promise.all([
-            sshClient.run('/usr/bin/cat /home/core/domain'),
+            sshClient.run('cat /home/rancher/domain'),
             sshClient.run('docker exec strongswan /bin/sh -c "cat /etc/ipsec.d/client.password"'),
         ]);
 
@@ -94,7 +94,7 @@ class Deploy {
 
     private async getSSHKeyPair(name: string): Promise<Keypair> {
         const sshKeyPair = await Keygen.generateKeyPair();
-        logger.debug('[DigitalOcean] SSH Keypair:', sshKeyPair);
+        logger.debug(['[DigitalOcean] SSH Keypair:', sshKeyPair]);
 
         await this.client.createSSHKey(name, sshKeyPair.authorizedKey);
 
@@ -137,8 +137,8 @@ class Deploy {
                 if (countWaitingForVPN === 0) {
                     throw e;
                 }
-                await sleep(countWaitingForVPN * 1000);
             }
+            await sleep(countWaitingForVPN * 1000);
         } while (countWaitingForVPN > 0);
     }
 
@@ -155,9 +155,8 @@ class Deploy {
                 logger.debug(
                     `[DigitalOcean] SSH connection not ready: ${JSON.stringify(e)}, retrying ${10 - trialLeft}/10`,
                 );
-
-                await sleep(trialLeft * 1000);
             }
+            await sleep(trialLeft * 1000);
         } while (trialLeft > 0);
     }
 

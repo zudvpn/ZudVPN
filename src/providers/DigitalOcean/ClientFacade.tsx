@@ -64,7 +64,9 @@ class ClientFacade implements Client {
     }
 
     async deleteServer(server: Server): Promise<void> {
-        await this.apiClient.deleteDroplet(server.uid);
+        this.apiClient.deleteDroplet(server.uid);
+        const sshKeyPair = await Keychain.getSSHKeyPair(server.name);
+        this.apiClient.deleteSshKey(sshKeyPair.fingerprint);
     }
 
     async getRegions(): Promise<Region[]> {

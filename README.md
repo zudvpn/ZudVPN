@@ -17,7 +17,7 @@ Features
 
 How to install?
 --
-- The easiest way is to install ZudVPN from App Store or Google Play (soon).
+- The easiest way to install ZudVPN is from App Store or Google Play (soon).
     - Join our Beta Test Program: https://testflight.apple.com/join/o2U4Ljbh
 - It is also possible to [build from the source](INSTALL.md).
 
@@ -77,14 +77,14 @@ All donations support continued development of ZudVPN.
 
 Powered by
 --
-- [strongSwan](https://strongswan.org/) - IPSec-based VPN software.
-- [CoreOS](http://coreos.com/) - used for running containers.
-- [Pi-hole](https://pi-hole.net/) - used for DNS ad-blocking.
-- [React-Native](https://reactnative.dev/) - ZudVPN is written using React-Native.
+- [strongSwan](https://strongswan.org/) - IPSec-based VPN solution.
+- [RancherOS](https://rancher.com/) - A containerized OS.
+- [Pi-hole](https://pi-hole.net/) - DNS ad-blocker.
+- [React-Native](https://reactnative.dev/) - A learn once, write everywhere mobile app framework.
 
 Acknowledgements
 --
-- [dan-v/dosxvpn](https://github.com/dan-v/dosxvpn) - ZudVPN was mostly inspired by this project.
+- [dan-v/dosxvpn](https://github.com/dan-v/dosxvpn) - ZudVPN is mostly inspired by this project.
 - [trailofbits/algo](https://github.com/trailofbits/algo) - strongSwan configuration is borrowed from this project.
 
 Building from source
