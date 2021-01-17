@@ -26,13 +26,6 @@ const DigitalOceanLogin = (props: any) => {
         });
     };
 
-    const signUp = () => {
-        SafariView.show({
-            url: 'https://m.do.co/c/ad75f5779a2a',
-            fromBottom: true,
-        });
-    };
-
     const signInByToken = async () => {
         const html = DOCallbackHtml();
         const url = await StaticServer.serveHtml(html);
@@ -65,7 +58,7 @@ const DigitalOceanLogin = (props: any) => {
                 </View>
                 <Input
                     containerStyle={{ backgroundColor: BACKGROUND_SECONDARY }}
-                    leftIcon={{ type: 'material-community', name: 'account-key-outline' }}
+                    leftIcon={{ type: 'material-community', name: 'account-key-outline', color: COLOR_SECONDARY }}
                     label={'Personal Access Token'}
                     inputStyle={{ color: COLOR_SECONDARY }}
                     placeholder={'Type or paste here'}
@@ -74,7 +67,7 @@ const DigitalOceanLogin = (props: any) => {
                 <View style={{ margin: 15 }}>
                     <Button
                         buttonStyle={{ backgroundColor: BACKGROUND_SECONDARY, borderColor: colors.divider }}
-                        icon={{ type: 'font-awesome-5', name: 'digital-ocean' }}
+                        icon={{ type: 'font-awesome-5', name: 'digital-ocean', color: '#008bcf' }}
                         type={'outline'}
                         raised={true}
                         onPress={() => signInByToken()}
@@ -94,31 +87,21 @@ const DigitalOceanLogin = (props: any) => {
             <Divider />
             <View style={{ backgroundColor: BACKGROUND_SECONDARY }}>
                 <Text style={{ color: COLOR_SECONDARY, margin: 15 }}>
-                    ZudVPN uses DigitalOcean API to create a VPN server. Choose a step to sign in to DigitalOcean and
-                    start deploying your own VPN server.
+                    ZudVPN uses DigitalOcean API to create a VPN server. Choose a step to sign in to DigitalOcean
+                    account. After the sign-in, you will be provided a list of regions to host your VPN server.
                 </Text>
             </View>
             <Divider />
             <View style={{ margin: 15 }}>
                 <Button
                     buttonStyle={{ backgroundColor: BACKGROUND_SECONDARY, borderColor: colors.divider }}
-                    icon={{ type: 'font-awesome-5', name: 'digital-ocean' }}
+                    icon={{ type: 'font-awesome-5', name: 'digital-ocean', color: '#008bcf' }}
                     type={'outline'}
                     raised={true}
                     title={'Sign in with DigitalOcean'}
                     titleStyle={{ color: COLOR_SECONDARY }}
                     onPress={() => signIn()}
                 />
-            </View>
-            <Divider />
-            <View style={{ backgroundColor: BACKGROUND_SECONDARY }}>
-                <TouchableOpacity style={{ margin: 15 }} onPress={() => signUp()}>
-                    <Text style={{ color: COLOR_SECONDARY }}>Don't have an account?</Text>
-                    <Text style={{ color: COLOR_SECONDARY }}>
-                        <Text style={{ textDecorationLine: 'underline', color: COLOR_SECONDARY }}>Tap here</Text> for a
-                        free $100 credit on DigitalOcean using our referral!
-                    </Text>
-                </TouchableOpacity>
             </View>
             <Divider />
             <View style={{ backgroundColor: BACKGROUND_SECONDARY }}>

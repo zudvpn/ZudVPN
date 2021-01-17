@@ -67,7 +67,7 @@ const useScreen = () => {
                     },
                 },
             }),
-        SettingsScreenModel: () =>
+        SettingsScreenModal: () =>
             Navigation.showModal({
                 stack: {
                     children: [

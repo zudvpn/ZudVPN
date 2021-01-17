@@ -19,7 +19,6 @@
 		7617F431984284DA136DA073 /* libPods-ZudVPN-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D22DC7CE54687847EB481833 /* libPods-ZudVPN-tvOS.a */; };
 		7DA1A284E9AB7640FF312039 /* libPods-ZudVPN-ZudVPNTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C609E633E65D888980D353E /* libPods-ZudVPN-ZudVPNTests.a */; };
 		BC056CBE2482D894000E9900 /* assets in Resources */ = {isa = PBXBuildFile; fileRef = BC056CBC2482D894000E9900 /* assets */; };
-		BC9415F6231C9151002908C9 /* libRNSSHClient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BC9415F5231C913B002908C9 /* libRNSSHClient.a */; };
 		BCAE9BC02330321800CB50AD /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCAE9BBF2330321800CB50AD /* NetworkExtension.framework */; };
 		BCFF0CAE2528D4B200292DCC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BCFF0CAC2528D4B200292DCC /* LaunchScreen.storyboard */; };
 		CDA6967C30453181A7004651 /* libPods-ZudVPN.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 091080A238B989222CE4AEA6 /* libPods-ZudVPN.a */; };
@@ -39,13 +38,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = 2D02E47A1E0B4A5D006451C7;
 			remoteInfo = "ZudVPN-tvOS";
-		};
-		BC9415F4231C913B002908C9 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BC9415F0231C913B002908C9 /* RNSSHClient.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 134814201AA4EA6300B7C361;
-			remoteInfo = RNSSHClient;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -85,7 +77,6 @@
 		9C609E633E65D888980D353E /* libPods-ZudVPN-ZudVPNTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ZudVPN-ZudVPNTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2219ABA80B13AA053FECB9C /* Pods-ZudVPN-ZudVPNTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZudVPN-ZudVPNTests.debug.xcconfig"; path = "Target Support Files/Pods-ZudVPN-ZudVPNTests/Pods-ZudVPN-ZudVPNTests.debug.xcconfig"; sourceTree = "<group>"; };
 		BC056CBC2482D894000E9900 /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; name = assets; path = ../assets; sourceTree = "<group>"; };
-		BC9415F0231C913B002908C9 /* RNSSHClient.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNSSHClient.xcodeproj; path = "../node_modules/react-native-ssh-sftp/ios/RNSSHClient.xcodeproj"; sourceTree = "<group>"; };
 		BCAE9BBF2330321800CB50AD /* NetworkExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NetworkExtension.framework; path = System/Library/Frameworks/NetworkExtension.framework; sourceTree = SDKROOT; };
 		BCAE9BC12330321800CB50AD /* ZudVPN.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = ZudVPN.entitlements; path = ZudVPN/ZudVPN.entitlements; sourceTree = "<group>"; };
 		BCFF0CAD2528D4B200292DCC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = ZudVPN/Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -114,7 +105,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BC9415F6231C9151002908C9 /* libRNSSHClient.a in Frameworks */,
 				BCAE9BC02330321800CB50AD /* NetworkExtension.framework in Frameworks */,
 				CDA6967C30453181A7004651 /* libPods-ZudVPN.a in Frameworks */,
 			);
@@ -228,7 +218,6 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
-				BC9415F0231C913B002908C9 /* RNSSHClient.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -257,14 +246,6 @@
 				00E356EE1AD99517003FC87E /* ZudVPNTests.xctest */,
 				2D02E47B1E0B4A5D006451C7 /* ZudVPN-tvOS.app */,
 				2D02E4901E0B4A5D006451C7 /* ZudVPN-tvOSTests.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		BC9415F1231C913B002908C9 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				BC9415F5231C913B002908C9 /* libRNSSHClient.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -401,12 +382,6 @@
 			mainGroup = 83CBB9F61A601CBA00E9B192;
 			productRefGroup = 83CBBA001A601CBA00E9B192 /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = BC9415F1231C913B002908C9 /* Products */;
-					ProjectRef = BC9415F0231C913B002908C9 /* RNSSHClient.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				13B07F861A680F5B00A75B9A /* ZudVPN */,
@@ -416,16 +391,6 @@
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		BC9415F5231C913B002908C9 /* libRNSSHClient.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libRNSSHClient.a;
-			remoteRef = BC9415F4231C913B002908C9 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		00E356EC1AD99517003FC87E /* Resources */ = {
@@ -511,7 +476,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
+			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh\n";
 		};
 		3B44B022FD0B0E84617DBA8D /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -833,7 +798,7 @@
 				CODE_SIGN_ENTITLEMENTS = ZudVPN/ZudVPN.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 5;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = G7AQRR3KRQ;
 				INFOPLIST_FILE = ZudVPN/Info.plist;
@@ -899,7 +864,7 @@
 				CODE_SIGN_ENTITLEMENTS = ZudVPN/ZudVPN.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = G7AQRR3KRQ;
 				INFOPLIST_FILE = ZudVPN/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

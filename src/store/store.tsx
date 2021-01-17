@@ -8,6 +8,7 @@ import { Server } from 'providers/types/Server';
 import { Provider } from 'providers/types/Provider';
 
 interface State {
+    privacyAccepted: boolean;
     providerTokens: Token[];
     currentServer: Server | null;
     vpnStatus: string;
@@ -15,6 +16,7 @@ interface State {
 }
 
 const initialState: State = {
+    privacyAccepted: false,
     providerTokens: [],
     currentServer: null,
     vpnStatus: 'Disconnected',
@@ -28,6 +30,11 @@ interface StoreActions {
 }
 
 const actions = {
+    acceptPrivacy: () => ({ setState, dispatch }: StoreActions) => {
+        setState({ privacyAccepted: true });
+
+        dispatch(actions.persistState());
+    },
     addProviderToken: (token: Token) => ({ setState, getState, dispatch }: StoreActions) => {
         setState({ providerTokens: [...getState().providerTokens, token] });
 

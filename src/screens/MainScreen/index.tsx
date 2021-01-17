@@ -3,19 +3,24 @@ import { View } from 'react-native';
 import { RoundButton } from './buttons';
 import { useStore } from '../../store/store';
 import useScreen from '../useScreen';
+import AcceptPrivacy from './AcceptPrivacy';
 import Layout from './layout';
 import withInitState from '../../store/withInitState';
 import Notifications from './notifications';
 import CurrentServer from './current_server';
 
 const MainScreen = () => {
-    const [{ providerTokens, currentServer, vpnStatus }, { toggleVPN }] = useStore();
-    const { SettingsScreenModel } = useScreen();
+    const [{ privacyAccepted, providerTokens, currentServer, vpnStatus }, { toggleVPN }] = useStore();
+    const { SettingsScreenModal } = useScreen();
+
+    if (!privacyAccepted) {
+        return <AcceptPrivacy />;
+    }
 
     if (providerTokens.length === 0) {
         return (
             <Layout>
-                <RoundButton label={'Get Started!'} onPress={SettingsScreenModel} />
+                <RoundButton label={'Get Started!'} onPress={SettingsScreenModal} />
                 <View style={{ marginVertical: 10 }}>
                     <Notifications />
                 </View>
@@ -35,17 +40,17 @@ const MainScreen = () => {
             break;
     }
 
-    const toggleVPNOrSettingsScreenModel = () => {
+    const toggleVPNOrSettingsScreenModal = () => {
         if (currentServer) {
             toggleVPN();
         } else {
-            SettingsScreenModel();
+            SettingsScreenModal();
         }
     };
 
     return (
         <Layout>
-            <RoundButton label={buttonLabel} onPress={toggleVPNOrSettingsScreenModel} disabled={disabled} />
+            <RoundButton label={buttonLabel} onPress={toggleVPNOrSettingsScreenModal} disabled={disabled} />
             <View style={{ marginVertical: 10 }}>
                 <CurrentServer />
             </View>
