@@ -43,9 +43,9 @@ const AcceptPrivacy = () => {
                     <Text style={style.question}>What data are collected by ZudVPN?</Text>
                     <Text style={style.answer}>
                         ZudVPN operates on your device and stores your cloud provider API tokens in your device's
-                        internal memory. All collected data is stored only on your device and is unaccessable by anyone.
+                        internal memory. All collected data is stored only on your device and is inaccessible by anyone.
                         As such, ZudVPN operates on the device, it does not collect any public or private information
-                        about you or the your cloud providers.
+                        about you or your cloud providers.
                     </Text>
                     <TouchableOpacity onPress={() => viewPrivacyPage()}>
                         <Text style={{ marginTop: 20, color: COLOR_SECONDARY, textDecorationLine: 'underline' }}>

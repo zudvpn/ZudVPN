@@ -19,7 +19,7 @@ How to install?
 --
 - The easiest way to install ZudVPN is from App Store or Google Play (soon).
     - Join our Beta Test Program: https://testflight.apple.com/join/o2U4Ljbh
-- It is also possible to [build from the source](INSTALL.md).
+- It is also possible to [build from the source](docs/INSTALL.md).
 
 
 How to use?
@@ -33,28 +33,28 @@ How to use?
 
 FAQ
 --
-1. Should I use ZudVPN?
-    - That's up to you. Use at your own risk.
-2. Why is this better than using any free/public/private VPN provider?
-    - While most VPN providers will provide a secure connection to their endpoints, you may not be interested in putting blind faith in their claims that they will not log or track your activity online.
-    - With ZudVPN, you control all your traffic.
-3. How is this different from [trailofbits/algo](https://github.com/trailofbits/algo)?
-    - Installation - with a single click of a button you can deploy your own Cloud VPN server on your phone!
-4. How much does this cost?
-    - ZudVPN tries to use a least priced server on Cloud Providers. For instance, DigitalOcean's least plan costs 5$/month server. Besides, you can always destroy the server whenever you don't need.
-5. What is the bandwidth limit?
+1. What does ZudVPN offer that free/public/private VPN applications don't?
+    * Although most VPN applications claim that they do not log or track your online activities, do not put a blind faith on them.
+    * VPN servers created by ZudVPN is only accessible by you.
+2. How is this different from [trailofbits/algo](https://github.com/trailofbits/algo)?
+    * Installation - ZudVPN works right from your phone to create a VPN server.
+3. How much does it cost?
+    * ZudVPN uses cheapest cloud servers. For instance, DigitalOcean's cheapest plan costs 5$/month server. 
+    * Besides, you can always destroy the server whenever you don't need.
+4. What is the bandwidth limit?
     - That depends on Cloud Providers. In general, the bandwidths are above 1 TB/month.
-6. How does ZudVPN create VPN profiles?
-    - On iOS, to create a legitimate VPN profile, iOS requires a valid SSL certificate for the VPN server and a Personal VPN entitlements for the application. ZudVPN generates certificates using [Let's Encrypt](https://letsencrypt.org/) service. To generate certificates Let's Encrypt requires a valid domain. During the deployment, ZudVPN generates a domain name bound to the IP address of your server.
-7. How do I SSH into the deployed VPN server?
+5. How does ZudVPN create VPN profiles?
+    - On iOS, to create a legitimate VPN profile, iOS requires a valid SSL certificate for the VPN server and a Personal VPN entitlements.
+      ZudVPN generates certificates using [Let's Encrypt](https://letsencrypt.org/). To generate certificates Let's Encrypt requires a valid domain. During the deployment, ZudVPN generates a domain name bound to the IP address of your server.
+6. How do I SSH into the deployed VPN server?
     - ZudVPN has an incorporated Terminal feature that you can use to log into your server. (Experimental feature)
-8. What is the password to login to Pi-hole?
+7. What is the password to login to Pi-hole?
     - The password is `zudvpn`. Access to Pi-hole is restricted to VPN connected users.
-9. Are you going to support other Cloud Providers?
+8. Are you going to support other Cloud Providers?
     - Yes, we are working to add more providers.
-10. Will this make me completely anonymous?
+9. Will this make me completely anonymous?
     - No, absolutely not. All of your traffic is going through a provider which could be traced back to your account. You can still be tracked by browser fingerprinting, etc. Your IP address may still leak due to WebRTC, Flash, etc.
-11. How do I uninstall VPN profiles?
+10. How do I uninstall VPN profiles?
     - You can destroy VPN server from within the application. This will automatically delete the VPN profile from your phone as well. However, if you delete the profile manually from iOS VPN settings, the server would still be active. You must destroy the server in order to not get charged by the provider.
 
 Troubleshoot
@@ -68,7 +68,7 @@ Todo
 - Work on tvOS version
 - Add AWS, GCP and other cloud providers
 - Keychain/Keystore shared VPN
-- Add WireGuard as a VPN solution
+- Evaluate WireGuard as a VPN solution
 
 Donate
 --
@@ -77,10 +77,11 @@ All donations support continued development of ZudVPN.
 
 Powered by
 --
-- [strongSwan](https://strongswan.org/) - IPSec-based VPN solution.
-- [RancherOS](https://rancher.com/) - A containerized OS.
-- [Pi-hole](https://pi-hole.net/) - DNS ad-blocker.
 - [React-Native](https://reactnative.dev/) - A learn once, write everywhere mobile app framework.
+- [RancherOS](https://rancher.com/) - A containerized OS.
+- [strongSwan](https://strongswan.org/) - IPSec-based VPN solution.
+- [Let's Encrypt](https://letsencrypt.org/) - Free SSL certificate provider.
+- [Pi-hole](https://pi-hole.net/) - DNS ad-blocker.
 
 Acknowledgements
 --
@@ -89,6 +90,5 @@ Acknowledgements
 
 Building from source
 --
-- Follow [install steps](INSTALL.md) to build the application locally.
+- Follow [install steps](docs/INSTALL.md) to build the application locally.
 - For iOS: You must have an Apple Developer account because this application uses paid-developer only entitlement Personal VPN.
- 
