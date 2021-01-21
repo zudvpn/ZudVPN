@@ -18,7 +18,7 @@ Features
 How to install?
 --
 - The easiest way to install ZudVPN is from App Store or Google Play (soon).
-    - Join our Beta Test Program: https://testflight.apple.com/join/o2U4Ljbh
+    - Apple App Store: https://apps.apple.com/us/app/zudvpn-personal-vpn-on-cloud/id1517610454
 - It is also possible to [build from the source](docs/INSTALL.md).
 
 
