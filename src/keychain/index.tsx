@@ -1,10 +1,18 @@
 import * as RNKeychain from 'react-native-keychain';
 import { Keypair } from 'ssh/keygen';
+import { Token } from 'providers/types/Token';
+import { Server } from 'providers/types/Server';
 
 export const INITIAL_STATE_KEY = 'INITIAL_STATE_KEY';
 
+interface State {
+    privacyAccepted: boolean;
+    providerTokens: Token[];
+    currentServer: Server | null;
+}
+
 const Keychain = {
-    setInitialState: (state: any) => {
+    setInitialState: (state: State) => {
         Keychain.set(INITIAL_STATE_KEY, state);
     },
 

@@ -79,8 +79,9 @@ const actions = {
     initState: (state: State) => ({ setState }: StoreActions) => setState(state),
     persistState: () => ({ getState }: StoreActions) => {
         const state = {
-            provider_tokens: getState().providerTokens,
-            current_vpn_server: getState().currentServer,
+            privacyAccepted: getState().privacyAccepted,
+            providerTokens: getState().providerTokens,
+            currentServer: getState().currentServer,
         };
 
         Keychain.setInitialState(state);
