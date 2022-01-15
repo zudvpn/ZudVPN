@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@react-native-community/async-storage": "^1.12.0",
-    "node-forge": "^0.10.0",
+    "node-forge": "^1.0.0",
     "react": "16.13.1",
     "react-native": "0.63.3",
     "react-native-elements": "^2.3.2",
